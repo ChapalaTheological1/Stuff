@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 11: Apologetics (The Defense of the Faith) | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 11: Apologetics (The Defense of the Faith)</span><span class="lang-es">📖 Unidad 11: Apologética (La Defensa de la Fe)</span></h1>
+    <p><span class="lang-en">Reasons for the Hope Within Us</span><span class="lang-es">Razones para la Esperanza que Hay en Nosotros</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">Apologetics (The Defense of the Faith)</div>
+            <div class="lesson-section"><h3>Text: 1 Peter 3:15 (NIV)</h3><div class="scripture">"But in your hearts revere Christ as Lord. Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect." — 1 Peter 3:15</div></div>
+            <div class="lesson-section"><h3>The Ice‑Box Cookie Principle</h3><p>Apologetics is the formal defense of the faith. It is not about winning an argument, but about clearing a path. A powerful illustration of this is the "Ice‑Box Cookie" story. A man once baked and ate an entire batch of cookies while his family was out. He cleaned the kitchen, hid the tray, and wiped the counters "slick as a whistle." He was certain he had covered his tracks. Yet, the moment his wife walked in, she asked, "Where are the cookies?" He had forgotten one clue: the house was permeated with the smell of freshly baked cookies.</p><p>In the same way, the "smell" of a Creator permeates the universe. Romans 1:18-20 tells us that God's invisible qualities are clearly seen through what has been made. We follow the clues — the design, the history, and the conscience — back to the Baker.</p></div>
+            <div class="lesson-section"><h3>The Design of the Heavens (Teleological Argument)</h3><p>The first layer of evidence is the physical universe. This is the argument from design.</p><p><strong>The Fine-Tuning of the Earth:</strong> The Earth is a "privileged planet" situated in a precisely calibrated environment. If Earth were slightly closer to the sun, the heat would be too intense for life; slightly further, and we would be a permanent ice ball. The 23.5-degree tilt is responsible for the seasons and the distribution of heat. Without it, the poles would be significantly larger, and the equator would be a belt of uninhabitable fire. The 78% nitrogen and 21% oxygen balance is a narrow window. If oxygen levels were even a few percentage points higher, every forest on Earth would eventually burn to the ground from spontaneous combustion. A quarter-inch-thick layer of ozone protects us from deadly solar rays while letting in the "good" light.</p><p><strong>Jupiter: The Gravitational Shield:</strong> We must also look at our "Big Brother" in the solar system: Jupiter. Its mass is 318 times that of Earth. Because of its immense size and position, it acts as a "gravitational vacuum cleaner." It intercepts comets and asteroids that would otherwise strike Earth. In 1994, we watched the Shoemaker-Levy 9 comet strike Jupiter. Had that comet hit Earth, it would have ended all life. Jupiter is a sentinel standing guard.</p></div>
+            <div class="lesson-section"><h3>The Fingerprint of Prophecy</h3><p>Prophecy is God's way of writing history in advance.</p><p><strong>The Mathematical Probability:</strong> Mathematician Peter Stoner calculated that the odds of one person fulfilling just eight specific prophecies are 1 in 10 to the 17th power. Imagine covering the entire state of Texas with silver dollars, two feet deep. Mark one with a red 'X'. Blindfold a man and tell him he can walk as far as he wants, but he must pick up that one marked coin on the first try. Those are the odds. Jesus fulfilled over 300.</p><p><strong>The Bethlehem and Crucifixion Markers:</strong> Micah 5:2 identified Bethlehem as the birthplace 700 years early. Psalm 22 described the piercing of hands and feet and the casting of lots for clothing 1,000 years early — before the Romans had even invented crucifixion as a method of execution.</p></div>
+            <div class="lesson-section"><h3>The Historical Resurrection</h3><p>The resurrection is not a "nice story"; it is a historical event verified by the transformation of skeptics.</p><p><strong>The Transformation of Antagonists:</strong> Thomas (the intellectual) refused to believe the "hearsay" of his friends. He demanded physical, empirical proof. He only converted when he touched the wounds of a man he knew had been dead. James (the skeptical brother) grew up with Jesus and did not believe He was the Messiah. It was only after a post-resurrection appearance that he became a leader of the Church and eventually died for the claim that his brother was God. Saul of Tarsus (the violent hunter) was an enemy of the Cross. He had a prestigious career and power. He gave it all up — becoming the persecuted rather than the persecutor — because he encountered the risen Christ.</p><p><strong>The Failure of the Conspiracy Theory:</strong> Chuck Colson, a key figure in the Watergate scandal, pointed out that ten powerful men could not keep a lie together for two weeks, even to save the Presidency. The disciples were powerless men who were tortured and executed. If the resurrection was a "stolen body" conspiracy, at least one of them would have broken under the threat of a painful death. Not one did. People will die for a lie they believe is true, but no one dies for a lie they know is a lie.</p></div>
+            <div class="illustration"><strong>💡 The Ice‑Box Cookie:</strong> A man ate all the cookies and cleaned everything perfectly, but his wife immediately asked, "Where are the cookies?" He forgot one thing: the house smelled like cookies. The "smell" of a Creator permeates the universe. We follow the clues back to the Baker.</div>
+            <div class="lesson-section"><h3>The Verdict of Sociology and The Reliability of Scripture</h3><p><strong>The Verdict of Sociology:</strong> Within five weeks of the crucifixion, 10,000 Jews in Jerusalem — the very place where Jesus was killed — changed their day of worship from the Saturday Sabbath (which they had kept for 1,500 years) to Sunday. They abandoned animal sacrifice and began baptizing in the name of Jesus. This is a sociological earthquake that can only be explained by a real, historical event.</p><p><strong>The Reliability of the New Testament Documents:</strong> Skeptics often claim the Bible has been "changed" over time. However, when we look at the historical evidence, the New Testament is the most well-attested document in ancient history. For most ancient works (like Homer's <em>Iliad</em> or Caesar's <em>Gallic Wars</em>), the earliest copies we have were written 500 to 1,000 years after the original. For the New Testament, we have fragments within 30-50 years and complete books within 200 years. We have over 5,800 Greek manuscripts of the New Testament. No other ancient book comes close. If we reject the New Testament as historically unreliable, we must also reject every other piece of ancient history as well.</p><p><strong>Apologetics provides the 'reason for the hope.'</strong> We follow the design of the stars, the math of the prophets, the blood of the martyrs, and the tug of the conscience back to the Father. Are you ready to give an answer?</p></div>
+            <div class="lesson-section"><h3>Final Summary</h3><p>The doctrine of Apologetics teaches us that faith is not blind. It is grounded in evidence: the design of the universe, the fulfillment of prophecy, the historical reality of the resurrection, and the reliability of Scripture. Doubt is not the enemy of faith; it can be a pathway to deeper understanding. The goal of apologetics is not to win arguments but to remove obstacles so that people can see the truth of Christ. As Peter instructed, we must always be ready to give a reason for the hope within us, doing so with gentleness and respect.</p><div class="scripture">"For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes." — Romans 1:16</div></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">Apologética (La Defensa de la Fe)</div>
+            <div class="lesson-section"><h3>Texto: 1 Pedro 3:15</h3><div class="scripture">"Sino santificad a Dios el Señor en vuestros corazones, y estad siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros." — 1 Pedro 3:15</div></div>
+            <div class="lesson-section"><h3>El Principio de la Galleta del Refrigerador</h3><p>La apologética es la defensa formal de la fe. No se trata de ganar una discusión, sino de despejar un camino. Una poderosa ilustración de esto es la historia de la "Galleta del Refrigerador". Un hombre una vez horneó y se comió todo un lote de galletas mientras su familia estaba fuera. Limpió la cocina, escondió la bandeja y limpió los mostradores "perfectamente". Estaba seguro de que había cubierto sus huellas. Sin embargo, en el momento en que su esposa entró, preguntó: "¿Dónde están las galletas?" Había olvidado una pista: la casa estaba impregnada con el olor de las galletas recién horneadas.</p><p>De la misma manera, el "olor" de un Creador impregna el universo. Romanos 1:18-20 nos dice que las cualidades invisibles de Dios se ven claramente a través de lo que ha sido hecho. Seguimos las pistas — el diseño, la historia y la conciencia — de vuelta al Panadero.</p></div>
+            <div class="lesson-section"><h3>El Diseño de los Cielos (Argumento Teleológico)</h3><p>La primera capa de evidencia es el universo físico. Este es el argumento del diseño.</p><p><strong>El Ajuste Fino de la Tierra:</strong> La Tierra es un "planeta privilegiado" situado en un entorno precisamente calibrado. Si la Tierra estuviera ligeramente más cerca del sol, el calor sería demasiado intenso para la vida; ligeramente más lejos, y seríamos una bola de hielo permanente. La inclinación de 23,5 grados es responsable de las estaciones y la distribución del calor. Sin ella, los polos serían significativamente más grandes, y el ecuador sería un cinturón de fuego inhabitable. El equilibrio del 78% de nitrógeno y 21% de oxígeno es una ventana estrecha. Si los niveles de oxígeno fueran solo unos puntos porcentuales más altos, cada bosque en la Tierra eventualmente se quemaría hasta los cimientos por combustión espontánea. Una capa de ozono de un cuarto de pulgada de grosor nos protege de los rayos solares mortales mientras deja entrar la luz "buena".</p><p><strong>Júpiter: El Escudo Gravitacional:</strong> También debemos mirar a nuestro "Hermano Mayor" en el sistema solar: Júpiter. Su masa es 318 veces la de la Tierra. Debido a su inmenso tamaño y posición, actúa como una "aspiradora gravitacional". Intercepta cometas y asteroides que de otra manera golpearían la Tierra. En 1994, vimos el cometa Shoemaker-Levy 9 chocar contra Júpiter. Si ese cometa hubiera golpeado la Tierra, habría terminado con toda la vida. Júpiter es un centinela montando guardia.</p></div>
+            <div class="lesson-section"><h3>La Huella de la Profecía</h3><p>La profecía es la manera de Dios de escribir la historia por adelantado.</p><p><strong>La Probabilidad Matemática:</strong> El matemático Peter Stoner calculó que las probabilidades de que una persona cumpla solo ocho profecías específicas son de 1 en 10 elevado a la 17. Imagine cubrir todo el estado de Texas con dólares de plata, de dos pies de profundidad. Marque uno con una "X" roja. Vende los ojos a un hombre y dígale que puede caminar tan lejos como quiera, pero debe recoger esa moneda marcada en el primer intento. Esas son las probabilidades. Jesús cumplió más de 300.</p><p><strong>Los Marcadores de Belén y la Crucifixión:</strong> Miqueas 5:2 identificó a Belén como el lugar de nacimiento 700 años antes. Salmo 22 describió la perforación de las manos y los pies y el echar suertes por las vestiduras 1.000 años antes — antes de que los romanos hubieran inventado la crucifixión como método de ejecución.</p></div>
+            <div class="lesson-section"><h3>La Resurrección Histórica</h3><p>La resurrección no es una "linda historia"; es un evento histórico verificado por la transformación de escépticos.</p><p><strong>La Transformación de Antagonistas:</strong> Tomás (el intelectual) se negó a creer el "rumor" de sus amigos. Exigió prueba física y empírica. Solo se convirtió cuando tocó las heridas de un hombre que sabía que había estado muerto. Jacobo (el hermano escéptico) creció con Jesús y no creía que Él fuera el Mesías. Solo después de una aparición post-resurrección se convirtió en líder de la Iglesia y eventualmente murió por la afirmación de que su hermano era Dios. Saulo de Tarso (el cazador violento) era enemigo de la Cruz. Tenía una carrera prestigiosa y poder. Renunció a todo — convirtiéndose en el perseguido en lugar del perseguidor — porque encontró al Cristo resucitado.</p><p><strong>El Fracaso de la Teoría de la Conspiración:</strong> Chuck Colson, una figura clave en el escándalo de Watergate, señaló que diez hombres poderosos no podían mantener una mentira juntos durante dos semanas, ni siquiera para salvar la Presidencia. Los discípulos eran hombres sin poder que fueron torturados y ejecutados. Si la resurrección fue una conspiración de "cuerpo robado", al menos uno de ellos se habría quebrado bajo la amenaza de una muerte dolorosa. Ninguno lo hizo. Las personas mueren por una mentira que creen verdadera, pero nadie muere por una mentira que sabe que es mentira.</p></div>
+            <div class="illustration"><strong>💡 La Galleta del Refrigerador:</strong> Un hombre se comió todas las galletas y limpió todo perfectamente, pero su esposa inmediatamente preguntó: "¿Dónde están las galletas?" Olvidó una cosa: la casa olía a galletas. El "olor" de un Creador impregna el universo. Seguimos las pistas de vuelta al Panadero.</div>
+            <div class="lesson-section"><h3>El Veredicto de la Sociología y la Confiabilidad de la Escritura</h3><p><strong>El Veredicto de la Sociología:</strong> Dentro de las cinco semanas posteriores a la crucifixión, 10.000 judíos en Jerusalén — el mismo lugar donde Jesús fue asesinado — cambiaron su día de adoración del sábado (que habían mantenido durante 1.500 años) al domingo. Abandonaron el sacrificio de animales y comenzaron a bautizar en el nombre de Jesús. Este es un terremoto sociológico que solo puede ser explicado por un evento real e histórico.</p><p><strong>La Confiabilidad de los Documentos del Nuevo Testamento:</strong> Los escépticos a menudo afirman que la Biblia ha sido "cambiada" con el tiempo. Sin embargo, cuando miramos la evidencia histórica, el Nuevo Testamento es el documento mejor atestiguado en la historia antigua. Para la mayoría de las obras antiguas (como la <em>Ilíada</em> de Homero o las <em>Guerras Galas</em> de César), las copias más antiguas que tenemos fueron escritas 500 a 1.000 años después del original. Para el Nuevo Testamento, tenemos fragmentos dentro de 30-50 años y libros completos dentro de 200 años. Tenemos más de 5.800 manuscritos griegos del Nuevo Testamento. Ningún otro libro antiguo se acerca. Si rechazamos el Nuevo Testamento como históricamente no confiable, también debemos rechazar toda otra pieza de la historia antigua.</p><p><strong>La apologética provee la 'razón de la esperanza'.</strong> Seguimos el diseño de las estrellas, la matemática de los profetas, la sangre de los mártires y el tirón de la conciencia de vuelta al Padre. ¿Estás listo para dar una respuesta?</p></div>
+            <div class="lesson-section"><h3>Resumen Final</h3><p>La doctrina de la Apologética nos enseña que la fe no es ciega. Está fundamentada en evidencia: el diseño del universo, el cumplimiento de la profecía, la realidad histórica de la resurrección y la confiabilidad de la Escritura. La duda no es enemiga de la fe; puede ser un camino hacia una comprensión más profunda. La meta de la apologética no es ganar discusiones sino remover obstáculos para que las personas puedan ver la verdad de Cristo. Como instruyó Pedro, siempre debemos estar listos para dar razón de la esperanza dentro de nosotros, haciéndolo con mansedumbre y respeto.</p><div class="scripture">"Porque no me avergüenzo del evangelio, porque es poder de Dios para salvación a todo aquel que cree." — Romanos 1:16</div></div>
+
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 11 Examination</span><span class="lang-es">📋 Examen de la Unidad 11</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit12.html" class="btn-nav"><span class="lang-en">Next: Kingdom of God →</span><span class="lang-es">Siguiente: Reino de Dios →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 11;
+const NEXT_URL = "CTSSTUnit12.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:2,
+    en:{ q:"What is the Greek root word for Apologetics?", opts:["Logos","Christos","Apologia","Agape"], expl:"Apologetics comes from the Greek word 'apologia', meaning a reasoned defense." },
+    es:{ q:"¿Cuál es la raíz griega de la palabra Apologética?", opts:["Logos","Christos","Apologia","Agape"], expl:"Apologética viene de la palabra griega 'apologia', que significa una defensa razonada." } },
+  { id:2, correct:0,
+    en:{ q:"What does the 'Ice‑Box Cookie' story illustrate about the evidence for God?", opts:["The 'smell' of design permeates the universe","Cookies are sinful","We should clean better","God is hidden"], expl:"The smell gave away the man's actions; creation's design points to a Creator." },
+    es:{ q:"¿Qué ilustra la historia de la 'Galleta del Refrigerador' sobre la evidencia de Dios?", opts:["El 'olor' del diseño impregna el universo","Las galletas son pecaminosas","Debemos limpiar mejor","Dios está escondido"], expl:"El olor delató las acciones del hombre; el diseño de la creación apunta a un Creador." } },
+  { id:3, correct:0,
+    en:{ q:"The Teleological Argument is:", opts:["Argument from design","Argument from conscience","Argument from being","Argument from cause and effect"], expl:"Teleology argues that design implies a designer." },
+    es:{ q:"El Argumento Teleológico es:", opts:["Argumento del diseño","Argumento de la conciencia","Argumento del ser","Argumento de causa y efecto"], expl:"La teleología argumenta que el diseño implica un diseñador." } },
+  { id:4, correct:3,
+    en:{ q:"Approximately how many miles is Earth from the sun?", opts:["150 million","200 million","50 million","93 million"], expl:"Earth is about 93 million miles from the sun." },
+    es:{ q:"¿Aproximadamente cuántas millas está la Tierra del sol?", opts:["150 millones","200 millones","50 millones","93 millones"], expl:"La Tierra está a unos 93 millones de millas del sol." } },
+  { id:5, correct:1,
+    en:{ q:"What is the degree of Earth's axial tilt?", opts:["15 degrees","23.5 degrees","30 degrees","45 degrees"], expl:"Earth's axial tilt is 23.5 degrees." },
+    es:{ q:"¿Cuál es el grado de inclinación axial de la Tierra?", opts:["15 grados","23.5 grados","30 grados","45 grados"], expl:"La inclinación axial de la Tierra es de 23.5 grados." } },
+  { id:6, correct:1,
+    en:{ q:"Why is Jupiter called the 'gravitational vacuum cleaner'?", opts:["It creates gravity","It pulls in asteroids and comets that might hit Earth","It cleans space dust","It has no atmosphere"], expl:"Jupiter's immense gravity intercepts comets and asteroids." },
+    es:{ q:"¿Por qué Júpiter es llamado la 'aspiradora gravitacional'?", opts:["Crea gravedad","Atrae asteroides y cometas que podrían golpear la Tierra","Limpia el polvo espacial","No tiene atmósfera"], expl:"La inmensa gravedad de Júpiter intercepta cometas y asteroides." } },
+  { id:7, correct:2,
+    en:{ q:"What comet hit Jupiter in 1994?", opts:["Hyakutake","Halley's Comet","Shoemaker‑Levy 9","Hale‑Bopp"], expl:"Shoemaker‑Levy 9 struck Jupiter in 1994." },
+    es:{ q:"¿Qué cometa golpeó Júpiter en 1994?", opts:["Hyakutake","Cometa Halley","Shoemaker‑Levy 9","Hale‑Bopp"], expl:"Shoemaker‑Levy 9 golpeó Júpiter en 1994." } },
+  { id:8, correct:0,
+    en:{ q:"Peter Stoner calculated the odds of fulfilling 8 prophecies as:", opts:["1 in 10^17","1 in 10^100","1 in 1,000","1 in 1 million"], expl:"Stoner's calculation was 1 in 10^17." },
+    es:{ q:"Peter Stoner calculó las probabilidades de cumplir 8 profecías como:", opts:["1 en 10^17","1 en 10^100","1 en 1,000","1 en 1 millón"], expl:"El cálculo de Stoner fue 1 en 10^17." } },
+  { id:9, correct:3,
+    en:{ q:"Which prophet identified Bethlehem as the birthplace?", opts:["Hosea","Isaiah","Jeremiah","Micah"], expl:"Micah 5:2 identified Bethlehem." },
+    es:{ q:"¿Qué profeta identificó a Belén como el lugar de nacimiento?", opts:["Oseas","Isaías","Jeremías","Miqueas"], expl:"Miqueas 5:2 identificó a Belén." } },
+  { id:10, correct:3,
+    en:{ q:"How many years before Christ was Psalm 22 written?", opts:["1,500","500","700","1,000"], expl:"Psalm 22 was written about 1,000 years before Christ." },
+    es:{ q:"¿Cuántos años antes de Cristo fue escrito el Salmo 22?", opts:["1,500","500","700","1,000"], expl:"El Salmo 22 fue escrito unos 1,000 años antes de Cristo." } },
+  { id:11, correct:1,
+    en:{ q:"Who was the 'Intellectual Skeptic' among the disciples?", opts:["James","Thomas","John","Peter"], expl:"Thomas demanded physical proof before believing." },
+    es:{ q:"¿Quién fue el 'Escéptico Intelectual' entre los discípulos?", opts:["Jacobo","Tomás","Juan","Pedro"], expl:"Tomás exigió prueba física antes de creer." } },
+  { id:12, correct:1,
+    en:{ q:"How did James' view of Jesus change after the resurrection?", opts:["He remained skeptical","He became a leader of the church and died for his faith","He left the church","He became a Roman official"], expl:"James, Jesus' brother, became a church leader after seeing the risen Christ." },
+    es:{ q:"¿Cómo cambió la visión de Jacobo sobre Jesús después de la resurrección?", opts:["Permaneció escéptico","Se convirtió en líder de la iglesia y murió por su fe","Dejó la iglesia","Se convirtió en funcionario romano"], expl:"Jacobo, el hermano de Jesús, se convirtió en líder de la iglesia después de ver a Cristo resucitado." } },
+  { id:13, correct:3,
+    en:{ q:"Who was Saul of Tarsus before conversion?", opts:["Roman soldier","Fisherman","Tax collector","Hunter of Christians"], expl:"Saul persecuted Christians." },
+    es:{ q:"¿Quién era Saulo de Tarso antes de su conversión?", opts:["Soldado romano","Pescador","Recaudador de impuestos","Cazador de cristianos"], expl:"Saulo perseguía a los cristianos." } },
+  { id:14, correct:2,
+    en:{ q:"What modern scandal did Chuck Colson use to disprove the 'conspiracy theory'?", opts:["Teapot Dome","Clinton scandal","Watergate","Iran‑Contra"], expl:"Colson was a Watergate figure who noted that powerful men could not keep a lie." },
+    es:{ q:"¿Qué escándalo moderno usó Chuck Colson para refutar la 'teoría de la conspiración'?", opts:["Teapot Dome","Escándalo Clinton","Watergate","Irán‑Contra"], expl:"Colson fue una figura de Watergate que notó que los hombres poderosos no podían mantener una mentira." } },
+  { id:15, correct:3,
+    en:{ q:"How many Jews changed their worship practices within five weeks of the cross?", opts:["50,000","1,000","5,000","10,000"], expl:"10,000 Jews in Jerusalem changed from Saturday to Sunday worship." },
+    es:{ q:"¿Cuántos judíos cambiaron sus prácticas de adoración dentro de las cinco semanas de la cruz?", opts:["50,000","1,000","5,000","10,000"], expl:"10,000 judíos en Jerusalén cambiaron del sábado al domingo." } },
+  { id:16, correct:1,
+    en:{ q:"How many Greek manuscripts of the New Testament exist?", opts:["2,000","5,800+","10,000+","500"], expl:"Over 5,800 Greek manuscripts of the New Testament have been found." },
+    es:{ q:"¿Cuántos manuscritos griegos del Nuevo Testamento existen?", opts:["2,000","5,800+","10,000+","500"], expl:"Se han encontrado más de 5,800 manuscritos griegos del Nuevo Testamento." } },
+  { id:17, correct:0,
+    en:{ q:"The 'manuscript gap' for the New Testament compared to other ancient works is:", opts:["Much smaller","Same","Unknown","Larger"], expl:"The gap is 30‑50 years, far smaller than the 500‑1,000 year gap for other works." },
+    es:{ q:"La 'brecha de manuscritos' para el Nuevo Testamento en comparación con otras obras antiguas es:", opts:["Mucho más pequeña","Igual","Desconocida","Más grande"], expl:"La brecha es de 30‑50 años, mucho menor que la brecha de 500‑1,000 años para otras obras." } },
+  { id:18, correct:2,
+    en:{ q:"What does the 'boy with a kite' illustration explain about the Holy Spirit?", opts:["The Spirit is like the wind","The Spirit is a force","The Spirit is invisible but powerful","The Spirit is like a kite string"], expl:"You know the Spirit is there by the 'tug'—His invisible but powerful work." },
+    es:{ q:"¿Qué explica la ilustración del 'niño con una cometa' sobre el Espíritu Santo?", opts:["El Espíritu es como el viento","El Espíritu es una fuerza","El Espíritu es invisible pero poderoso","El Espíritu es como una cuerda de cometa"], expl:"Sabes que el Espíritu está allí por el 'tirón'—Su obra invisible pero poderosa." } },
+  { id:19, correct:0,
+    en:{ q:"What is 'Apostolic Succession' in witnessing?", opts:["Chain of witnesses from eyewitnesses","The popes","Church councils","Bible translation"], expl:"It refers to the chain of witnesses passing down the gospel from the original eyewitnesses." },
+    es:{ q:"¿Qué es la 'Sucesión Apostólica' en el testimonio?", opts:["Cadena de testigos desde los testigos oculares","Los papas","Concilios de la iglesia","Traducción de la Biblia"], expl:"Se refiere a la cadena de testigos que transmiten el evangelio desde los testigos oculares originales." } },
+  { id:20, correct:2,
+    en:{ q:"The goal of apologetics is to:", opts:["Display intelligence","Win arguments","Remove obstacles to faith","Prove atheists wrong"], expl:"Apologetics aims to clear the path so others can see Christ." },
+    es:{ q:"El objetivo de la apologética es:", opts:["Mostrar inteligencia","Ganar argumentos","Eliminar obstáculos para la fe","Probar que los ateos están equivocados"], expl:"La apologética busca despejar el camino para que otros puedan ver a Cristo." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the 'Ice‑Box Cookie' illustration and its application to apologetics.", kw:["cookies","smell","baker","creation","evidence","design","creator"], expl:"The smell of cookies gave away the man's actions. Likewise, evidence of design in creation points to a Creator." },
+    es:{ q:"Explique la ilustración de la 'Galleta del Refrigerador' y su aplicación a la apologética.", kw:["galletas","olor","panadero","creación","evidencia","diseño","creador"], expl:"El olor de las galletas delató las acciones del hombre. Del mismo modo, la evidencia del diseño en la creación apunta a un Creador." } },
+  { id:22,
+    en:{ q:"Describe three examples of fine‑tuning in the universe that make life possible on Earth.", kw:["fine‑tuning","sun","distance","tilt","atmosphere","ozone","jupiter"], expl:"Earth's distance from the sun, axial tilt, and Jupiter's gravitational protection are examples of fine-tuning." },
+    es:{ q:"Describa tres ejemplos de ajuste fino en el universo que hacen posible la vida en la Tierra.", kw:["ajuste fino","sol","distancia","inclinación","atmósfera","ozono","júpiter"], expl:"La distancia de la Tierra al sol, la inclinación axial y la protección gravitacional de Júpiter son ejemplos de ajuste fino." } },
+  { id:23,
+    en:{ q:"Explain Peter Stoner's probability illustration regarding prophecy fulfillment.", kw:["stoner","probability","prophecy","texas","silver dollars","odds","jesus"], expl:"The odds of one person fulfilling eight prophecies are 1 in 10^17, demonstrating divine origin." },
+    es:{ q:"Explique la ilustración de probabilidad de Peter Stoner sobre el cumplimiento de la profecía.", kw:["stoner","probabilidad","profecía","texas","dólares","probabilidades","jesús"], expl:"Las probabilidades de que una persona cumpliera ocho profecías son 1 en 10^17, demostrando origen divino." } },
+  { id:24,
+    en:{ q:"Why is the transformation of Saul of Tarsus considered strong evidence for the resurrection?", kw:["saul","paul","persecutor","apostle","conversion","resurrection","damascus"], expl:"Saul had no motive to convert; only an authentic encounter with the risen Christ explains his transformation." },
+    es:{ q:"¿Por qué la transformación de Saulo de Tarso se considera una fuerte evidencia de la resurrección?", kw:["saulo","pablo","perseguidor","apóstol","conversión","resurrección","damasco"], expl:"Saulo no tenía motivo para convertirse; solo un encuentro auténtico con Cristo resucitado explica su transformación." } },
+  { id:25,
+    en:{ q:"Explain Chuck Colson's argument against the 'conspiracy theory' of the resurrection.", kw:["colson","watergate","conspiracy","disciples","martyrdom","lie","truth"], expl:"Ten powerful men couldn't keep a lie; the powerless disciples died for their testimony, proving they believed it was true." },
+    es:{ q:"Explique el argumento de Chuck Colson contra la 'teoría de la conspiración' de la resurrección.", kw:["colson","watergate","conspiración","discípulos","martirio","mentira","verdad"], expl:"Diez hombres poderosos no pudieron mantener una mentira; los discípulos sin poder murieron por su testimonio, demostrando que creían que era verdad." } },
+  { id:26,
+    en:{ q:"What is the significance of the early church changing their worship day from Saturday to Sunday?", kw:["sabbath","sunday","resurrection","jews","worship","change","evidence"], expl:"10,000 Jews abandoned 1,500 years of tradition; only the resurrection explains this dramatic change." },
+    es:{ q:"¿Cuál es el significado de que la iglesia primitiva cambiara su día de adoración del sábado al domingo?", kw:["sábado","domingo","resurrección","judíos","adoración","cambio","evidencia"], expl:"10,000 judíos abandonaron 1,500 años de tradición; solo la resurrección explica este cambio dramático." } },
+  { id:27,
+    en:{ q:"Compare the manuscript evidence for the New Testament with other ancient documents.", kw:["manuscripts","iliad","caesar","gap","number","copies","reliability"], expl:"The New Testament has over 5,800 manuscripts with a 30‑50 year gap, far surpassing any other ancient work." },
+    es:{ q:"Compare la evidencia manuscrita del Nuevo Testamento con otros documentos antiguos.", kw:["manuscritos","ilíada","césar","brecha","número","copias","confiabilidad"], expl:"El Nuevo Testamento tiene más de 5,800 manuscritos con una brecha de 30‑50 años, superando con creces cualquier otra obra antigua." } },
+  { id:28,
+    en:{ q:"How does the existence of skeptical witnesses strengthen the case for the resurrection?", kw:["skeptical","witnesses","thomas","james","paul","conversion","evidence"], expl:"These men had every reason to doubt or oppose; their transformation is best explained by an authentic encounter with the risen Christ." },
+    es:{ q:"¿Cómo fortalece la existencia de testigos escépticos el caso de la resurrección?", kw:["escéptic","testigos","tomás","jacobo","pablo","conversión","evidencia"], expl:"Estos hombres tenían todas las razones para dudar u oponerse; su transformación se explica mejor por un encuentro auténtico con Cristo resucitado." } },
+  { id:29,
+    en:{ q:"What does the prophecy in Psalm 22 reveal about the nature of biblical prophecy?", kw:["psalm 22","crucifixion","hands","feet","lots","clothing","jesus"], expl:"It described crucifixion 1,000 years before it was invented, demonstrating divine foreknowledge." },
+    es:{ q:"¿Qué revela la profecía del Salmo 22 sobre la naturaleza de la profecía bíblica?", kw:["salmo 22","crucifixión","manos","pies","suertes","vestiduras","jesús"], expl:"Describió la crucifixión 1,000 años antes de que fuera inventada, demostrando el conocimiento divino previo." } },
+  { id:30,
+    en:{ q:"Why should every Christian be prepared to give an answer for their hope?", kw:["apologetics","answer","hope","evidence","reason","faith","defense"], expl:"Faith is grounded in evidence; being ready removes obstacles and points others to Christ." },
+    es:{ q:"¿Por qué todo cristiano debe estar preparado para dar una razón de su esperanza?", kw:["apologética","respuesta","esperanza","evidencia","razón","fe","defensa"], expl:"La fe está basada en evidencia; estar listo elimina obstáculos y señala a otros a Cristo." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

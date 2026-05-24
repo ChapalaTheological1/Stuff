@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 4: The Holy Spirit | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 4: The Holy Spirit</span><span class="lang-es">📖 Unidad 4: La Doctrina del Espíritu Santo (Neumatología)</span></h1>
+    <p><span class="lang-en">The Person and Work of the Spirit</span><span class="lang-es">La Persona y Obra del Espíritu</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">The Doctrine of the Holy Spirit (Pneumatology)</div>
+            <div class="lesson-section"><h3>Introduction: The Divine Applicator</h3><p>In the grand economy of redemption, the Holy Spirit is the third person of the Trinity—co-equal, co-eternal, and consubstantial with the Father and the Son. While the Father is the architect who decreed salvation and the Son is the achiever who accomplished it through His blood, the Holy Spirit is the <strong>applicator</strong>. He is the one who translates the finished work of Christ into the personal experience of the believer. Without the Spirit, the Christian life is reduced to mere moralism; with Him, it becomes a dynamic, supernatural union with the living God.</p><p>His activity is not a late addition to the biblical narrative. From the dawn of history, the Spirit was present, hovering over the chaos to bring forth order (Genesis 1:2). In the Old Covenant, He came upon select individuals for specific tasks (Exodus 31:3), but under the New Covenant, He establishes a permanent, internal residence within every child of God (John 14:17).</p></div>
+            <div class="lesson-section"><h3>The Personhood and Majesty of the Spirit</h3><p><strong>The Reality of Personality:</strong> To speak of the Holy Spirit as a mere "force" or "energy" is to strip the believer of a vital relationship. Scripture presents not a vague electricity, but a Person who engages the human heart. This personality is evidenced by three essential faculties:</p><p><strong>Intellect:</strong> He possesses a mind that plumbs the depths of divinity.</p><div class="scripture">"For what man knows the things of a man except the spirit of the man which is in him? Even so no one knows the things of God except the Spirit of God." — 1 Corinthians 2:11</div><p><strong>Emotions:</strong> As a relational Being, He possesses the capacity for sorrow. He is not indifferent to our conduct but is affected by it.</p><div class="scripture">"And do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption." — Ephesians 4:30</div><p><strong>Will:</strong> He exercises sovereign choice, particularly in the administration of the Church's resources.</p><div class="scripture">"But one and the same Spirit works all these things, distributing to each one individually as He wills." — 1 Corinthians 12:11</div><p><strong>The Absolute Deity of the Spirit:</strong> The Holy Spirit is not a subordinate "power" but the third member of the Godhead, possessing the full weight of divine majesty.</p><div class="scripture">"But Peter said, 'Ananias, why has Satan filled your heart to lie to the Holy Spirit... You have not lied to men but to God.'" — Acts 5:3-4</div><p>He holds properties that belong to God alone, such as Omnipresence ("Where can I go from Your Spirit?" — Psalm 139:7) and Eternality ("...the eternal Spirit..." — Hebrews 9:14).</p></div>
+            <div class="lesson-section"><h3>The Redemptive Work of the Spirit</h3><p><strong>The Genesis of Faith: Conviction and Regeneration:</strong> The Spirit initiates the movement of the soul toward God. He is the agent of the "New Birth," breaking the chains of spiritual death.</p><p><strong>Conviction:</strong> He serves as the divine prosecutor, making the sinner aware of their guilt and their need for the Savior.</p><div class="scripture">"And when He has come, He will convict the world of sin, and of righteousness, and of judgment." — John 16:8</div><p><strong>Regeneration:</strong> This is the miraculous impartation of life. It is the "washing" that makes a new creation possible.</p><div class="scripture">"Not by works of righteousness which we have done, but according to His mercy He saved us, through the washing of regeneration and renewing of the Holy Spirit." — Titus 3:5</div><p><strong>The Security of the Saint: Indwelling and Sealing:</strong> Upon the moment of belief, the Spirit enters the soul, not as a visitor, but as a permanent resident.</p><div class="scripture">"Or do you not know that your body is the temple of the Holy Spirit who is in you, whom you have from God, and you are not your own?" — 1 Corinthians 6:19</div><p>He acts as the "seal" of God, a divine mark of ownership and a guarantee of the believer's final inheritance (Ephesians 1:13).</p></div>
+            <div class="illustration"><strong>💡 The Hurricane:</strong> When a hurricane passes with 150 mph winds, you see the trees bend and break, you hear the roar, and you see the debris. No one denies a powerful force is at work. While we cannot see God's face or hear an audible voice, we see the "changed lives" He leaves behind as surely as the broken limbs of a tree after a storm. The Spirit is invisible but powerful.</div>
+            <div class="lesson-section"><h3>The Fragility of Fellowship: Sins Against the Spirit</h3><p>Because the Spirit is a Person who loves and leads, our responses to Him matter. The New Testament warns of three distinct ways we can hinder His work.</p><p><strong>Grieving the Spirit (The Wound of Love):</strong> Grieving is an ethical violation. It occurs when a believer's character—bitterness, anger, or unholy speech—clashes with the Holy Spirit's nature. It is the sorrow of a Holy Guest witnessing the unholiness of His host.</p><div class="scripture">"And do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption. Let all bitterness, wrath, anger, clamor, and evil speaking be put away from you, with all malice." — Ephesians 4:30-31</div><p><strong>Quenching the Spirit (The Dimming of Light):</strong> To quench is to extinguish a fire. This is a functional violation where we suppress the Spirit's influence or stifle the exercise of spiritual gifts. When we ignore His promptings, we effectively douse the flame meant to illuminate the Church.</p><div class="scripture">"Do not quench the Spirit. Do not despise prophecies." — 1 Thessalonians 5:19-20</div><p><strong>Blaspheming the Spirit (The Final Defiance):</strong> The "unpardonable sin" is the decisive rejection of the Spirit's testimony regarding Jesus. It is a heart so hardened that it attributes the manifest power of God to the agency of Satan.</p><div class="scripture">"Assuredly, I say to you, all sins will be forgiven the sons of men and whatever blasphemies they may utter; but he who blasphemes against the Holy Spirit never has forgiveness, but is subject to eternal condemnation." — Mark 3:28-29</div></div>
+            <div class="lesson-section"><h3>The Fruit and Gifts of the Spirit</h3><p><strong>The Fruit of the Spirit:</strong> The evidence of the Spirit's indwelling is not merely spectacular signs but the transformation of character. Paul lists the fruit: love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control (Galatians 5:22-23). This fruit is not produced by human effort but is the natural outflow of a life surrendered to the Spirit.</p><p><strong>The Gifts of the Spirit:</strong> The Spirit distributes gifts to believers for the building up of the church. These include prophecy, service, teaching, exhortation, giving, leadership, mercy, and others (Romans 12:6-8; 1 Corinthians 12:4-11). The purpose is always edification, not self-exaltation.</p></div>
+            <div class="lesson-section"><h3>Walking in the Spirit</h3><p>The Christian life is not a matter of trying harder in our own strength. It is a matter of walking in the Spirit—living in daily dependence upon His power and guidance. When we walk in the Spirit, we will not fulfill the lusts of the flesh (Galatians 5:16). This walk requires surrender, prayer, and obedience to the Word. The Spirit does not force us; He invites us to yield. The more we yield, the more He produces His fruit and manifests His power through us.</p><div class="scripture">"I say then: Walk in the Spirit, and you shall not fulfill the lust of the flesh." — Galatians 5:16</div></div>
+            <div class="lesson-section"><h3>Final Summary</h3><p>The Doctrine of the Holy Spirit teaches us that God is not distant but dwells within His people. The Spirit is a Person, not a force. He is fully God, co-equal with the Father and the Son. He convicts, regenerates, indwells, seals, sanctifies, empowers, and gives gifts. He can be grieved, quenched, and blasphemed. The believer's response should be reverence, yieldedness, and gratitude. To walk in the Spirit is to experience the abundant life that God intends. Without Him, we can do nothing. With Him, all things are possible.</p></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">La Doctrina del Espíritu Santo (Neumatología)</div>
+            <div class="lesson-section"><h3>Introducción: El Aplicador Divino</h3><p>En la economía grandiosa de la redención, el Espíritu Santo es la tercera persona de la Trinidad—coigual, coeterno y consustancial con el Padre y el Hijo. Mientras que el Padre es el arquitecto que decretó la salvación y el Hijo es el que la logró a través de Su sangre, el Espíritu Santo es el <strong>aplicador</strong>. Él es quien traduce la obra terminada de Cristo a la experiencia personal del creyente. Sin el Espíritu, la vida cristiana se reduce a mero moralismo; con Él, se convierte en una unión dinámica y sobrenatural con el Dios vivo.</p><p>Su actividad no es una adición tardía a la narrativa bíblica. Desde los albores de la historia, el Espíritu estaba presente, moviéndose sobre el caos para traer orden (Génesis 1:2). En el Antiguo Pacto, venía sobre individuos selectos para tareas específicas (Éxodo 31:3), pero bajo el Nuevo Pacto, establece una residencia permanente e interna dentro de cada hijo de Dios (Juan 14:17).</p></div>
+            <div class="lesson-section"><h3>La Personalidad y Majestad del Espíritu</h3><p><strong>La Realidad de la Personalidad:</strong> Hablar del Espíritu Santo como una mera "fuerza" o "energía" es privar al creyente de una relación vital. Las Escrituras presentan no una electricidad vaga, sino una Persona que involucra el corazón humano. Esta personalidad se evidencia en tres facultades esenciales:</p><p><strong>Intelecto:</strong> Posee una mente que escudriña las profundidades de la divinidad.</p><div class="scripture">"Porque ¿quién de los hombres sabe las cosas del hombre, sino el espíritu del hombre que está en él? Así tampoco nadie conoce las cosas de Dios, sino el Espíritu de Dios." — 1 Corintios 2:11</div><p><strong>Emociones:</strong> Como Ser relacional, posee la capacidad de sentir tristeza. No es indiferente a nuestra conducta sino que es afectado por ella.</p><div class="scripture">"Y no contristéis al Espíritu Santo de Dios, con el cual fuisteis sellados para el día de la redención." — Efesios 4:30</div><p><strong>Voluntad:</strong> Ejerce elección soberana, particularmente en la administración de los recursos de la Iglesia.</p><div class="scripture">"Pero todas estas cosas las obra uno y el mismo Espíritu, repartiendo a cada uno en particular como él quiere." — 1 Corintios 12:11</div><p><strong>La Deidad Absoluta del Espíritu:</strong> El Espíritu Santo no es un "poder" subordinado sino el tercer miembro de la Deidad, poseyendo el peso completo de la majestad divina.</p><div class="scripture">"Pedro dijo: Ananías, ¿por qué llenó Satanás tu corazón para que mintieses al Espíritu Santo... No has mentido a los hombres, sino a Dios." — Hechos 5:3-4</div><p>Posee propiedades que pertenecen solo a Dios, como la Omnipresencia ("¿A dónde me iré de tu Espíritu?" — Salmo 139:7) y la Eternidad ("...el Espíritu eterno..." — Hebreos 9:14).</p></div>
+            <div class="lesson-section"><h3>La Obra Redentora del Espíritu</h3><p><strong>La Génesis de la Fe: Convicción y Regeneración:</strong> El Espíritu inicia el movimiento del alma hacia Dios. Él es el agente del "Nuevo Nacimiento", rompiendo las cadenas de la muerte espiritual.</p><p><strong>Convicción:</strong> Sirve como el fiscal divino, haciendo que el pecador tome conciencia de su culpa y de su necesidad del Salvador.</p><div class="scripture">"Y cuando él venga, convencerá al mundo de pecado, de justicia y de juicio." — Juan 16:8</div><p><strong>Regeneración:</strong> Esta es la milagrosa impartición de vida. Es el "lavamiento" que hace posible una nueva creación.</p><div class="scripture">"No por obras de justicia que nosotros hubiéramos hecho, sino por su misericordia nos salvó, por el lavamiento de la regeneración y por la renovación en el Espíritu Santo." — Tito 3:5</div><p><strong>La Seguridad del Santo: Morada y Sello:</strong> En el momento de la fe, el Espíritu entra en el alma, no como visitante, sino como residente permanente.</p><div class="scripture">"¿O no sabéis que vuestro cuerpo es templo del Espíritu Santo, el cual está en vosotros, el cual tenéis de Dios, y que no sois vuestros?" — 1 Corintios 6:19</div><p>Actúa como el "sello" de Dios, una marca divina de propiedad y una garantía de la herencia final del creyente (Efesios 1:13).</p></div>
+            <div class="illustration"><strong>💡 El Huracán:</strong> Cuando un huracán pasa con vientos de 150 mph, ves los árboles doblarse y romperse, oyes el rugor y ves los escombros. Nadie niega que una fuerza poderosa está obrando. Aunque no podemos ver el rostro de Dios ni oír una voz audible, vemos las "vidas cambiadas" que Él deja atrás tan seguramente como las ramas rotas de un árbol después de una tormenta. El Espíritu es invisible pero poderoso.</div>
+            <div class="lesson-section"><h3>La Fragilidad del Compañerismo: Pecados Contra el Espíritu</h3><p>Debido a que el Espíritu es una Persona que ama y guía, nuestras respuestas a Él importan. El Nuevo Testamento advierte de tres maneras distintas en que podemos obstaculizar Su obra.</p><p><strong>Entristecer al Espíritu (La Herida del Amor):</strong> Entristecer es una violación ética. Ocurre cuando el carácter de un creyente—amargura, ira o habla impía—choca con la naturaleza del Espíritu Santo. Es el dolor de un Invitado Santo que presencia la falta de santidad de Su anfitrión.</p><div class="scripture">"Y no contristéis al Espíritu Santo de Dios... Quítense de vosotros toda amargura, enojo, ira, gritería y maledicencia." — Efesios 4:30-31</div><p><strong>Apagar el Espíritu (El Oscurecimiento de la Luz):</strong> Apagar es extinguir un fuego. Esta es una violación funcional donde suprimimos la influencia del Espíritu o sofocamos el ejercicio de los dones espirituales.</p><div class="scripture">"No apaguéis el Espíritu. No menospreciéis las profecías." — 1 Tesalonicenses 5:19-20</div><p><strong>Blasfemar contra el Espíritu (La Desafianza Final):</strong> El "pecado imperdonable" es el rechazo decisivo del testimonio del Espíritu acerca de Jesús. Es un corazón tan endurecido que atribuye el poder manifiesto de Dios a la agencia de Satanás.</p><div class="scripture">"De cierto os digo que todos los pecados serán perdonados a los hijos de los hombres, y las blasfemias cualesquiera que sean; pero cualquiera que blasfeme contra el Espíritu Santo, no tiene jamás perdón." — Marcos 3:28-29</div></div>
+            <div class="lesson-section"><h3>El Fruto y los Dones del Espíritu</h3><p><strong>El Fruto del Espíritu:</strong> La evidencia de la morada del Espíritu no es meramente señales espectaculares sino la transformación del carácter. Pablo enumera el fruto: amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza (Gálatas 5:22-23). Este fruto no es producido por el esfuerzo humano sino que es el flujo natural de una vida rendida al Espíritu.</p><p><strong>Los Dones del Espíritu:</strong> El Espíritu distribuye dones a los creyentes para la edificación de la iglesia. Estos incluyen profecía, servicio, enseñanza, exhortación, liderazgo, misericordia y otros (Romanos 12:6-8; 1 Corintios 12:4-11). El propósito es siempre la edificación, no la autoexaltación.</p></div>
+            <div class="lesson-section"><h3>Andar en el Espíritu</h3><p>La vida cristiana no es cuestión de esforzarnos más en nuestras propias fuerzas. Es cuestión de andar en el Espíritu—vivir en dependencia diaria de Su poder y guía. Cuando andamos en el Espíritu, no cumplimos los deseos de la carne (Gálatas 5:16). Este caminar requiere rendición, oración y obediencia a la Palabra. El Espíritu no nos fuerza; nos invita a rendirnos. Cuanto más nos rendimos, más produce Su fruto y manifiesta Su poder a través de nosotros.</p><div class="scripture">"Digo, pues: Andad en el Espíritu, y no satisfagáis los deseos de la carne." — Gálatas 5:16</div></div>
+            <div class="lesson-section"><h3>Resumen Final</h3><p>La Doctrina del Espíritu Santo nos enseña que Dios no está distante sino que mora dentro de Su pueblo. El Espíritu es una Persona, no una fuerza. Él es plenamente Dios, coigual con el Padre y el Hijo. Él convence, regenera, mora, sella, santifica, empodera y da dones. Puede ser entristecido, apagado y blasfemado. La respuesta del creyente debe ser reverencia, sumisión y gratitud. Andar en el Espíritu es experimentar la vida abundante que Dios intenta. Sin Él, nada podemos hacer. Con Él, todo es posible.</p></div>
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 4 Examination</span><span class="lang-es">📋 Examen de la Unidad 4</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit5.html" class="btn-nav"><span class="lang-en">Next: Humanity →</span><span class="lang-es">Siguiente: Humanidad →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 4;
+const NEXT_URL = "CTSSTUnit5.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:3,
+    en:{ q:"The Holy Spirit is accurately defined as:", opts:["A created being","An angel","An impersonal force","A divine Person"], expl:"The Holy Spirit is a divine Person, not an impersonal force." },
+    es:{ q:"El Espíritu Santo se define con precisión como:", opts:["Un ser creado","Un ángel","Una fuerza impersonal","Una Persona divina"], expl:"El Espíritu Santo es una Persona divina, no una fuerza impersonal." } },
+  { id:2, correct:1,
+    en:{ q:"Scripture identifies lying to the Spirit as lying to God in:", opts:["John 3:5","Acts 5:3-4","Romans 8:14","Galatians 5:22"], expl:"Acts 5:3-4 states that lying to the Holy Spirit is lying to God." },
+    es:{ q:"La Escritura identifica mentir al Espíritu como mentir a Dios en:", opts:["Juan 3:5","Hechos 5:3-4","Romanos 8:14","Gálatas 5:22"], expl:"Hechos 5:3-4 declara que mentir al Espíritu Santo es mentir a Dios." } },
+  { id:3, correct:0,
+    en:{ q:"Which faculty allows the Spirit to be 'grieved'?", opts:["Emotion","Will","Power","Intellect"], expl:"The Spirit has emotions and can be grieved (Ephesians 4:30)." },
+    es:{ q:"¿Qué facultad permite que el Espíritu sea 'entristecido'?", opts:["Emoción","Voluntad","Poder","Intelecto"], expl:"El Espíritu tiene emociones y puede ser entristecido (Efesios 4:30)." } },
+  { id:4, correct:2,
+    en:{ q:"The Spirit's role in 'Conviction' is to:", opts:["Speak in tongues","Perform miracles","Make the world aware of sin","Punish sinners"], expl:"The Spirit convicts the world of sin, righteousness, and judgment (John 16:8)." },
+    es:{ q:"El papel del Espíritu en la 'Convicción' es:", opts:["Hablar en lenguas","Realizar milagros","Hacer que el mundo sepa del pecado","Castigar a los pecadores"], expl:"El Espíritu convence al mundo de pecado, justicia y juicio (Juan 16:8)." } },
+  { id:5, correct:3,
+    en:{ q:"'Regeneration' refers to:", opts:["Church membership","Baptism","Moral improvement","The new spiritual birth"], expl:"Regeneration is the new birth by the Spirit (Titus 3:5)." },
+    es:{ q:"'Regeneración' se refiere a:", opts:["Membresía de iglesia","Bautismo","Mejora moral","El nuevo nacimiento espiritual"], expl:"La regeneración es el nuevo nacimiento por el Espíritu (Tito 3:5)." } },
+  { id:6, correct:3,
+    en:{ q:"Where does the Spirit reside in the believer?", opts:["Beside them","In the church building","In heaven only","Within their body as a temple"], expl:"The believer's body is the temple of the Holy Spirit (1 Corinthians 6:19)." },
+    es:{ q:"¿Dónde reside el Espíritu en el creyente?", opts:["Junto a ellos","En el edificio de la iglesia","Solo en el cielo","Dentro de su cuerpo como un templo"], expl:"El cuerpo del creyente es el templo del Espíritu Santo (1 Corintios 6:19)." } },
+  { id:7, correct:2,
+    en:{ q:"The 'Seal' of the Spirit signifies:", opts:["Church approval","Temporary enthusiasm","Ownership and a guarantee of redemption","A second blessing"], expl:"The Spirit seals believers as a mark of ownership and guarantee (Ephesians 1:13)." },
+    es:{ q:"El 'Sello' del Espíritu significa:", opts:["Aprobación de la iglesia","Entusiasmo temporal","Propiedad y una garantía de redención","Una segunda bendición"], expl:"El Espíritu sella a los creyentes como marca de propiedad y garantía (Efesios 1:13)." } },
+  { id:8, correct:2,
+    en:{ q:"The evidence of character transformation is called:", opts:["Tongues","Spiritual gifts","The Fruit of the Spirit","Miracles"], expl:"The Fruit of the Spirit is the evidence of character transformation (Galatians 5:22-23)." },
+    es:{ q:"La evidencia de la transformación del carácter se llama:", opts:["Lenguas","Dones espirituales","El Fruto del Espíritu","Milagros"], expl:"El Fruto del Espíritu es la evidencia de la transformación del carácter (Gálatas 5:22-23)." } },
+  { id:9, correct:0,
+    en:{ q:"Spiritual gifts are primarily distributed for:", opts:["Building up the church","Showing off","Financial gain","Personal glory"], expl:"Gifts are given for the common good and building up the church." },
+    es:{ q:"Los dones espirituales se distribuyen principalmente para:", opts:["Edificación de la iglesia","Presumir","Ganancia financiera","Gloria personal"], expl:"Los dones se dan para el bien común y la edificación de la iglesia." } },
+  { id:10, correct:0,
+    en:{ q:"Sanctification is the ongoing process of:", opts:["Growing in holiness","Receiving gifts","Speaking in tongues","Being saved from hell"], expl:"Sanctification is the process of becoming more like Christ." },
+    es:{ q:"La santificación es el proceso continuo de:", opts:["Crecer en santidad","Recibir dones","Hablar en lenguas","Ser salvo del infierno"], expl:"La santificación es el proceso de llegar a ser más como Cristo." } },
+  { id:11, correct:1,
+    en:{ q:"The command in Ephesians 5:18 is to:", opts:["Ignore the Spirit","Be filled with the Spirit","Quench the Spirit","Grieve the Spirit"], expl:"Paul commands believers to be filled with the Spirit." },
+    es:{ q:"El mandato en Efesios 5:18 es:", opts:["Ignorar el Espíritu","Ser llenos del Espíritu","Apagar el Espíritu","Entristecer el Espíritu"], expl:"Pablo ordena a los creyentes ser llenos del Espíritu." } },
+  { id:12, correct:1,
+    en:{ q:"To 'Quench' the Spirit means to:", opts:["Seek His guidance","Suppress His influence","Welcome His power","Celebrate His gifts"], expl:"Quenching the Spirit means suppressing His influence (1 Thessalonians 5:19)." },
+    es:{ q:"Apagar el Espíritu significa:", opts:["Buscar Su guía","Suprimir Su influencia","Dar la bienvenida a Su poder","Celebrar Sus dones"], expl:"Apagar el Espíritu significa suprimir Su influencia (1 Tesalonicenses 5:19)." } },
+  { id:13, correct:3,
+    en:{ q:"Which sin involves attributing God's work to Satan?", opts:["Quenching the Spirit","Ignoring the Spirit","Grieving the Spirit","Blaspheming the Spirit"], expl:"Blasphemy against the Spirit attributes God's work to Satan (Mark 3:28-29)." },
+    es:{ q:"¿Qué pecado implica atribuir la obra de Dios a Satanás?", opts:["Apagar el Espíritu","Ignorar el Espíritu","Entristecer el Espíritu","Blasfemar contra el Espíritu"], expl:"La blasfemia contra el Espíritu atribuye la obra de Dios a Satanás (Marcos 3:28-29)." } },
+  { id:14, correct:0,
+    en:{ q:"The Spirit provides 'Assurance' by:", opts:["Witnessing to our spirit that we are God's children","Removing all trials","Making us perfect","Giving material wealth"], expl:"The Spirit bears witness that we are children of God (Romans 8:16)." },
+    es:{ q:"El Espíritu proporciona 'Seguridad' al:", opts:["Dar testimonio a nuestro espíritu de que somos hijos de Dios","Eliminar todas las pruebas","Hacernos perfectos","Dar riqueza material"], expl:"El Espíritu da testimonio de que somos hijos de Dios (Romanos 8:16)." } },
+  { id:15, correct:2,
+    en:{ q:"The Spirit's role in Genesis 1:2 involved:", opts:["Prophecy","Judgment","Creation","Salvation"], expl:"The Spirit hovered over the waters at creation (Genesis 1:2)." },
+    es:{ q:"El papel del Espíritu en Génesis 1:2 implicaba:", opts:["Profecía","Juicio","Creación","Salvación"], expl:"El Espíritu se movía sobre la faz de las aguas en la creación (Génesis 1:2)." } },
+  { id:16, correct:2,
+    en:{ q:"The office given for 'equipping the saints' is:", opts:["Prophet","Apostle","Pastor-teacher","Evangelist"], expl:"Pastor-teachers are given for equipping the saints (Ephesians 4:11-12)." },
+    es:{ q:"El oficio dado para 'equipar a los santos' es:", opts:["Profeta","Apóstol","Pastor-maestro","Evangelista"], expl:"Los pastores-maestros son dados para equipar a los santos (Efesios 4:11-12)." } },
+  { id:17, correct:3,
+    en:{ q:"Walking in the Spirit (Galatians 5:16) results in:", opts:["Perfect sinlessness","Material prosperity","Fame","Overcoming the lusts of the flesh"], expl:"Walking in the Spirit enables us to overcome fleshly desires." },
+    es:{ q:"Andar en el Espíritu (Gálatas 5:16) resulta en:", opts:["Perfecta impecabilidad","Prosperidad material","Fama","Vencer las pasiones de la carne"], expl:"Andar en el Espíritu nos capacita para vencer los deseos de la carne." } },
+  { id:18, correct:0,
+    en:{ q:"The distribution of gifts 'as He wills' shows His:", opts:["Will","Intellect","Weakness","Emotion"], expl:"The Spirit distributes gifts according to His will (1 Corinthians 12:11)." },
+    es:{ q:"La distribución de los dones 'como Él quiere' muestra Su:", opts:["Voluntad","Intelecto","Debilidad","Emoción"], expl:"El Espíritu distribuye los dones según Su voluntad (1 Corintios 12:11)." } },
+  { id:19, correct:1,
+    en:{ q:"To 'Grieve' the Spirit refers to:", opts:["Rejoicing in His presence","Causing Him sorrow through unholy living","Using spiritual gifts","Seeking His guidance"], expl:"Grieving the Spirit means causing Him sorrow through sinful conduct (Ephesians 4:30)." },
+    es:{ q:"'Entristecer' al Espíritu se refiere a:", opts:["Regocijarse en Su presencia","Causarle tristeza a través de una vida impía","Usar los dones espirituales","Buscar Su guía"], expl:"Entristecer al Espíritu significa causarle tristeza a través de una conducta pecaminosa (Efesios 4:30)." } },
+  { id:20, correct:1,
+    en:{ q:"The Spirit is described as the 'earnest' or 'guarantee' of our inheritance. This means:", opts:["Our salvation is uncertain","The Spirit is a down-payment ensuring final redemption","We must earn our salvation","The Spirit can be lost"], expl:"The Spirit is the guarantee of our inheritance until redemption (Ephesians 1:14)." },
+    es:{ q:"El Espíritu es descrito como las 'arras' o 'garantía' de nuestra herencia. Esto significa:", opts:["Nuestra salvación es incierta","El Espíritu es un pago inicial que asegura la redención final","Debemos ganar nuestra salvación","El Espíritu puede perderse"], expl:"El Espíritu es las arras de nuestra herencia hasta la redención (Efesios 1:14)." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the grammatical significance of John 16:13. Jesus uses the masculine 'He' (ekeinos) with the neuter 'Spirit' (pneuma). What does this teach about the Spirit's personhood?", kw:["masculine","he","neuter","spirit","pneuma","person","grammar"], expl:"Jesus deliberately uses a masculine pronoun to emphasize that the Spirit is a Person, not an impersonal 'it.'" },
+    es:{ q:"Explique el significado gramatical de Juan 16:13. Jesús usa el masculino 'Él' (ekeinos) con el neutro 'Espíritu' (pneuma). ¿Qué enseña esto sobre la personalidad del Espíritu?", kw:["masculino","él","neutro","espíritu","pneuma","persona","gramática","pronombre"], expl:"Jesús usa deliberadamente un pronombre masculino para enfatizar que el Espíritu es una Persona, no un 'ello' impersonal." } },
+  { id:22,
+    en:{ q:"Explain the relationship between the 'Seal' and the 'Earnest' (down payment) of the Spirit. How do they assure believers of their salvation?", kw:["seal","earnest","down payment","guarantee","inheritance","redemption"], expl:"The Spirit is both the seal (mark of ownership) and the earnest (down payment) guaranteeing our final redemption." },
+    es:{ q:"Explique la relación entre el 'Sello' y las 'Arras' (pago inicial) del Espíritu. ¿Cómo aseguran a los creyentes de su salvación?", kw:["sello","arras","pago inicial","garantía","herencia","redención","propiedad"], expl:"El Espíritu es tanto el sello (marca de propiedad) como las arras (pago inicial) que garantizan nuestra redención final." } },
+  { id:23,
+    en:{ q:"Distinguish between the Fruit of the Spirit and the Gifts of the Spirit. Which is for all believers? Which varies?", kw:["fruit","gifts","character","service","all believers","varies"], expl:"Fruit (character) is for all believers; gifts (service abilities) vary from person to person." },
+    es:{ q:"Distinga entre el Fruto del Espíritu y los Dones del Espíritu. ¿Cuál es para todos los creyentes? ¿Cuál varía?", kw:["fruto","dones","carácter","servicio","todos los creyentes","varía","cada"], expl:"El Fruto (carácter) es para todos los creyentes; los dones (habilidades de servicio) varían de persona a persona." } },
+  { id:24,
+    en:{ q:"How does Regeneration address Total Depravity? Why is the new birth necessary?", kw:["regeneration","total depravity","dead","spiritually","new birth","life"], expl:"Since man is spiritually dead (total depravity), only the Spirit can impart new life through regeneration (John 3)." },
+    es:{ q:"¿Cómo aborda la Regeneración la Depravación Total? ¿Por qué es necesario el nuevo nacimiento?", kw:["regeneración","depravación total","muerto","espiritualmente","nuevo nacimiento","vida","nuevo"], expl:"Dado que el hombre está espiritualmente muerto (depravación total), solo el Espíritu puede impartir nueva vida a través de la regeneración (Juan 3)." } },
+  { id:25,
+    en:{ q:"Refute the idea of the Spirit as a 'junior partner' in the Trinity. Use Scripture to demonstrate His deity.", kw:["junior","partner","subordinate","co-equal","co-eternal","deity","acts"], expl:"The Spirit possesses identical divine attributes and is called God in Acts 5, proving He is co-equal with the Father and Son." },
+    es:{ q:"Refute la idea del Espíritu como un 'socio menor' en la Trinidad. Use las Escrituras para demostrar Su deidad.", kw:["junior","socio","subordinado","coigual","coeterno","deidad","hechos"], expl:"El Espíritu posee atributos divinos idénticos y es llamado Dios en Hechos 5, demostrando que es coigual con el Padre y el Hijo." } },
+  { id:26,
+    en:{ q:"Contrast Indwelling vs. Filling of the Spirit. What is the difference, and why is it important for spiritual growth?", kw:["indwelling","filling","permanent","repeatable","submission","control"], expl:"Indwelling is permanent for every believer; Filling is a repeatable state of submission and control by the Spirit." },
+    es:{ q:"Contraste la Morada vs. el Llenura del Espíritu. ¿Cuál es la diferencia y por qué es importante para el crecimiento espiritual?", kw:["morada","llenura","permanente","repetible","sumisión","control","lleno"], expl:"La morada es permanente para cada creyente; la llenura es un estado repetible de sumisión y control por el Espíritu." } },
+  { id:27,
+    en:{ q:"Explain the nature of the 'Unpardonable Sin' (Blasphemy against the Holy Spirit). Who can commit it, and why is it unforgivable?", kw:["unpardonable","blasphemy","rejection","hardened","unbelief","persistent"], expl:"It is the persistent, hardened rejection of the Spirit's witness to Christ, committing unbelievers to final unbelief." },
+    es:{ q:"Explique la naturaleza del 'Pecado Imperdonable' (Blasfemia contra el Espíritu Santo). ¿Quién puede cometerlo y por qué es imperdonable?", kw:["imperdonable","blasfemia","rechazo","endurecido","incredulidad","persistente"], expl:"Es el rechazo persistente y endurecido del testimonio del Espíritu a Cristo, que compromete a los incrédulos a la incredulidad final." } },
+  { id:28,
+    en:{ q:"Describe the Spirit's role in the inspiration of Scripture. How does 2 Peter 1:21 inform our view of the Bible's authority?", kw:["inspiration","moved","carried along","holy men","scripture","god-breathed"], expl:"The Spirit 'moved' (carried along) human authors to record God's exact intent (2 Peter 1:21)." },
+    es:{ q:"Describa el papel del Espíritu en la inspiración de las Escrituras. ¿Cómo informa 2 Pedro 1:21 nuestra visión de la autoridad de la Biblia?", kw:["inspiración","movido","llevado","santos hombres","escritura","inspirad","pedro"], expl:"El Espíritu 'movió' (llevó) a los autores humanos para registrar la intención exacta de Dios (2 Pedro 1:21)." } },
+  { id:29,
+    en:{ q:"Why is Sanctification described as 'Synergistic'? How do the Spirit and the believer cooperate?", kw:["synergistic","cooperation","spirit","believer","obedience","response"], expl:"Sanctification requires the Spirit's power and the believer's active obedience and response (Philippians 2:12-13)." },
+    es:{ q:"¿Por qué se describe la Santificación como 'Sinérgica'? ¿Cómo cooperan el Espíritu y el creyente?", kw:["sinergíst","cooperación","espíritu","creyente","obediencia","respuesta","junto"], expl:"La santificación requiere el poder del Espíritu y la obediencia activa y respuesta del creyente (Filipenses 2:12-13)." } },
+  { id:30,
+    en:{ q:"Contrast 'Grieving' vs. 'Quenching' the Spirit in a church context. How can a church avoid both?", kw:["grieving","quenching","holiness","suppression","character","gifts"], expl:"Grieving is personal unholiness (character); Quenching is suppression of His corporate work and gifts (function)." },
+    es:{ q:"Contraste 'Entristecer' vs. 'Apagar' al Espíritu en un contexto eclesiástico. ¿Cómo puede una iglesia evitar ambos?", kw:["entristecer","apagar","santidad","supresión","carácter","dones","corporativ"], expl:"Entristecer es falta de santidad personal (carácter); Apagar es la supresión de Su obra corporativa y dones (función)." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

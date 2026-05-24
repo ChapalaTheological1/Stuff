@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 8: The Doctrine of the Church (Ecclesiology) | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 8: The Doctrine of the Church (Ecclesiology)</span><span class="lang-es">📖 Unidad 8: La Doctrina de la Iglesia (Eclesiología)</span></h1>
+    <p><span class="lang-en">The Identity, Structure, and Mission of the Called-Out Assembly</span><span class="lang-es">La Identidad, Estructura y Misión de la Asamblea Llamada</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">The Doctrine of the Church (Ecclesiology)</div>
+            <div class="lesson-section"><h3>The Definition: People, Not Places</h3><p>A few years ago, my wife and I went to Barcelona and we saw this magnificent church building, the <strong>Sagrada Família</strong>. It is perhaps the most breathtaking structure on earth — an architectural masterpiece of soaring spires and intricate stone. They have been working on the building for over 140 years, and it is still not completed. It stands as a monumental testament to human vision and persistence.</p><p><strong>However, as amazing as the building is, it is not the Church.</strong></p><p>The Church is not a physical location; it is a <strong>people</strong>. This is a fundamental distinction that much of the modern world has forgotten. We often speak of "going to church," but in the New Testament sense, you cannot go to a church; you can only gather as a church. For the first 250 years of its existence, the Church had no dedicated buildings whatsoever. There were no cathedrals, no steeples, and no designated "holy sites." Instead, believers met in homes, in the streets, and in hidden places.</p><p>During this "building-less" era, the growth of the Church was phenomenal. Without the overhead of physical facilities, the movement was agile and focused entirely on people. They understood that the <em>Ekklesia</em> was the "called-out assembly" of believers — the community itself — and not the mortar and stone where they gathered. If every cathedral on earth were leveled today, the Church of Jesus Christ would remain entirely intact because the Church is comprised of <strong>"Living Stones"</strong> (1 Peter 2:5). The structure is merely a shell; the life is in the assembly. We must never confuse the "chapel" with the "community." One is made of dead stone; the other is made of living souls redeemed by the blood of Christ.</p><div class="scripture">"You also, as living stones, are being built up a spiritual house, a holy priesthood, to offer up spiritual sacrifices acceptable to God through Jesus Christ." — 1 Peter 2:5</div></div>
+            <div class="lesson-section"><h3>The Unified Office: One Role, Three Descriptions</h3><p>When we examine the New Testament record regarding leadership, we find a consistent pattern. There were three specific Greek terms used to describe the leaders of the local assembly. While modern denominations have taken these three and separated them into different tiers of authority or different offices, the Biblical record suggests they all <strong>likely described the same office and function.</strong></p><p><strong>Episkopos (Bishop/Overseer):</strong> This term emphasizes the <strong>function</strong> of management, organization, and oversight. It points to the responsibility of the office.</p><p><strong>Presbuteros (Elder):</strong> This term emphasizes the <strong>character</strong>, maturity, and wisdom of the leader. It points to the dignity of the office.</p><p><strong>Poimen (Pastor/Shepherd):</strong> This term emphasizes the <strong>duty</strong> of feeding, caring for, and protecting the flock. It points to the heart of the office.</p><p>In the early church, these were not three different jobs; they were three ways of describing the same man doing God's work. A leader was an elder in his maturity, a bishop in his oversight, and a pastor in his heart for the sheep.</p><div class="scripture">"Therefore take heed to yourselves and to all the flock, among which the Holy Spirit has made you overseers (episkopos), to shepherd (poimen) the church of God." — Acts 20:28</div></div>
+            <div class="lesson-section"><h3>The Ordinances: The Enacted Gospel</h3><p>A true church is identified by the faithful preaching of the Word and the proper administration of the <strong>Ordinances</strong>. We must view <strong>Baptism</strong> and the <strong>Lord's Supper</strong> as more than mere symbols or rituals; they are the <strong>Gospel enacted</strong> in physical form.</p><p><strong>1. Baptism (The Gospel of Identity):</strong> In baptism, the Gospel is physically performed. As the believer is placed under the water and raised back up, they are enacting the death, burial, and resurrection of Christ. It is the outward drama of an inward change — a public identification with the work of Jesus. It does not save, but it testifies that salvation has already occurred.</p><div class="scripture">"Therefore we were buried with Him through baptism into death, that just as Christ was raised from the dead by the glory of the Father, even so we also should walk in newness of life." — Romans 6:4</div><p><strong>2. The Lord's Supper (The Gospel of Remembrance):</strong> When the church gathers for the bread and the cup, they are enacting the sacrifice of Calvary. By eating and drinking together, the assembly is participating in a physical sermon that "proclaims the Lord's death until He comes." It is the Gospel made visible through the shared elements of the table. It is also a time of reflection. Believers are called to examine themselves, remembering the seriousness of sin and the greatness of Christ's sacrifice.</p><div class="scripture">"For as often as you eat this bread and drink this cup, you proclaim the Lord's death till He comes." — 1 Corinthians 11:26</div></div>
+            <div class="illustration"><strong>💡 The Sagrada Família:</strong> A breathtaking cathedral in Barcelona, under construction for over 140 years. As amazing as the building is, it is not the Church. The Church is not a physical location; it is a people. For the first 250 years of Christianity, the church had no buildings — they met in homes and grew phenomenally. If every cathedral on earth were leveled today, the Church of Jesus Christ would remain entirely intact because the Church is comprised of living stones, not dead mortar.</div>
+            <div class="lesson-section"><h3>The Three-Fold Mission</h3><p>The Church is a community with a specific, three-dimensional movement. It functions as the "Body" of Christ in the world through three distinct directions:</p><p><strong>Upward (Worship):</strong> The Church looks up to acknowledge the supremacy and holiness of God. This is our primary purpose — to glorify the Creator through praise and the proclamation of His truth. Worship is not limited to a service, but it finds a special expression when the church gathers together.</p><p><strong>Inward (Edification):</strong> The Church looks at itself for the purpose of mutual growth. This is the work of <em>Koinonia</em> (fellowship), involving teaching and encouraging one another so that the "Living Stones" are properly shaped and fitted together. Believers are called to share life together, encouraging one another, bearing burdens, and building one another up.</p><p><strong>Outward (Evangelism):</strong> The Church looks at the world. This is the movement of the <strong>Scarlet Thread</strong>. Having been reconciled to God, the Church carries the message and invitation of that reconciliation to those who are still outside the assembly. It is called to proclaim the gospel and to make disciples. This mission extends beyond the walls of the church into the world.</p><div class="scripture">"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit." — Matthew 28:19</div></div>
+            <div class="lesson-section"><h3>The Body of Christ: Many Members, One Purpose</h3><p>The Apostle Paul uses the metaphor of the human body to describe the church. A body has many parts — eyes, ears, hands, feet — and each part has a different function. None is greater, and none is lesser. The eye cannot say to the hand, "I have no need of you." In the same way, every believer has a role to play. No one is unnecessary, and no one is sufficient alone.</p><p><strong>The Eye of Vision:</strong> In a physical body, the eyes don't create the path; they simply perceive the path that is already there. As Henry Blackaby taught, spiritual vision isn't about us coming up with a clever plan and asking God to bless it. It is about looking for where God is already at work and simply joining Him. It is the difference between asking, "What can we do for God?" and asking, "What is God doing that He wants us to be part of?"</p><p><strong>The Ear of Compassion:</strong> The church is the body that listens when the world turns a deaf ear. We stop to hear a soul. We ask about people's lives. We become members of the Body who listen.</p><p><strong>The Foot of Evangelism:</strong> "How beautiful are the feet of those who bring good news!" (Romans 10:15). Those "beautiful feet" are not our own — they are God's grace moving through people who are willing to take the step. The glory belongs to the One who waits for us to finally take the step.</p><div class="scripture">"For as the body is one and has many members, but all the members of that one body, being many, are one body, so also is Christ." — 1 Corinthians 12:12</div></div>
+            <div class="lesson-section"><h3>The Church is Loved, Holy, and Called</h3><p><strong>The Church is Loved:</strong> Ephesians 5:25 says, "Husbands, love your wives, just as Christ loved the church and gave himself up for her." The Greek term for love used here is <em>agape</em>, signifying a selfless, sacrificial, and volitional commitment. The Church is not merely a human organization or a social club; it is the specific object of Christ's divine affection. Christ didn't just love the idea of a church; He loved the people who compose it enough to endure the cross. We should never criticize the Bride of Christ. If Christ, who is perfect, loved the Church enough to die for it, then we, as His followers, cannot claim to love the Head (Christ) while despising or neglecting the Body (the Church).</p><p><strong>The Church is Holy:</strong> The command for this "unblemished" church is found in 1 Peter 1:15-16: "But as he which hath called you is holy, so be ye holy in all manner of conversation; Because it is written, Be ye holy; for I am holy." To be a holy church means we are a people who have been set apart by the Spirit for God's exclusive use. In the Old Testament Temple, access to the Holy of Holies was restricted. When Jesus died, the veil was split from top to bottom (Matthew 27:51). This was God's way of saying the door is open. But holiness is what keeps the power flowing. We are the Holy Church. We are designed to carry the power of God to a world in need. To be holy is to maintain the "Clean Room" of our fellowship so that God's power can flow through us to the world without interference.</p><div class="scripture">"But you are a chosen generation, a royal priesthood, a holy nation, His own special people, that you may proclaim the praises of Him who called you out of darkness into His marvelous light." — 1 Peter 2:9</div></div>
+            <div class="lesson-section"><h3>Final Summary</h3><p>The Doctrine of the Church teaches us that the Church is not a building but a people — the called-out assembly of believers. It is the body of Christ, the bride of Christ, and the household of God. Its leaders are described as elders, bishops, and pastors — one office with three descriptions. Its ordinances are baptism and the Lord's Supper — the gospel enacted. Its mission is threefold: upward (worship), inward (edification), and outward (evangelism). The Church is loved by Christ, called to be holy, and empowered by the Spirit. To neglect the Church is to neglect a central part of God's design. To love the Church is to love what Christ loves. To serve the Church is to serve the body of which He is the head.</p><div class="scripture">"And He put all things under His feet, and gave Him to be head over all things to the church, which is His body, the fullness of Him who fills all in all." — Ephesians 1:22-23</div></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">La Doctrina de la Iglesia (Eclesiología)</div>
+            <div class="lesson-section"><h3>La Definición: Personas, No Lugares</h3><p>Hace unos años, mi esposa y yo fuimos a Barcelona y vimos este magnífico edificio de iglesia, la <strong>Sagrada Família</strong>. Es quizás la estructura más impresionante de la tierra — una obra maestra arquitectónica de agujas elevadas y piedra intrincada. Han estado trabajando en el edificio por más de 140 años, y todavía no está terminado. Se erige como un testimonio monumental de la visión y persistencia humanas.</p><p><strong>Sin embargo, por increíble que sea el edificio, no es la Iglesia.</strong></p><p>La Iglesia no es una ubicación física; es un <strong>pueblo</strong>. Esta es una distinción fundamental que gran parte del mundo moderno ha olvidado. A menudo hablamos de "ir a la iglesia", pero en el sentido del Nuevo Testamento, no se puede ir a una iglesia; solo se puede reunir como iglesia. Durante los primeros 250 años de su existencia, la Iglesia no tenía absolutamente ningún edificio dedicado. No había catedrales, ni campanarios, ni "sitios santos" designados. En cambio, los creyentes se reunían en casas, en las calles y en lugares escondidos.</p><p>Durante esta era "sin edificios", el crecimiento de la Iglesia fue fenomenal. Sin la carga de las instalaciones físicas, el movimiento era ágil y enfocado completamente en las personas. Entendían que la <em>Ekklesia</em> era la "asamblea llamada" de creyentes — la comunidad misma — y no el mortero y la piedra donde se reunían. Si cada catedral en la tierra fuera arrasada hoy, la Iglesia de Jesucristo permanecería completamente intacta porque la Iglesia está compuesta de <strong>"Piedras Vivas"</strong> (1 Pedro 2:5). La estructura es meramente un cascarón; la vida está en la asamblea. Nunca debemos confundir la "capilla" con la "comunidad". Una está hecha de piedra muerta; la otra está hecha de almas vivas redimidas por la sangre de Cristo.</p><div class="scripture">"Vosotros también, como piedras vivas, sed edificados como casa espiritual y sacerdocio santo, para ofrecer sacrificios espirituales aceptables a Dios por medio de Jesucristo." — 1 Pedro 2:5</div></div>
+            <div class="lesson-section"><h3>El Oficio Unificado: Un Rol, Tres Descripciones</h3><p>Cuando examinamos el registro del Nuevo Testamento sobre el liderazgo, encontramos un patrón consistente. Había tres términos griegos específicos utilizados para describir a los líderes de la asamblea local. Mientras que las denominaciones modernas han tomado estos tres y los han separado en diferentes niveles de autoridad o diferentes oficios, el registro bíblico sugiere que todos <strong>probablemente describían el mismo oficio y función.</strong></p><p><strong>Episkopos (Obispo/Supervisor):</strong> Este término enfatiza la <strong>función</strong> de gestión, organización y supervisión. Apunta a la responsabilidad del oficio.</p><p><strong>Presbuteros (Anciano):</strong> Este término enfatiza el <strong>carácter</strong>, la madurez y la sabiduría del líder. Apunta a la dignidad del oficio.</p><p><strong>Poimen (Pastor):</strong> Este término enfatiza el <strong>deber</strong> de alimentar, cuidar y proteger al rebaño. Apunta al corazón del oficio.</p><p>En la iglesia primitiva, estos no eran tres trabajos diferentes; eran tres maneras de describir al mismo hombre haciendo la obra de Dios. Un líder era un anciano en su madurez, un obispo en su supervisión y un pastor en su corazón por las ovejas.</p><div class="scripture">"Por tanto, mirad por vosotros, y por todo el rebaño en que el Espíritu Santo os ha puesto por obispos, para apacentar la iglesia del Señor." — Hechos 20:28</div></div>
+            <div class="lesson-section"><h3>Las Ordenanzas: El Evangelio Actuado</h3><p>Una iglesia verdadera se identifica por la predicación fiel de la Palabra y la administración adecuada de las <strong>Ordenanzas</strong>. Debemos ver el <strong>Bautismo</strong> y la <strong>Cena del Señor</strong> como más que meros símbolos o rituales; son el <strong>Evangelio actuado</strong> en forma física.</p><p><strong>1. Bautismo (El Evangelio de la Identidad):</strong> En el bautismo, el Evangelio se realiza físicamente. A medida que el creyente es puesto bajo el agua y levantado nuevamente, está actuando la muerte, sepultura y resurrección de Cristo. Es el drama externo de un cambio interno — una identificación pública con la obra de Jesús. No salva, pero testifica que la salvación ya ha ocurrido.</p><div class="scripture">"Porque somos sepultados juntamente con él para muerte por el bautismo, a fin de que como Cristo resucitó de los muertos por la gloria del Padre, así también nosotros andemos en vida nueva." — Romanos 6:4</div><p><strong>2. La Cena del Señor (El Evangelio del Recuerdo):</strong> Cuando la iglesia se reúne para el pan y la copa, están actuando el sacrificio del Calvario. Al comer y beber juntos, la asamblea está participando en un sermón físico que "anuncia la muerte del Señor hasta que él venga". Es el Evangelio hecho visible a través de los elementos compartidos de la mesa. También es un tiempo de reflexión. Se llama a los creyentes a examinarse a sí mismos, recordando la seriedad del pecado y la grandeza del sacrificio de Cristo.</p><div class="scripture">"Así, pues, todas las veces que comiereis este pan, y bebiereis esta copa, la muerte del Señor anunciáis hasta que él venga." — 1 Corintios 11:26</div></div>
+            <div class="illustration"><strong>💡 La Sagrada Família:</strong> Una catedral impresionante en Barcelona, en construcción por más de 140 años. Por increíble que sea el edificio, no es la Iglesia. La Iglesia no es una ubicación física; es un pueblo. Durante los primeros 250 años del cristianismo, la iglesia no tenía edificios — se reunían en casas y crecían fenomenalmente. Si cada catedral en la tierra fuera arrasada hoy, la Iglesia de Jesucristo permanecería completamente intacta porque la Iglesia está compuesta de piedras vivas, no de mortero muerto.</div>
+            <div class="lesson-section"><h3>La Misión Triple</h3><p>La Iglesia es una comunidad con un movimiento específico y tridimensional. Funciona como el "Cuerpo" de Cristo en el mundo a través de tres direcciones distintas:</p><p><strong>Hacia Arriba (Adoración):</strong> La Iglesia mira hacia arriba para reconocer la supremacía y santidad de Dios. Este es nuestro propósito primario — glorificar al Creador a través de la alabanza y la proclamación de Su verdad. La adoración no está limitada a un servicio, pero encuentra una expresión especial cuando la iglesia se reúne.</p><p><strong>Hacia Adentro (Edificación):</strong> La Iglesia se mira a sí misma con el propósito del crecimiento mutuo. Este es el trabajo de <em>Koinonía</em> (comunión), involucrando enseñar y animarse unos a otros para que las "Piedras Vivas" sean apropiadamente formadas y ensambladas. Se llama a los creyentes a compartir la vida juntos, animándose unos a otros, llevando cargas y edificándose unos a otros.</p><p><strong>Hacia Afuera (Evangelismo):</strong> La Iglesia mira al mundo. Este es el movimiento del <strong>Hilo Escarlata</strong>. Habiendo sido reconciliada con Dios, la Iglesia lleva el mensaje y la invitación de esa reconciliación a aquellos que todavía están fuera de la asamblea. Es llamada a proclamar el evangelio y a hacer discípulos. Esta misión se extiende más allá de las paredes de la iglesia hacia el mundo.</p><div class="scripture">"Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo." — Mateo 28:19</div></div>
+            <div class="lesson-section"><h3>El Cuerpo de Cristo: Muchos Miembros, Un Propósito</h3><p>El apóstol Pablo usa la metáfora del cuerpo humano para describir la iglesia. Un cuerpo tiene muchas partes — ojos, oídos, manos, pies — y cada parte tiene una función diferente. Ninguna es mayor, y ninguna es menor. El ojo no puede decir a la mano: "No tengo necesidad de ti." Del mismo modo, cada creyente tiene un papel que desempeñar. Nadie es innecesario, y nadie es suficiente solo.</p><p><strong>El Ojo de la Visión:</strong> En un cuerpo físico, los ojos no crean el camino; simplemente perciben el camino que ya está allí. Como enseñó Henry Blackaby, la visión espiritual no se trata de que se nos ocurra un plan ingenioso y le pidamos a Dios que lo bendiga. Se trata de buscar dónde Dios ya está obrando y simplemente unirnos a Él. Es la diferencia entre preguntar: "¿Qué podemos hacer por Dios?" y preguntar: "¿Qué está haciendo Dios de lo que Él quiere que seamos parte?"</p><p><strong>El Oído de la Compasión:</strong> La iglesia es el cuerpo que escucha cuando el mundo hace oídos sordos. Nos detenemos para escuchar a un alma. Preguntamos sobre las vidas de las personas. Nos convertimos en miembros del Cuerpo que escuchan.</p><p><strong>El Pie del Evangelismo:</strong> "¡Cuán hermosos son los pies de los que anuncian buenas nuevas!" (Romanos 10:15). Esos "hermosos pies" no son los nuestros — son la gracia de Dios moviéndose a través de personas que están dispuestas a dar el paso. La gloria pertenece a Aquel que espera que finalmente demos el paso.</p><div class="scripture">"Porque así como el cuerpo es uno, y tiene muchos miembros, pero todos los miembros del cuerpo, siendo muchos, son un solo cuerpo, así también Cristo." — 1 Corintios 12:12</div></div>
+            <div class="lesson-section"><h3>La Iglesia es Amada, Santa y Llamada</h3><p><strong>La Iglesia es Amada:</strong> Efesios 5:25 dice: "Maridos, amad a vuestras mujeres, así como Cristo amó a la iglesia, y se entregó a sí mismo por ella." El término griego para amor usado aquí es <em>ágape</em>, que significa un compromiso desinteresado, sacrificial y volitivo. La Iglesia no es meramente una organización humana o un club social; es el objeto específico del afecto divino de Cristo. Cristo no solo amó la idea de una iglesia; amó a las personas que la componen lo suficiente como para soportar la cruz. Nunca debemos criticar a la Esposa de Cristo. Si Cristo, quien es perfecto, amó a la Iglesia lo suficiente como para morir por ella, entonces nosotros, como Sus seguidores, no podemos afirmar amar a la Cabeza (Cristo) mientras despreciamos o descuidamos al Cuerpo (la Iglesia).</p><p><strong>La Iglesia es Santa:</strong> El mandato para esta iglesia "sin mancha" se encuentra en 1 Pedro 1:15-16: "Sino, como aquel que os llamó es santo, sed también vosotros santos en toda vuestra manera de vivir; porque escrito está: Sed santos, porque yo soy santo." Ser una iglesia santa significa que somos un pueblo que ha sido apartado por el Espíritu para el uso exclusivo de Dios. En el Templo del Antiguo Testamento, el acceso al Lugar Santísimo estaba restringido. Cuando Jesús murió, el velo se rasgó de arriba abajo (Mateo 27:51). Esta era la manera de Dios de decir que la puerta está abierta. Pero la santidad es lo que mantiene fluyendo el poder. Somos la Iglesia Santa. Estamos diseñados para llevar el poder de Dios a un mundo necesitado. Ser santo es mantener el "Cuarto Limpio" de nuestra comunión para que el poder de Dios pueda fluir a través de nosotros al mundo sin interferencia.</p><div class="scripture">"Mas vosotros sois linaje escogido, real sacerdocio, nación santa, pueblo adquirido por Dios, para que anunciéis las virtudes de aquel que os llamó de las tinieblas a su luz admirable." — 1 Pedro 2:9</div></div>
+            <div class="lesson-section"><h3>Resumen Final</h3><p>La Doctrina de la Iglesia nos enseña que la Iglesia no es un edificio sino un pueblo — la asamblea llamada de creyentes. Es el cuerpo de Cristo, la esposa de Cristo y la familia de Dios. Sus líderes son descritos como ancianos, obispos y pastores — un oficio con tres descripciones. Sus ordenanzas son el bautismo y la Cena del Señor — el evangelio actuado. Su misión es triple: hacia arriba (adoración), hacia adentro (edificación) y hacia afuera (evangelismo). La Iglesia es amada por Cristo, llamada a ser santa y empoderada por el Espíritu. Descuidar la Iglesia es descuidar una parte central del diseño de Dios. Amar la Iglesia es amar lo que Cristo ama. Servir a la Iglesia es servir al cuerpo del cual Él es la cabeza.</p><div class="scripture">"Y sometió todas las cosas bajo sus pies, y lo dio por cabeza sobre todas las cosas a la iglesia, la cual es su cuerpo, la plenitud de Aquel que todo lo llena en todo." — Efesios 1:22-23</div></div>
+
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 8 Examination</span><span class="lang-es">📋 Examen de la Unidad 8</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit9.html" class="btn-nav"><span class="lang-en">Next: Denominations →</span><span class="lang-es">Siguiente: Denominaciones →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 8;
+const NEXT_URL = "CTSSTUnit9.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:3,
+    en:{ q:"The church is best understood as:", opts:["A social organization","A building","An institution only","A people called out by God"], expl:"The church is a people — the called-out assembly of believers." },
+    es:{ q:"La iglesia se entiende mejor como:", opts:["Una organización social","Un edificio","Solo una institución","Un pueblo llamado por Dios"], expl:"La iglesia es un pueblo — la asamblea llamada de creyentes." } },
+  { id:2, correct:0,
+    en:{ q:"The word 'church' (ekklesia) refers to:", opts:["Called-out ones","Religious activity","Tradition","A location"], expl:"Ekklesia means 'called-out ones' — the people God claims." },
+    es:{ q:"La palabra 'iglesia' (ekklesia) se refiere a:", opts:["Los llamados","Actividad religiosa","Tradición","Una ubicación"], expl:"Ekklesia significa 'los llamados' — el pueblo que Dios reclama." } },
+  { id:3, correct:3,
+    en:{ q:"For how long did the early church have no dedicated buildings?", opts:["500 years","50 years","100 years","250 years"], expl:"For the first 250 years, the church had no buildings; they met in homes." },
+    es:{ q:"¿Por cuánto tiempo la iglesia primitiva no tuvo edificios dedicados?", opts:["500 años","50 años","100 años","250 años"], expl:"Durante los primeros 250 años, la iglesia no tenía edificios; se reunían en casas." } },
+  { id:4, correct:1,
+    en:{ q:"The three Greek terms for church leaders (episkopos, presbuteros, poimen) likely describe:", opts:["Three different offices with different authority","The same office and function from different angles","Offices that no longer exist","Secular government roles"], expl:"These three terms describe the same office — elder (character), bishop (function), pastor (duty)." },
+    es:{ q:"Los tres términos griegos para líderes de la iglesia (episkopos, presbuteros, poimen) probablemente describen:", opts:["Tres oficios diferentes con diferente autoridad","El mismo oficio y función desde diferentes ángulos","Oficios que ya no existen","Roles del gobierno secular"], expl:"Estos tres términos describen el mismo oficio — anciano (carácter), obispo (función), pastor (deber)." } },
+  { id:5, correct:1,
+    en:{ q:"What does 'episkopos' emphasize?", opts:["Character and maturity","Function and oversight","Feeding and protecting","Age and experience"], expl:"Episkopos (bishop/overseer) emphasizes the function of management and oversight." },
+    es:{ q:"¿Qué enfatiza 'episkopos'?", opts:["Carácter y madurez","Función y supervisión","Alimentar y proteger","Edad y experiencia"], expl:"Episkopos (obispo/supervisor) enfatiza la función de gestión y supervisión." } },
+  { id:6, correct:1,
+    en:{ q:"What does 'presbuteros' emphasize?", opts:["Feeding and protecting","Character, maturity, and wisdom","Age only","Function and oversight"], expl:"Presbuteros (elder) emphasizes the character, maturity, and wisdom of the leader." },
+    es:{ q:"¿Qué enfatiza 'presbuteros'?", opts:["Alimentar y proteger","Carácter, madurez y sabiduría","Solo edad","Función y supervisión"], expl:"Presbuteros (anciano) enfatiza el carácter, la madurez y la sabiduría del líder." } },
+  { id:7, correct:3,
+    en:{ q:"What does 'poimen' emphasize?", opts:["Administration","Function and oversight","Character and maturity","Feeding, caring for, and protecting the flock"], expl:"Poimen (pastor/shepherd) emphasizes the duty of feeding, caring for, and protecting the flock." },
+    es:{ q:"¿Qué enfatiza 'poimen'?", opts:["Administración","Función y supervisión","Carácter y madurez","Alimentar, cuidar y proteger el rebaño"], expl:"Poimen (pastor) enfatiza el deber de alimentar, cuidar y proteger el rebaño." } },
+  { id:8, correct:3,
+    en:{ q:"The two ordinances of the church are:", opts:["Preaching and teaching","Worship and service","Prayer and fasting","Baptism and the Lord's Supper"], expl:"The two ordinances are Baptism and the Lord's Supper — the gospel enacted." },
+    es:{ q:"Las dos ordenanzas de la iglesia son:", opts:["Predicación y enseñanza","Adoración y servicio","Oración y ayuno","Bautismo y la Cena del Señor"], expl:"Las dos ordenanzas son el Bautismo y la Cena del Señor — el evangelio actuado." } },
+  { id:9, correct:2,
+    en:{ q:"Baptism represents:", opts:["The end of sin","Salvation itself","Identification with Christ's death, burial, and resurrection","Church membership only"], expl:"Baptism enacts the death, burial, and resurrection of Christ." },
+    es:{ q:"El bautismo representa:", opts:["El fin del pecado","La salvación misma","Identificación con la muerte, sepultura y resurrección de Cristo","Solo membresía de iglesia"], expl:"El bautismo actúa la muerte, sepultura y resurrección de Cristo." } },
+  { id:10, correct:1,
+    en:{ q:"The Lord's Supper is a:", opts:["Meal for physical hunger","Remembrance of Christ's death","Weekly requirement for salvation","Jewish festival"], expl:"The Lord's Supper is a remembrance of Christ's sacrifice." },
+    es:{ q:"La Cena del Señor es una:", opts:["Comida para el hambre física","Conmemoración de la muerte de Cristo","Requisito semanal para la salvación","Festival judío"], expl:"La Cena del Señor es una conmemoración del sacrificio de Cristo." } },
+  { id:11, correct:2,
+    en:{ q:"The three-fold mission of the church is:", opts:["Faith, hope, love","Past, present, future","Upward, inward, outward","Father, Son, Spirit"], expl:"The three-fold mission is upward (worship), inward (edification), and outward (evangelism)." },
+    es:{ q:"La misión triple de la iglesia es:", opts:["Fe, esperanza, amor","Pasado, presente, futuro","Hacia arriba, hacia adentro, hacia afuera","Padre, Hijo, Espíritu"], expl:"La misión triple es hacia arriba (adoración), hacia adentro (edificación) y hacia afuera (evangelismo)." } },
+  { id:12, correct:2,
+    en:{ q:"The Greek word 'Koinonia' refers to:", opts:["Church government","Worship","Deep fellowship and sharing","Evangelism"], expl:"Koinonia refers to deep fellowship, sharing life together." },
+    es:{ q:"La palabra griega 'Koinonía' se refiere a:", opts:["Gobierno de la iglesia","Adoración","Comunión profunda y compartir","Evangelismo"], expl:"Koinonía se refiere a la comunión profunda, compartir la vida juntos." } },
+  { id:13, correct:0,
+    en:{ q:"The church is called the 'Body of Christ' to emphasize:", opts:["Many members with different functions working together","That it is physically Christ","That it is invisible","That it replaces Christ"], expl:"The body metaphor emphasizes unity in diversity — many parts, one purpose." },
+    es:{ q:"La iglesia es llamada el 'Cuerpo de Cristo' para enfatizar:", opts:["Muchos miembros con diferentes funciones trabajando juntos","Que es físicamente Cristo","Que es invisible","Que reemplaza a Cristo"], expl:"La metáfora del cuerpo enfatiza la unidad en la diversidad — muchas partes, un propósito." } },
+  { id:14, correct:0,
+    en:{ q:"The church is called the 'Bride of Christ' to emphasize:", opts:["Devotion, love, and relationship","Organization and structure","Independence","Authority and power"], expl:"The bride metaphor emphasizes devotion, love, and faithful relationship." },
+    es:{ q:"La iglesia es llamada la 'Novia de Cristo' para enfatizar:", opts:["Devoción, amor y relación","Organización y estructura","Independencia","Autoridad y poder"], expl:"La metáfora de la novia enfatiza la devoción, el amor y la relación fiel." } },
+  { id:15, correct:3,
+    en:{ q:"The church is called the 'Household of God' to emphasize:", opts:["A physical building","Political power","Strict rules","Family relationship and belonging"], expl:"The household metaphor emphasizes family relationship and belonging." },
+    es:{ q:"La iglesia es llamada la 'Familia de Dios' para enfatizar:", opts:["Un edificio físico","Poder político","Reglas estrictas","Relación familiar y pertenencia"], expl:"La metáfora de la familia enfatiza la relación familiar y la pertenencia." } },
+  { id:16, correct:1,
+    en:{ q:"According to 1 Peter 2:5, believers are described as:", opts:["Church members","Living stones","Religious workers","Spectators"], expl:"Believers are 'living stones' being built into a spiritual house." },
+    es:{ q:"Según 1 Pedro 2:5, los creyentes son descritos como:", opts:["Miembros de la iglesia","Piedras vivas","Trabajadores religiosos","Espectadores"], expl:"Los creyentes son 'piedras vivas' siendo edificadas como casa espiritual." } },
+  { id:17, correct:2,
+    en:{ q:"Who is the only authorized 'Head' of the Church?", opts:["The Pope","The Bishop","Jesus Christ","The Council of Elders"], expl:"Jesus Christ is the head of the church, His body (Ephesians 1:22-23)." },
+    es:{ q:"¿Quién es la única 'Cabeza' autorizada de la Iglesia?", opts:["El Papa","El Obispo","Jesucristo","El consejo de ancianos"], expl:"Jesucristo es la cabeza de la iglesia, Su cuerpo (Efesios 1:22-23)." } },
+  { id:18, correct:0,
+    en:{ q:"The church is called to be 'holy' which means:", opts:["Set apart by God for His exclusive use","Separated from all people","Only for special believers","Perfect without any flaws"], expl:"Holiness means being set apart by God for His exclusive use and purpose." },
+    es:{ q:"La iglesia es llamada a ser 'santa' lo que significa:", opts:["Apartada por Dios para Su uso exclusivo","Separada de todas las personas","Solo para creyentes especiales","Perfecta sin defectos"], expl:"Santidad significa ser apartado por Dios para Su uso y propósito exclusivo." } },
+  { id:19, correct:0,
+    en:{ q:"What does the Sagrada Família illustration teach about the church?", opts:["The church is a people, not a building","Architecture is essential for worship","Barcelona is the center of Christianity","Beautiful buildings honor God most"], expl:"The Sagrada Família is a magnificent building, but it is not the church. The church is the people." },
+    es:{ q:"¿Qué enseña la ilustración de la Sagrada Família sobre la iglesia?", opts:["La iglesia es un pueblo, no un edificio","La arquitectura es esencial para la adoración","Barcelona es el centro del cristianismo","Los edificios hermosos honran más a Dios"], expl:"La Sagrada Família es un edificio magnífico, pero no es la iglesia. La iglesia es el pueblo." } },
+  { id:20, correct:2,
+    en:{ q:"The purpose of spiritual gifts in the church is:", opts:["Financial gain","Personal glory","Building up the body of Christ","Showing superiority"], expl:"Spiritual gifts are given for the edification and building up of the church." },
+    es:{ q:"El propósito de los dones espirituales en la iglesia es:", opts:["Ganancia financiera","Gloria personal","Edificación del cuerpo de Cristo","Mostrar superioridad"], expl:"Los dones espirituales son dados para la edificación y edificación de la iglesia." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the distinction between the church as a building and the church as a people. Why is this distinction important for understanding the New Testament?", kw:["building","people","ekklesia","called out","living stones","body","community"], expl:"The New Testament word ekklesia never refers to a building but always to a people — the called-out assembly. For the first 250 years, the church had no buildings. Understanding this shifts focus from facilities to relationships and mission." },
+    es:{ q:"Explique la distinción entre la iglesia como edificio y la iglesia como pueblo. ¿Por qué es importante esta distinción para entender el Nuevo Testamento?", kw:["edificio","pueblo","ekklesia","llamad","piedras vivas","cuerpo","comunidad"], expl:"La palabra del Nuevo Testamento ekklesia nunca se refiere a un edificio sino siempre a un pueblo — la asamblea llamada. Durante los primeros 250 años, la iglesia no tenía edificios. Entender esto cambia el enfoque de las instalaciones a las relaciones y la misión." } },
+  { id:22,
+    en:{ q:"Explain the relationship between the three Greek terms for church leadership: episkopos, presbuteros, and poimen. How do they describe the same office?", kw:["episkopos","presbuteros","poimen","bishop","elder","pastor","overseer","shepherd"], expl:"These three terms describe the same office from different angles: episkopos (function/oversight), presbuteros (character/maturity), poimen (duty/shepherding). A leader is an elder in character, a bishop in function, and a pastor in heart." },
+    es:{ q:"Explique la relación entre los tres términos griegos para el liderazgo de la iglesia: episkopos, presbuteros y poimen. ¿Cómo describen el mismo oficio?", kw:["episkopos","presbuteros","poimen","obispo","anciano","pastor","supervisor"], expl:"Estos tres términos describen el mismo oficio desde diferentes ángulos: episkopos (función/supervisión), presbuteros (carácter/madurez), poimen (deber/pastoreo). Un líder es anciano en carácter, obispo en función y pastor en corazón." } },
+  { id:23,
+    en:{ q:"Explain the meaning of baptism and the Lord's Supper as 'the Gospel enacted.' What does each ordinance communicate about the work of Christ?", kw:["baptism","lord's supper","gospel","enacted","death","burial","resurrection","remembrance"], expl:"Baptism enacts death, burial, and resurrection. The Lord's Supper enacts remembrance of Christ's sacrifice. Together, they make the gospel visible and physical." },
+    es:{ q:"Explique el significado del bautismo y la Cena del Señor como 'el Evangelio actuado.' ¿Qué comunica cada ordenanza sobre la obra de Cristo?", kw:["bautismo","cena del señor","evangelio","actuad","muerte","sepultura","resurrección","recuerdo"], expl:"El bautismo actúa la muerte, sepultura y resurrección. La Cena del Señor actúa el recuerdo del sacrificio de Cristo. Juntos, hacen visible y físico el evangelio." } },
+  { id:24,
+    en:{ q:"Describe the three-fold mission of the church: upward, inward, and outward. Why are all three necessary for a healthy church?", kw:["upward","worship","inward","edification","outward","evangelism","mission","balance"], expl:"Upward (worship) honors God. Inward (edification) builds up believers. Outward (evangelism) reaches the lost. Neglecting any one leads to an unbalanced, unhealthy church." },
+    es:{ q:"Describa la misión triple de la iglesia: hacia arriba, hacia adentro y hacia afuera. ¿Por qué son necesarias las tres para una iglesia saludable?", kw:["arriba","adoración","adentro","edificación","afuera","evangelismo","misión","equilibri"], expl:"Hacia arriba (adoración) honra a Dios. Hacia adentro (edificación) edifica a los creyentes. Hacia afuera (evangelismo) alcanza a los perdidos. Descuidar cualquiera lleva a una iglesia desequilibrada y poco saludable." } },
+  { id:25,
+    en:{ q:"Using the body metaphor (1 Corinthians 12), explain why every member of the church is necessary. What happens when some members are not functioning?", kw:["body","members","necessary","function","gifts","church","contribution"], expl:"Every member has a unique function, like parts of a body. If a hand stops moving, the body is paralyzed. When members don't function, the whole body suffers and cannot fulfill its mission." },
+    es:{ q:"Usando la metáfora del cuerpo (1 Corintios 12), explique por qué cada miembro de la iglesia es necesario. ¿Qué sucede cuando algunos miembros no están funcionando?", kw:["cuerpo","miembros","necesari","función","dones","iglesia","contribución"], expl:"Cada miembro tiene una función única, como las partes de un cuerpo. Si una mano deja de moverse, el cuerpo queda paralizado. Cuando los miembros no funcionan, todo el cuerpo sufre y no puede cumplir su misión." } },
+  { id:26,
+    en:{ q:"What does it mean that the church is 'holy'? How does the 'Clean Room' illustration explain the importance of holiness for the church's effectiveness?", kw:["holy","clean room","dust","spirit","power","set apart","purity"], expl:"Holiness means being set apart for God. Like a microchip factory must be free of dust to function, the church must be free of sin's 'dust' to carry God's power without short-circuiting." },
+    es:{ q:"¿Qué significa que la iglesia es 'santa'? ¿Cómo explica la ilustración de la 'Sala Limpia' la importancia de la santidad para la efectividad de la iglesia?", kw:["santa","cuarto limpio","polvo","espíritu","poder","apartad","pureza"], expl:"Santidad significa ser apartado para Dios. Como una fábrica de microchips debe estar libre de polvo para funcionar, la iglesia debe estar libre del 'polvo' del pecado para llevar el poder de Dios sin cortocircuitos." } },
+  { id:27,
+    en:{ q:"Why should believers 'never criticize the Bride of Christ'? What does this reveal about Christ's love for the church?", kw:["bride","church","criticize","love","christ","sacrifice","protect"], expl:"Christ loved the church enough to die for her. If He is that protective, believers cannot claim to love the Head while despising the Body. Criticizing the church is like an autoimmune disease — the body attacking itself." },
+    es:{ q:"¿Por qué los creyentes nunca deben 'criticar a la Novia de Cristo'? ¿Qué revela esto sobre el amor de Cristo por la iglesia?", kw:["esposa","novia","iglesia","criticar","amor","cristo","sacrificio","proteger"], expl:"Cristo amó tanto a la iglesia que murió por ella. Si Él es tan protector, los creyentes no pueden decir que aman a la Cabeza mientras desprecian al Cuerpo. Criticar a la iglesia es como una enfermedad autoinmune — el cuerpo atacándose a sí mismo." } },
+  { id:28,
+    en:{ q:"Explain the roles of the 'Eye of Vision,' the 'Ear of Compassion,' and the 'Foot of Evangelism' in the body of Christ. How can believers fulfill these roles?", kw:["eye","vision","ear","compassion","foot","evangelism","body","church"], expl:"The eye perceives where God is already working. The ear listens to those in need. The foot carries the gospel to others. Believers fulfill these by seeking God's vision, showing compassion, and taking steps to share the gospel." },
+    es:{ q:"Explique los roles del 'Ojo de la Visión', el 'Oído de la Compasión' y el 'Pie del Evangelismo' en el cuerpo de Cristo. ¿Cómo pueden los creyentes cumplir estos roles?", kw:["ojo","visión","oído","compasión","pie","evangelismo","cuerpo","iglesia"], expl:"El ojo percibe dónde Dios ya está obrando. El oído escucha a los necesitados. El pie lleva el evangelio a otros. Los creyentes cumplen estos buscando la visión de Dios, mostrando compasión y dando pasos para compartir el evangelio." } },
+  { id:29,
+    en:{ q:"What does it mean that the church is both 'spiritual' and 'visible'? How do these two aspects relate to each other?", kw:["spiritual","visible","invisible","local","universal","gathering","true believers"], expl:"The universal church (spiritual) includes all true believers everywhere, known only to God. The local church (visible) is the gathering of believers in a specific place. The visible should reflect the spiritual." },
+    es:{ q:"¿Qué significa que la iglesia es tanto 'espiritual' como 'visible'? ¿Cómo se relacionan estos dos aspectos entre sí?", kw:["espiritual","visible","invisible","local","universal","reunión","verdaderos creyentes"], expl:"La iglesia universal (espiritual) incluye a todos los verdaderos creyentes en todas partes, conocidos solo por Dios. La iglesia local (visible) es la reunión de creyentes en un lugar específico. Lo visible debe reflejar lo espiritual." } },
+  { id:30,
+    en:{ q:"Summarize the main point of Unit 8. Why is the doctrine of the church essential for Christian life and ministry?", kw:["church","body","bride","people","mission","worship","edification","evangelism"], expl:"The church is not a building but a people — the body of Christ, the bride of Christ, the household of God. It exists for worship, edification, and evangelism. To neglect the church is to neglect a central part of God's design." },
+    es:{ q:"Resuma el punto principal de la Unidad 8. ¿Por qué es esencial la doctrina de la iglesia para la vida y el ministerio cristiano?", kw:["iglesia","cuerpo","esposa","pueblo","misión","adoración","edificación","evangelismo"], expl:"La iglesia no es un edificio sino un pueblo — el cuerpo de Cristo, la novia de Cristo, la familia de Dios. Existe para la adoración, la edificación y el evangelismo. Descuidar la iglesia es descuidar una parte central del diseño de Dios." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 6: The Doctrine of Sin (Hamartiology) | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 6: The Doctrine of Sin (Hamartiology)</span><span class="lang-es">📖 Unidad 6: La Doctrina del Pecado (Hamartiología)</span></h1>
+    <p><span class="lang-en">Rebellion, Distortion, and the Need for Grace</span><span class="lang-es">Rebelión, Distorsión y la Necesidad de Gracia</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">The Doctrine of Sin (Hamartiology)</div>
+            <div class="lesson-section"><h3>Day 1 — The Reality and Seriousness of Sin</h3><p>Sin is one of the most important and least popular subjects in theology. Many people prefer to speak only of love, grace, and forgiveness. These are essential truths, but without a clear understanding of sin, they lose their meaning. Grace only makes sense when we understand what we are being saved from.</p><p>The Bible does not treat sin lightly. It presents sin as rebellion against God, a violation of His holy law, and a distortion of what humanity was created to be. Sin is not merely a mistake or a weakness. It is a moral failure rooted in the human heart.</p><p>In modern culture, sin is often redefined or avoided. We speak of mistakes, dysfunction, or poor choices rather than moral responsibility. Yet Scripture speaks clearly. Sin is real, and it is serious.</p><p>Sin separates us from God. It disrupts our relationship with Him and introduces disorder into every part of life. The holiness of God makes sin not just unfortunate, but offensive.</p><p>Understanding sin is essential for understanding salvation. If sin is minimized, then the cross of Christ becomes unnecessary. But when sin is seen clearly, the cross becomes central.</p><div class="scripture">"For all have sinned and fall short of the glory of God." — Romans 3:23</div><div class="scripture">"The wages of sin is death." — Romans 6:23</div><p>When we avoid the doctrine of sin, we do not make people better — we leave them without a solution.</p></div>
+            <div class="lesson-section"><h3>Day 2 — The Origin and Nature of Sin</h3><p>Sin entered the human race through Adam's disobedience in the Garden of Eden. The first sin was not murder or theft—it was disbelief in God's word and the choice to act independently of His command. Adam and Eve had one prohibition, and they violated it. They chose their own judgment over God's revelation.</p><p>Sin is both an act and a condition. It is an act when we choose to disobey God. It is a condition because we are born with a nature inclined toward sin. This is why Scripture speaks of being "dead in trespasses and sins" (Ephesians 2:1). The problem is not only what we do—it is what we are.</p><p>If sin were only external, we could fix ourselves. But because it is internal, we need transformation. Education cannot save us. Moral reform cannot save us. Only the work of God can change the human heart.</p><p>Examples of faith show how sin operates. The "leprous babe" illustration speaks of a baby in Jerusalem who appeared healthy but carried the germ of leprosy within. Though he looked perfect, the disease was hidden deep within his nature and would eventually manifest. This is the biblical view of original sin. We are not sinners because we sin; we sin because we carry the "germ" of a fallen nature. Jesus said it is not what goes into us that defiles us, but what comes out of the heart.</p></div>
+            <div class="illustration"><strong>💡 The Leprous Babe:</strong> Dr. John A. Broadus spoke of seeing a baby in Jerusalem who appeared ruddy-cheeked and healthy. Yet, as he reached over to pick the child up, he heard the startling cry, "Unclean! Unclean!" The child was the offspring of lepers. Though he looked perfect, the germ of the disease was hidden deep within his nature and would eventually manifest. We are not sinners because we sin; we sin because we carry the "germ" of a fallen nature.</div>
+            <div class="lesson-section"><h3>Day 3 — The Linguistic Anatomy of Failure: Hamartia</h3><p>The primary biblical concept for sin is <strong>Hamartia</strong> — a term from archery. It describes the archer who aims at the target of God's glory and misses. Crucially, in this theological sense, the archer doesn't just hit the outer ring; he misses the target entirely. He fails to hit the mark of God's perfect will. As Romans 3:23 states, we have all "fallen short." This "missing" is often intentional (rebellion) or through wandering (ignorance), but the result is always a chasm between our performance and God's standard.</p><p>Sin is also described in Scripture using other terms. It is called transgression — the crossing of a boundary. It is called iniquity — a twisting or perversion of what is right. It is called debt — something owed to God that we cannot pay. Each term adds depth to our understanding. Sin is not a single thing but a multifaceted reality. Yet at its core, sin is always a failure to be what God created us to be and to do what God commands us to do.</p></div>
+            <div class="lesson-section"><h3>Day 4 — The Perversion of the Positive and Sins of Commission/Omission</h3><p>One of the most creative ways to understand sin is as the "abuse of the positive." Most of our natural desires are gifts from God, but they can all be abused or misdirected. Alcohol can propel a car as fuel, or it can be abused to propel a person drunkenly into the street. Water can quench a life-threatening thirst, or it can be used to drown someone. Sex is a holy gift for intimacy and family, yet it is abused through promiscuity, adultery, and lust. Fire warms the hearth or consumes the city. Sin is the act of taking a "good" desire and aiming it toward an abusive end. The desire for food becomes gluttony; the desire for rest becomes laziness.</p><p>Sin also manifests in our daily conduct in two distinct ways:</p><p><strong>Sins of Commission:</strong> These are the "active rebellions." We see God's "No" and we do it anyway. We willfully fire our "arrow" in the opposite direction of the target.</p><p><strong>Sins of Omission:</strong> These are the "passive failures." We know the good we should do, but we fail to do it. As James 4:17 states, to know the good and fail to do it is sin. We miss the mark through our silence and our inaction.</p><div class="scripture">"Therefore, to him who knows to do good and does not do it, to him it is sin." — James 4:17</div></div>
+            <div class="illustration"><strong>💡 The Alcohol-Logic:</strong> Both the man who uses alcohol to fuel his car and the man who uses alcohol to fuel his drunkenness are using the same substance. The difference is not in the thing itself, but in the direction of the use. Sin is not the destruction of the good; it is the misdirection of the good.</div>
+            <div class="lesson-section"><h3>Day 5 — The Great Distinction: Sin versus Sins</h3><p>To master this doctrine, one must distinguish between <strong>Sin (the nature)</strong> and <strong>Sins (the actions)</strong>.</p><p><strong>Sin (The Condition):</strong> This refers to the corrupted state of the human race. No one person seems responsible for it, yet things are in a terrible state. As a result of this condition, we find "problems without individual responsibility"—diseases, wars, earthquakes, and floods. This is the "helpless" state described in Romans 5-7. As theologian Fisher Humphreys famously noted: "In our sin we are helpless and need liberation."</p><p><strong>Sins (The Transgressions):</strong> These are the result of our freedom of choice. These are the specific, willful decisions we make that run contrary to God's will, as cataloged in Romans 1-3. For these, we are personally guilty and need forgiveness.</p><p>One requires liberation from a state; the other requires forgiveness for an act. Addressing one without the other leads to incomplete ministry. The gospel addresses both: Christ liberates us from the power of sin and forgives us for the acts of sin.</p></div>
+            <div class="lesson-section"><h3>Final Summary: The Path to Liberation</h3><p>The Doctrine of Sin is never the final word. It identifies the "missed mark" so we realize that we cannot save ourselves. Instead, we need a <strong>Substitute Archer</strong> — Jesus Christ — who hit the mark perfectly and whose righteousness is credited to us by grace.</p><p>Sin is real, serious, and universal. It entered through Adam, affects every part of our being, and leads to death. But the gospel announces that where sin abounded, grace abounded much more (Romans 5:20). The diagnosis of sin prepares us for the cure of salvation. To understand sin is to understand why we need a Savior. To understand grace is to understand what we have received in Him.</p><div class="scripture">"But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us." — Romans 5:8</div></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">La Doctrina del Pecado (Hamartiología)</div>
+            <div class="lesson-section"><h3>Día 1 — La Realidad y Seriedad del Pecado</h3><p>El pecado es uno de los temas más importantes y menos populares en la teología. Muchas personas prefieren hablar solo de amor, gracia y perdón. Estas son verdades esenciales, pero sin una comprensión clara del pecado, pierden su significado. La gracia solo tiene sentido cuando entendemos de qué estamos siendo salvos.</p><p>La Biblia no trata el pecado a la ligera. Presenta el pecado como rebelión contra Dios, una violación de Su santa ley y una distorsión de lo que la humanidad fue creada para ser. El pecado no es meramente un error o una debilidad. Es un fracaso moral arraigado en el corazón humano.</p><p>En la cultura moderna, el pecado a menudo se redefine o se evita. Hablamos de errores, disfunción o malas decisiones en lugar de responsabilidad moral. Sin embargo, la Escritura habla con claridad. El pecado es real, y es serio.</p><p>El pecado nos separa de Dios. Interrumpe nuestra relación con Él e introduce desorden en cada parte de la vida. La santidad de Dios hace que el pecado no sea solo desafortunado, sino ofensivo.</p><p>Entender el pecado es esencial para entender la salvación. Si el pecado se minimiza, entonces la cruz de Cristo se vuelve innecesaria. Pero cuando el pecado se ve con claridad, la cruz se vuelve central.</p><div class="scripture">"Por cuanto todos pecaron, y están destituidos de la gloria de Dios." — Romanos 3:23</div><div class="scripture">"La paga del pecado es muerte." — Romanos 6:23</div><p>Cuando evitamos la doctrina del pecado, no hacemos mejores a las personas — las dejamos sin una solución.</p></div>
+            <div class="lesson-section"><h3>Día 2 — El Origen y la Naturaleza del Pecado</h3><p>El pecado entró en la raza humana a través de la desobediencia de Adán en el Jardín del Edén. El primer pecado no fue asesinato ni robo—fue la incredulidad en la palabra de Dios y la decisión de actuar independientemente de Su mandato. Adán y Eva tenían una sola prohibición, y la violaron. Eligieron su propio juicio sobre la revelación de Dios.</p><p>El pecado es tanto un acto como una condición. Es un acto cuando elegimos desobedecer a Dios. Es una condición porque nacemos con una naturaleza inclinada hacia el pecado. Por eso la Escritura habla de estar "muertos en delitos y pecados" (Efesios 2:1). El problema no es solo lo que hacemos—es lo que somos.</p><p>Si el pecado fuera solo externo, podríamos arreglarnos a nosotros mismos. Pero porque es interno, necesitamos transformación. La educación no puede salvarnos. La reforma moral no puede salvarnos. Solo la obra de Dios puede cambiar el corazón humano.</p><p>Los ejemplos de fe muestran cómo opera el pecado. La ilustración del "bebé leproso" habla de un bebé en Jerusalén que parecía saludable pero llevaba el germen de la lepra en su interior. Aunque parecía perfecto, la enfermedad estaba escondida en lo profundo de su naturaleza y eventualmente se manifestaría. Esta es la visión bíblica del pecado original. No somos pecadores porque pecamos; pecamos porque llevamos el "germen" de una naturaleza caída. Jesús dijo que no es lo que entra en nosotros lo que nos contamina, sino lo que sale del corazón.</p></div>
+            <div class="illustration"><strong>💡 El Bebé Leproso:</strong> El Dr. John A. Broadus habló de ver a un bebé en Jerusalén que parecía sonrosado y saludable. Sin embargo, cuando se acercó para recoger al niño, escuchó el grito alarmante: "¡Inmundo! ¡Inmundo!" El niño era hijo de leprosos. Aunque parecía perfecto, el germen de la enfermedad estaba escondido en lo profundo de su naturaleza y eventualmente se manifestaría. No somos pecadores porque pecamos; pecamos porque llevamos el "germen" de una naturaleza caída.</div>
+            <div class="lesson-section"><h3>Día 3 — La Anatomía Lingüística del Fracaso: Hamartia</h3><p>El concepto bíblico principal para el pecado es <strong>Hamartia</strong> — un término del tiro con arco. Describe al arquero que apunta al blanco de la gloria de Dios y falla. Crucialmente, en este sentido teológico, el arquero no solo toca el anillo exterior; falla el blanco por completo. No alcanza el estándar de la voluntad perfecta de Dios. Como Romanos 3:23 declara, todos hemos sido "destituidos". Este "fallar" es a menudo intencional (rebelión) o por vagar (ignorancia), pero el resultado es siempre un abismo entre nuestro desempeño y el estándar de Dios.</p><p>El pecado también se describe en la Escritura usando otros términos. Se llama transgresión — el cruce de un límite. Se llama iniquidad — un torcimiento o perversión de lo que es correcto. Se llama deuda — algo debido a Dios que no podemos pagar. Cada término añade profundidad a nuestra comprensión. El pecado no es una sola cosa sino una realidad multifacética. Sin embargo, en su esencia, el pecado es siempre un fracaso de ser lo que Dios nos creó para ser y de hacer lo que Dios nos manda hacer.</p></div>
+            <div class="lesson-section"><h3>Día 4 — La Perversión de lo Positivo y los Pecados de Comisión y Omisión</h3><p>Una de las maneras más creativas de entender el pecado es como el "abuso de lo positivo". La mayoría de nuestros deseos naturales son dones de Dios, pero todos pueden ser abusados o mal dirigidos. El alcohol puede impulsar un automóvil como combustible, o puede ser abusado para impulsar a una persona ebria a la calle. El agua puede saciar una sed peligrosa, o puede usarse para ahogar a alguien. El sexo es un don santo para la intimidad y la familia, sin embargo se abusa a través de la promiscuidad, el adulterio y la lujuria. El fuego calienta el hogar o consume la ciudad. El pecado es el acto de tomar un deseo "bueno" y dirigirlo hacia un fin abusivo. El deseo de comida se convierte en glotonería; el deseo de descanso se convierte en pereza.</p><p>El pecado también se manifiesta en nuestra conducta diaria de dos maneras distintas:</p><p><strong>Pecados de Comisión:</strong> Son las "rebeliones activas". Vemos el "No" de Dios y lo hacemos de todos modos. Disparamos voluntariamente nuestra "flecha" en dirección opuesta al blanco.</p><p><strong>Pecados de Omisión:</strong> Son los "fracasos pasivos". Sabemos el bien que debemos hacer, pero no lo hacemos. Como declara Santiago 4:17, saber el bien y no hacerlo es pecado. Fallamos el blanco a través de nuestro silencio y nuestra inacción.</p><div class="scripture">"Al que sabe hacer lo bueno y no lo hace, le es pecado." — Santiago 4:17</div></div>
+            <div class="illustration"><strong>💡 La Lógica del Alcohol:</strong> Tanto el hombre que usa alcohol para alimentar su automóvil como el que usa alcohol para alimentar su embriaguez están usando la misma sustancia. La diferencia no está en la cosa misma, sino en la dirección del uso. El pecado no es la destrucción de lo bueno; es la mala dirección de lo bueno.</div>
+            <div class="lesson-section"><h3>Día 5 — La Gran Distinción: Pecado vs. Pecados</h3><p>Para dominar esta doctrina, uno debe distinguir entre <strong>Pecado (la naturaleza)</strong> y <strong>Pecados (las acciones)</strong>.</p><p><strong>Pecado (La Condición):</strong> Se refiere al estado corrupto de la raza humana. Ninguna persona parece responsable de él, sin embargo las cosas están en un estado terrible. Como resultado de esta condición, encontramos "problemas sin responsabilidad individual" — enfermedades, guerras, terremotos e inundaciones. Este es el estado "indefenso" descrito en Romanos 5-7. Como notó famosamente el teólogo Fisher Humphreys: "En nuestro pecado somos indefensos y necesitamos liberación".</p><p><strong>Pecados (Las Transgresiones):</strong> Son el resultado de nuestra libertad de elección. Son las decisiones específicas y voluntarias que tomamos que van en contra de la voluntad de Dios, catalogadas en Romanos 1-3. Por estos, somos personalmente culpables y necesitamos perdón.</p><p>Uno requiere liberación de un estado; el otro requiere perdón por un acto. Abordar uno sin el otro lleva a un ministerio incompleto. El evangelio aborda ambos: Cristo nos libera del poder del pecado y nos perdona por los actos del pecado.</p></div>
+            <div class="lesson-section"><h3>Resumen Final: El Camino a la Liberación</h3><p>La Doctrina del Pecado nunca es la palabra final. Identifica el "blanco fallado" para que nos demos cuenta de que no podemos salvarnos a nosotros mismos. En cambio, necesitamos un <strong>Arquero Sustituto</strong> — Jesucristo — que acertó en el blanco perfectamente y cuya justicia se nos acredita por gracia.</p><p>El pecado es real, serio y universal. Entró por Adán, afecta cada parte de nuestro ser y lleva a la muerte. Pero el evangelio anuncia que donde el pecado abundó, sobreabundó la gracia (Romanos 5:20). El diagnóstico del pecado nos prepara para la cura de la salvación. Entender el pecado es entender por qué necesitamos un Salvador. Entender la gracia es entender lo que hemos recibido en Él.</p><div class="scripture">"Mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros." — Romanos 5:8</div></div>
+
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 6 Examination</span><span class="lang-es">📋 Examen de la Unidad 6</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit7.html" class="btn-nav"><span class="lang-en">Next: Salvation →</span><span class="lang-es">Siguiente: Salvación →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 6;
+const NEXT_URL = "CTSSTUnit7.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:1,
+    en:{ q:"What is sin primarily?", opts:["Weakness","Rebellion against God","Ignorance","A mistake"], expl:"Sin is rebellion against God and violation of His holy law." },
+    es:{ q:"¿Qué es el pecado principalmente?", opts:["Debilidad","Rebelión contra Dios","Ignorancia","Un error"], expl:"El pecado es rebelión contra Dios y violación de Su santa ley." } },
+  { id:2, correct:3,
+    en:{ q:"Why is understanding sin important?", opts:["It improves behavior","It avoids guilt","It replaces grace","It helps us understand salvation"], expl:"Understanding sin helps us understand why we need salvation." },
+    es:{ q:"¿Por qué es importante entender el pecado?", opts:["Mejora el comportamiento","Evita la culpa","Reemplaza la gracia","Nos ayuda a entender la salvación"], expl:"Entender el pecado nos ayuda a entender por qué necesitamos salvación." } },
+  { id:3, correct:0,
+    en:{ q:"Sin entered through:", opts:["Adam's disobedience","Culture","Society","Moses"], expl:"Sin entered the human race through Adam's disobedience." },
+    es:{ q:"El pecado entró a través de:", opts:["La desobediencia de Adán","La cultura","La sociedad","Moisés"], expl:"El pecado entró en la raza humana a través de la desobediencia de Adán." } },
+  { id:4, correct:2,
+    en:{ q:"Sin is:", opts:["Only action","Only condition","Both act and condition","Only behavior"], expl:"Sin is both an act we commit and a condition we inherit." },
+    es:{ q:"El pecado es:", opts:["Solo acción","Solo condición","Tanto acto como condición","Solo comportamiento"], expl:"El pecado es tanto un acto que cometemos como una condición que heredamos." } },
+  { id:5, correct:3,
+    en:{ q:"Total depravity means:", opts:["Maximum evil","No good actions","Only some sinful","All parts affected by sin"], expl:"Total depravity means every part of human nature is affected by sin." },
+    es:{ q:"La depravación total significa:", opts:["Maldad máxima","No hay buenas acciones","Solo algunos son pecaminosos","Todas las partes afectadas por el pecado"], expl:"La depravación total significa que cada parte de la naturaleza humana es afectada por el pecado." } },
+  { id:6, correct:0,
+    en:{ q:"The mind is:", opts:["Darkened","Neutral","Perfect","Enlightened"], expl:"The noetic effects of sin mean the mind is darkened regarding spiritual truth." },
+    es:{ q:"La mente está:", opts:["Oscurecida","Neutral","Perfecta","Iluminada"], expl:"Los efectos noéticos del pecado significan que la mente está oscurecida con respecto a la verdad espiritual." } },
+  { id:7, correct:3,
+    en:{ q:"The will is:", opts:["Perfect","Removed","Irrelevant","Weakened by sin"], expl:"The will is weakened and enslaved to selfish desires." },
+    es:{ q:"La voluntad está:", opts:["Perfecta","Eliminada","Irrelevante","Debilitada por el pecado"], expl:"La voluntad está debilitada y esclavizada a los deseos egoístas." } },
+  { id:8, correct:3,
+    en:{ q:"Emotions are:", opts:["Pure","Perfect","Unimportant","Disordered"], expl:"Emotions are disordered and prone to love what we should hate." },
+    es:{ q:"Las emociones están:", opts:["Puras","Perfectas","Sin importancia","Desordenadas"], expl:"Las emociones están desordenadas y propensas a amar lo que deberíamos odiar." } },
+  { id:9, correct:0,
+    en:{ q:"Sin affects:", opts:["The whole person","Actions only","Thoughts only","Society only"], expl:"Sin affects the entire person — mind, will, emotions, and body." },
+    es:{ q:"El pecado afecta:", opts:["A toda la persona","Solo las acciones","Solo los pensamientos","Solo la sociedad"], expl:"El pecado afecta a toda la persona — mente, voluntad, emociones y cuerpo." } },
+  { id:10, correct:0,
+    en:{ q:"Sin is ultimately against:", opts:["God","People","Self","Nature"], expl:"Every sin is first and foremost an offense against God (Psalm 51:4)." },
+    es:{ q:"El pecado es en última instancia contra:", opts:["Dios","Las personas","Uno mismo","La naturaleza"], expl:"Cada pecado es ante todo una ofensa contra Dios (Salmo 51:4)." } },
+  { id:11, correct:0,
+    en:{ q:"Sin affects:", opts:["Creation itself","Only humans","Only culture","Nothing physical"], expl:"The ground was cursed because of sin; all creation groans (Romans 8:22)." },
+    es:{ q:"El pecado afecta:", opts:["La creación misma","Solo los humanos","Solo la cultura","Nada físico"], expl:"La tierra fue maldecida a causa del pecado; toda la creación gime (Romanos 8:22)." } },
+  { id:12, correct:1,
+    en:{ q:"Sin over time:", opts:["Removes guilt","Hardens the heart","Softens the heart","Improves character"], expl:"Sin hardens the heart, making it easier to sin again (Hebrews 3:13)." },
+    es:{ q:"El pecado con el tiempo:", opts:["Elimina la culpa","Endurece el corazón","Ablanda el corazón","Mejora el carácter"], expl:"El pecado endurece el corazón, haciendo más fácil pecar de nuevo (Hebreos 3:13)." } },
+  { id:13, correct:1,
+    en:{ q:"Sin leads to:", opts:["Neutrality","Death","Life","Growth"], expl:"The wages of sin is death (Romans 6:23)." },
+    es:{ q:"El pecado lleva a:", opts:["Neutralidad","Muerte","Vida","Crecimiento"], expl:"La paga del pecado es muerte (Romanos 6:23)." } },
+  { id:14, correct:1,
+    en:{ q:"Sin promises:", opts:["Truth","Freedom","Judgment","Grace"], expl:"Sin always promises freedom but produces bondage." },
+    es:{ q:"El pecado promete:", opts:["Verdad","Libertad","Juicio","Gracia"], expl:"El pecado siempre promete libertad pero produce esclavitud." } },
+  { id:15, correct:3,
+    en:{ q:"Sin produces:", opts:["Freedom","Peace","Joy","Bondage"], expl:"Sin produces bondage, not the freedom it promises." },
+    es:{ q:"El pecado produce:", opts:["Libertad","Paz","Gozo","Esclavitud"], expl:"El pecado produce esclavitud, no la libertad que promete." } },
+  { id:16, correct:2,
+    en:{ q:"The solution to sin is:", opts:["Education","Culture","Christ","Effort"], expl:"Only Christ can solve the problem of sin." },
+    es:{ q:"La solución al pecado es:", opts:["Educación","Cultura","Cristo","Esfuerzo"], expl:"Solo Cristo puede resolver el problema del pecado." } },
+  { id:17, correct:2,
+    en:{ q:"The gospel:", opts:["Minimizes sin","Avoids sin","Addresses sin fully","Ignores sin"], expl:"The gospel fully addresses sin through the work of Christ." },
+    es:{ q:"El evangelio:", opts:["Minimiza el pecado","Evita el pecado","Aborda el pecado plenamente","Ignora el pecado"], expl:"El evangelio aborda plenamente el pecado a través de la obra de Cristo." } },
+  { id:18, correct:2,
+    en:{ q:"The cross shows:", opts:["Only mercy","Only forgiveness","The seriousness of sin","Only love"], expl:"The cross shows both the seriousness of sin and the greatness of God's love." },
+    es:{ q:"La cruz muestra:", opts:["Solo misericordia","Solo perdón","La seriedad del pecado","Solo amor"], expl:"La cruz muestra tanto la seriedad del pecado como la grandeza del amor de Dios." } },
+  { id:19, correct:1,
+    en:{ q:"Grace shines brightest when:", opts:["Sin is denied","Sin is understood","Sin is ignored","Sin is minimized"], expl:"Grace shines brightest against the dark background of sin." },
+    es:{ q:"La gracia brilla más cuando:", opts:["El pecado es negado","El pecado es entendido","El pecado es ignorado","El pecado es minimizado"], expl:"La gracia brilla más contra el fondo oscuro del pecado." } },
+  { id:20, correct:2,
+    en:{ q:"Sin shows the need for:", opts:["Culture","Improvement","Salvation","Education"], expl:"Sin shows why we need salvation, not just improvement." },
+    es:{ q:"El pecado muestra la necesidad de:", opts:["Cultura","Mejora","Salvación","Educación"], expl:"El pecado muestra por qué necesitamos salvación, no solo mejora." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the distinction between Sin (nature) and Sins (actions). Why is this distinction important for understanding the gospel?", kw:["sin","sins","nature","actions","liberation","forgiveness","gospel"], expl:"Sin (nature) requires liberation from a state; Sins (actions) require forgiveness for acts. The gospel provides both." },
+    es:{ q:"Explique la distinción entre Pecado (naturaleza) y Pecados (acciones). ¿Por qué es importante esta distinción para entender el evangelio?", kw:["hamartia","arquero","blanco","fallar","gloria","destituidos","rebelión"], expl:"El Pecado (naturaleza) requiere liberación de un estado; los Pecados (acciones) requieren perdón por actos. El evangelio provee ambos." } },
+  { id:22,
+    en:{ q:"Describe the 'Leprous Babe' illustration and explain what it teaches about original sin.", kw:["leprous","babe","germ","nature","sin","inherited","fallen"], expl:"The baby looked healthy but carried leprosy within. Similarly, we sin because we carry the germ of a fallen nature from birth." },
+    es:{ q:"Describa la ilustración del 'Bebé Leproso' y explique qué enseña sobre el pecado original.", kw:["heredad","imputación","federal","total","cobertura","representa","cabeza"], expl:"El bebé parecía saludable pero llevaba la lepra dentro. Del mismo modo, pecamos porque llevamos el germen de una naturaleza caída desde el nacimiento." } },
+  { id:23,
+    en:{ q:"Explain the meaning of the Greek word 'Hamartia' and how it helps us understand sin.", kw:["hamartia","archer","miss","target","glory","fail","standard"], expl:"Hamartia means 'missing the mark' — failing to hit the target of God's glory and perfect will." },
+    es:{ q:"Explique el significado de la palabra griega 'Hamartia' y cómo nos ayuda a entender el pecado.", kw:["concupiscencia","deseo","interno","externo","corazón","raíz","motiva"], expl:"Hamartia significa 'fallar el blanco' — no alcanzar el objetivo de la gloria de Dios y Su voluntad perfecta." } },
+  { id:24,
+    en:{ q:"Explain the difference between Sins of Commission and Sins of Omission. Give an example of each.", kw:["commission","omission","active","passive","rebellion","failure","james"], expl:"Commission: doing what God forbids. Omission: failing to do what God commands (James 4:17)." },
+    es:{ q:"Explique la diferencia entre los Pecados de Comisión y los Pecados de Omisión. Dé un ejemplo de cada uno.", kw:["pelagian","semi","agustín","libre","necesidad","ayuda","monergism"], expl:"Comisión: hacer lo que Dios prohíbe. Omisión: no hacer lo que Dios manda (Santiago 4:17)." } },
+  { id:25,
+    en:{ q:"Using the 'Alcohol-Logic' illustration, explain how sin 'borrows' from the Good.", kw:["alcohol","fuel","drunkenness","direction","abuse","positive","misdirection"], expl:"Sin takes a good gift from God (alcohol, water, sex, fire) and misdirects it toward an abusive end. Sin has no independent existence; it is the perversion of something good." },
+    es:{ q:"Usando la ilustración de la 'Lógica del Alcohol', explique cómo el pecado 'toma prestado' del Bien.", kw:["original","actual","heredad","nacimiento","cometid","todos","todos"], expl:"El pecado toma un buen don de Dios (alcohol, agua, sexo, fuego) y lo dirige mal hacia un fin abusivo. El pecado no tiene existencia independiente; es la perversión de algo bueno." } },
+  { id:26,
+    en:{ q:"Explain the relationship between the fall of Lucifer (Isaiah 14:12-14) and the fall of humanity (Genesis 3).", kw:["lucifer","pride","ambition","adam","eve","rebellion","pattern"], expl:"Both falls involved pride and the desire to be independent from God. Lucifer's rebellion set the pattern for humanity's sin in Eden." },
+    es:{ q:"Explique la relación entre la caída de Lucifer (Isaías 14:12-14) y la caída de la humanidad (Génesis 3).", kw:["culpa","contaminación","limpieza","perdón","ambas","necesidad","cruz"], expl:"Ambas caídas involucraron orgullo y el deseo de ser independientes de Dios. La rebelión de Lucifer estableció el patrón para el pecado de la humanidad en Edén." } },
+  { id:27,
+    en:{ q:"Why can education, culture, and laws not solve the problem of sin?", kw:["education","culture","laws","external","internal","heart","transformation"], expl:"Sin is internal (the heart), not external. Education and laws can change behavior but cannot change the nature. Only God can transform the heart." },
+    es:{ q:"¿Por qué la educación, la cultura y las leyes no pueden resolver el problema del pecado?", kw:["dios","ofensa","relacional","tres","persona","cósmic","horizontal"], expl:"El pecado es interno (el corazón), no externo. La educación y las leyes pueden cambiar el comportamiento pero no pueden cambiar la naturaleza. Solo Dios puede transformar el corazón." } },
+  { id:28,
+    en:{ q:"Explain why the doctrine of sin is 'never the final word' in the gospel.", kw:["final word","gospel","grace","cross","redemption","savior","Christ"], expl:"Sin identifies the problem, but the gospel announces the solution: Christ's death and resurrection. Grace abounds where sin abounded." },
+    es:{ q:"Explique por qué la doctrina del pecado 'nunca es la palabra final' en el evangelio.", kw:["consecuencias","mortal","relacional","cósmic","muerte","separación"], expl:"El pecado identifica el problema, pero el evangelio anuncia la solución: la muerte y resurrección de Cristo. La gracia abunda donde el pecado abundó." } },
+  { id:29,
+    en:{ q:"How does the 'Substitute Archer' illustration explain the work of Christ?", kw:["substitute","archer","hit","mark","righteousness","credited","grace"], expl:"We missed the mark of God's glory. Jesus, the Substitute Archer, hit the mark perfectly, and His righteousness is credited to us by faith." },
+    es:{ q:"¿Cómo explica la ilustración del 'Arquero Sustituto' la obra de Cristo?", kw:["abuso","positivo","fuego","sexo","comer","glotonería","dirección"], expl:"Fallamos el blanco de la gloria de Dios. Jesús, el Arquero Sustituto, acertó perfectamente, y Su justicia se nos acredita por fe." } },
+  { id:30,
+    en:{ q:"Summarize the main point of Unit 6. Why must sin be understood before grace can be appreciated?", kw:["sin","grace","diagnosis","cure","cross","salvation","understand"], expl:"Sin is the dark canvas upon which the beauty of grace is painted. If we minimize sin, we devalue the cross. Understanding sin shows why we desperately need a Savior." },
+    es:{ q:"Resuma el punto principal de la Unidad 6. ¿Por qué debe entenderse el pecado antes de que se pueda apreciar la gracia?", kw:["sustituto","arquero","cristo","cruz","gracia","sobreabundó","perfecto"], expl:"El pecado es el lienzo oscuro sobre el cual se pinta la belleza de la gracia. Si minimizamos el pecado, devaluamos la cruz. Entender el pecado muestra por qué necesitamos desesperadamente un Salvador." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

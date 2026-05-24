@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 9: Denominations, Authority, and the Gospel | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 9: Denominations, Authority, and the Gospel</span><span class="lang-es">📖 Unidad 9: Denominaciones, Autoridad y el Evangelio</span></h1>
+    <p><span class="lang-en">From One Church to Many: Truth, Authority, and the Gospel</span><span class="lang-es">De Una Iglesia a Muchas: Verdad, Autoridad y el Evangelio</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">Denominations, Authority, and the Gospel</div>
+            <div class="lesson-section"><h3>Text: Ephesians 4:1-6 (NIV)</h3><div class="scripture">"As a prisoner for the Lord, then, I urge you to live a life worthy of the calling you have received. Be completely humble and gentle; be patient, bearing with one another in love. Make every effort to keep the unity of the Spirit through the bond of peace. There is one body and one Spirit, just as you were called to one hope when you were called; one Lord, one faith, one baptism; one God and Father of all, who is over all and through all and in all." — Ephesians 4:1-6</div></div>
+            <div class="lesson-section"><h3>Day 1 — Unity, Not Uniformity</h3><p>Our text calls for unity, but we must be careful not to mistake unity for uniformity. Uniformity is an external sameness where everyone looks, speaks, and acts in identical fashion. Unity, however, is a spiritual reality — a "bond of peace" that exists in the heart despite outward differences.</p><p>Today, we look at a landscape filled with thousands of denominations. It is estimated that there are as many as 500 different Baptist denominations alone. We in this church are non-denominational, but that does not mean we are "belief-less." We have deep, grounded convictions. We recognize that while we may sit on different branches, we are still part of the same massive family tree, with many brothers and sisters in Christ.</p><p>The Jerusalem Genesis: To understand the current state of the church, we must return to its birth. The first church in the New Testament was not found in Rome, Constantinople, Geneva, Wittenberg, or anywhere else we might name today. <strong>It was born in Jerusalem.</strong></p><p>In that first assembly, there were no buildings. There were no denominations. There were no signs out front telling you what kind of church it was. There were no systems, no seminaries, and no centuries of developed, formalized theology. There were simply people — people who had seen the risen Christ, people who had been filled with the Holy Spirit, and people who were devoted to the apostles' teaching, to fellowship, to the breaking of bread, and to prayer. It was simple. It was powerful. It was alive.</p><p>And yet — even there — there were differences. We sometimes imagine the early church as if everything was perfectly unified in every detail, but that is not what the New Testament shows us. Very early, questions began to arise: What do we do with Gentiles? Do they have to follow the law of Moses? What is essential, and what is not?</p><p>These were not small questions. In <strong>Acts 15</strong>, the leaders of the church gathered together for a council. They came together not to dominate one another, but to discern truth. They listened. They reasoned. They testified of what God had done. And they came to a conclusion grounded in the Gospel. From the very beginning, the church was unified in Christ — but it was never without tension.</p></div>
+            <div class="lesson-section"><h3>Day 2 — The Great Divergence: Structure and Schism</h3><p>As history moved forward, what began as a Spirit-filled movement slowly developed into a formal structure. Leadership became more defined, authority became more centralized, and doctrine became more formalized. For many centuries, the dominant expression of Christianity became what we now call the Roman Catholic Church.</p><p>But even that unity did not last. Differences grew in language, culture, theology, and authority. Eventually, in <strong>1054</strong>, a "Great Schism" took place between the church in Rome (the West) and the church in Constantinople (the East). The Western church continued as the Roman Catholic Church, while the Eastern church became the Eastern Orthodox Church — still present today in Greece, Russia, and throughout Eastern Europe.</p><p>Then came the great turning points of history: the printing press, the Renaissance, and the recovery of the Greek New Testament. Suddenly, people began to read the Bible for themselves. Before this, the Bible was often chained to the pulpit to keep ordinary people from reading and potentially misinterpreting it. But when the chains were broken, there was a spiritual explosion. Movements of reform rose across Europe. Men began to challenge traditions — not because they wanted something new, but because they wanted to return to something original. They wanted to come back to Scripture.</p><p>From that came Protestantism, and from Protestantism came denominations. And that process has never stopped. Now, listen carefully: Not all differences are dangerous. Not all denominations are wrong. But not all teachings are harmless. Alongside legitimate expressions of Christianity, there have been movements that have gone so far that they have distorted the Gospel itself.</p><p>Groups like the Mormons and Jehovah's Witnesses do not simply differ — they <strong>redefine</strong>. They redefine Christ. They redefine salvation. They redefine the nature of God. And when the Gospel is changed, it is no longer the Gospel. The apostle Paul did not treat this lightly. He said in <strong>Galatians 1:9</strong>: "If anyone preaches any other gospel to you than what you have received, let him be accursed." The Gospel is not ours to improve or reshape.</p></div>
+            <div class="lesson-section"><h3>Day 3 — The Catholic Church: Authority and the Foundation</h3><p>We begin with the Catholic Church — the largest and most historically influential branch of Christianity.</p><p><strong>The Pope and the Rock:</strong> At the center of Catholic teaching is a claim built upon the words of Jesus at Caesarea Philippi in <strong>Matthew 16:13-18</strong>. Jesus asks His disciples, "Who do men say that I, the Son of Man, am?" They give various answers, but Peter answers: "You are the Christ, the Son of the living God." Jesus responds: "And I also say to you that you are Peter, and on this rock I will build My church..."</p><p>Catholic theology says: Peter is the rock. Peter is the first pope. And authority flows from him. But look again at the central issue in the passage: "Who do you say that I am?" Peter's answer — the truth of who Jesus is — is the "Rock." That revelation is the foundation of the church. Jesus is not building His church on a man; He is building His church on the truth of His own deity. Scripture confirms this: "For no other foundation can anyone lay than that which is laid, which is Jesus Christ" (1 Corinthians 3:11). The church is not anchored in Peter; it is anchored in Christ, the chief cornerstone (Ephesians 2:20).</p><p><strong>The Priesthood and Mediation:</strong> Catholicism establishes a priesthood — a system where grace is mediated through an ordained class. While there were priests in the Old Testament, the New Testament says something radically different: "You... are a holy priesthood" (1 Peter 2:5). Every believer has direct access to God. Furthermore, <strong>1 Timothy 2:5</strong> says: "There is one God and one Mediator between God and men, the Man Christ Jesus." There are not many mediators; there is one. This means you can take your prayers and confessions directly to the throne of grace. You don't need a priest because you are a priest.</p><p><strong>The Treasury of Merit:</strong> There is the Catholic idea of "accumulated merit" from Jesus, Mary, and the saints. However, in the New Testament, every Christian was called a "saint." We are saints not because we are good, but because Jesus was good for us. Second, only Jesus was perfect. Everyone else, including Mary, was a sinner: "For all have sinned and fall short of the glory of God" (Romans 3:23). There is none that is righteous, no not one.</p><p><strong>The Sacraments and Tradition:</strong> The Catholic Church teaches that grace flows through the sacraments. But Scripture teaches: "For by grace you have been saved through faith... not of works" (Ephesians 2:8-9). Grace is not administered through ritual; it is received through faith. Finally, Catholic teaching places tradition alongside Scripture. But the Bible says it is sufficient on its own: "All Scripture is given by inspiration of God... that the man of God may be complete" (2 Timothy 3:16-17).</p></div>
+            <div class="lesson-section"><h3>Day 4 — Protestantism: Calvinism and the Reformed Tradition</h3><p>Now we come to John Calvin and the Reformed tradition. He was a brilliant mind and a systematic thinker. He had points and sub-points and sub-sub-points. He wrote the <em>Institutes of the Christian Religion</em>, shaping theology for generations. His teaching is summarized in the acronym <strong>TULIP</strong>:</p><p><strong>Total Depravity:</strong> Man is so affected by sin he cannot choose God on his own.</p><p><strong>Unconditional Election:</strong> God chooses whom He will save based on His mercy.</p><p><strong>Limited Atonement:</strong> Christ died specifically for the elect.</p><p><strong>Irresistible Grace:</strong> When God calls, the soul will eventually respond.</p><p><strong>Perseverance of the Saints:</strong> True believers will never fall away.</p><p><strong>The Danger of Balance and Predestination:</strong> There is truth here, but the danger is in what is emphasized beyond balance. Romans 8:29-30 and Ephesians 1:4-5 speak clearly of predestination. But some take this further and say God has predetermined some to heaven and some to hell. Scripture never says God is willing for people to perish; in fact, <strong>2 Peter 3:9</strong> says: "The Lord is not willing that any should perish..." God's sovereignty and God's heart are not in conflict.</p><p><strong>The Preservation of Urgency:</strong> There is a story of a Presbyterian who fell down the stairs. Bruised but alive, he picked himself up, dusted off his clothes, and said: "Well... thank God that's over with." It's a funny story, but it reveals a deeper issue. When everything is viewed as strictly predetermined, the sense of urgency often fades. This was seen in the history of missions. William Carey, a Baptist who is considered the father of modern missions, wanted to go to Asia. An older pastor stood up and said, "Sit down, young man; if God wants to save the heathen, he can do so without your help or mine." Carey refused that idea. Because he refused it, modern missions was born.</p><p><strong>The Paradox of Growth:</strong> Nearly every modern spiritual awakening began with the Presbyterians. It was as if the Holy Spirit chose the most "closed" and restrictive group to move with His power. Hundreds of thousands were converted in these Awakenings. But interestingly, the Presbyterians did not experience the greatest growth. Growth exploded among <strong>Methodists</strong> and <strong>Baptists</strong>. The Methodists believed in our free will to accept God's offer of salvation. The Baptists, while often Calvinistic, were very practical (after all, these were new warm bodies for the pews and potential tithers). They didn't let a little theology get in the way of evangelism, eventually leading Baptists to become a "hybrid" of Calvinist and Arminian views.</p></div>
+            <div class="illustration"><strong>💡 The Presbyterian on the Stairs:</strong> A Presbyterian fell down the stairs. Bruised but alive, he picked himself up, dusted off his clothes, and said: "Well... thank God that's over with." The story reveals that when everything is viewed as strictly predetermined, the sense of urgency often fades.</div>
+            <div class="lesson-section"><h3>Day 5 — The Arminian Pillar: Free Will and Falling from Grace</h3><p>In contrast to the strict sovereignty of Calvinism stands <strong>Arminianism</strong>, famously championed by <strong>John Wesley</strong> and the Methodist movement. This tradition places a heavy emphasis on the responsibility of the individual.</p><p><strong>The Emphasis on Free Will:</strong> Arminians believe that while man is fallen, God provides a "prevenient grace" that allows the individual to choose to accept or reject the offer of salvation. Salvation is not something forced upon a person by an irresistible decree; it is a relationship that must be entered into through a conscious act of faith.</p><p><strong>The Doctrine of Falling from Grace (Apostasy):</strong> This leads to the second major distinction of Arminianism: the possibility of <strong>falling from grace</strong>. Because salvation is tied to the continued exercise of faith and the will, Arminians teach that a believer can choose to turn away from Christ. Unlike the Calvinistic "Perseverance of the Saints," which argues that a true believer can never lose their salvation, the Arminian view suggests that if a person ceases to believe or falls into unrepentant sin, they can lose their standing before God. They point to passages such as <strong>Hebrews 6:4-6</strong> and <strong>Galatians 5:4</strong>, where Paul speaks of those who have "fallen from grace." In this view, security is found in an abiding relationship with Christ, not in a past event.</p><p><strong>The Charismatic and Pentecostal Expansion:</strong> Under the broader Arminian umbrella, we also find the groups that practice the <strong>Charismatic gifts</strong>. This includes Pentecostals, the Assemblies of God, and many other Charismatic groups. These groups elevate certain spiritual gifts, such as speaking in tongues and healing. Whether we agree with their specific practices or not, we know they are the <strong>fastest-growing groups in Christianity around the world</strong>. The Holy Spirit is certainly using the Charismatics, and we should be very careful about criticizing anyone whom the Holy Spirit is using.</p></div>
+            <div class="lesson-section"><h3>Final Lessons</h3><p><strong>1. Scripture Stands Above Tradition:</strong> This includes our own traditions. If there is a conflict, we must return to the New Testament model.</p><p><strong>2. The Command of Missions:</strong> People without Christ are lost. Jesus said in <strong>Matthew 28:19-20</strong>: "Go into all the world and teach them, baptizing them... and remember I am always with you."</p><p><strong>3. Essential Doctrine Must Be Protected:</strong> The Gospel is not ours to improve or reshape. When the Gospel is changed, it is no longer the Gospel.</p><div class="scripture">"If anyone preaches any other gospel to you than what you have received, let him be accursed." — Galatians 1:9</div><div class="scripture">"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you." — Matthew 28:19-20</div></div>
+            <div class="lesson-section"><h3>Final Summary</h3><p>The doctrine of denominations and authority teaches us that while the church was born in unity, differences developed over time. Not all differences are dangerous, but when the Gospel itself is redefined, it becomes another gospel altogether. The Catholic Church emphasizes tradition and papal authority. The Reformed tradition (Calvinism) emphasizes God's sovereignty and predestination. The Arminian tradition (Wesleyanism) emphasizes human free will and the possibility of falling from grace. The Charismatic and Pentecostal movements emphasize spiritual gifts and have become the fastest-growing Christian groups worldwide. Through all these traditions, Scripture must remain the final authority. The Gospel must be protected. And the mission to make disciples must never be abandoned.</p></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">Denominaciones, Autoridad y el Evangelio</div>
+            <div class="lesson-section"><h3>Texto: Efesios 4:1-6</h3><div class="scripture">"Yo pues, preso en el Señor, os ruego que andéis como es digno de la vocación con que fuisteis llamados, con toda humildad y mansedumbre, soportándoos con paciencia los unos a los otros en amor, solícitos en guardar la unidad del Espíritu en el vínculo de la paz. Un cuerpo, y un Espíritu, como fuisteis también llamados en una misma esperanza de vuestra vocación; un Señor, una fe, un bautismo, un Dios y Padre de todos, el cual es sobre todos, y por todos, y en todos." — Efesios 4:1-6</div></div>
+            <div class="lesson-section"><h3>Día 1 — Unidad, No Uniformidad</h3><p>Nuestro texto llama a la unidad, pero debemos tener cuidado de no confundir la unidad con la uniformidad. La uniformidad es una semejanza externa donde todos se ven, hablan y actúan de manera idéntica. La unidad, sin embargo, es una realidad espiritual — un "vínculo de paz" que existe en el corazón a pesar de las diferencias externas.</p><p>Hoy, miramos un paisaje lleno de miles de denominaciones. Se estima que hay hasta 500 denominaciones Bautistas diferentes solamente. Nosotros en esta iglesia somos no denominacionales, pero eso no significa que estemos "sin creencias". Tenemos convicciones profundas y fundamentadas. Reconocemos que aunque podemos estar sentados en ramas diferentes, todavía somos parte del mismo gran árbol familiar, con muchos hermanos y hermanas en Cristo.</p><p>El Origen en Jerusalén: Para entender el estado actual de la iglesia, debemos volver a su nacimiento. La primera iglesia en el Nuevo Testamento no se encontraba en Roma, Constantinopla, Ginebra, Wittenberg, ni en ningún otro lugar que podamos nombrar hoy. <strong>Nació en Jerusalén.</strong></p><p>En esa primera asamblea, no había edificios. No había denominaciones. No había letreros afuera diciéndote qué tipo de iglesia era. No había sistemas, ni seminarios, ni siglos de teología desarrollada y formalizada. Había simplemente personas — personas que habían visto a Cristo resucitado, personas que habían sido llenas del Espíritu Santo, y personas que estaban dedicadas a la enseñanza de los apóstoles, a la comunión, al partimiento del pan y a la oración. Era simple. Era poderoso. Estaba vivo.</p><p>Y sin embargo — incluso allí — había diferencias. A veces imaginamos la iglesia primitiva como si todo estuviera perfectamente unificado en cada detalle, pero eso no es lo que el Nuevo Testamento nos muestra. Muy temprano, comenzaron a surgir preguntas: ¿Qué hacemos con los gentiles? ¿Tienen que seguir la ley de Moisés? ¿Qué es esencial y qué no lo es?</p><p>Estas no eran preguntas pequeñas. En <strong>Hechos 15</strong>, los líderes de la iglesia se reunieron en un concilio. Se juntaron no para dominarse unos a otros, sino para discernir la verdad. Escucharon. Razonaron. Testificaron de lo que Dios había hecho. Y llegaron a una conclusión fundamentada en el Evangelio. Desde el principio, la iglesia estaba unificada en Cristo — pero nunca estuvo sin tensión.</p></div>
+            <div class="lesson-section"><h3>Día 2 — La Gran Divergencia: Estructura y Cisma</h3><p>A medida que la historia avanzaba, lo que comenzó como un movimiento lleno del Espíritu se desarrolló lentamente en una estructura formal. El liderazgo se hizo más definido, la autoridad se centralizó más, y la doctrina se formalizó más. Durante muchos siglos, la expresión dominante del cristianismo se convirtió en lo que ahora llamamos la Iglesia Católica Romana.</p><p>Pero incluso esa unidad no duró. Las diferencias crecieron en lenguaje, cultura, teología y autoridad. Eventualmente, en <strong>1054</strong>, tuvo lugar un "Gran Cisma" entre la iglesia en Roma (el Occidente) y la iglesia en Constantinopla (el Oriente). La iglesia occidental continuó como la Iglesia Católica Romana, mientras que la iglesia oriental se convirtió en la Iglesia Ortodoxa Oriental — todavía presente hoy en Grecia, Rusia y por toda Europa Oriental.</p><p>Luego vinieron los grandes puntos de inflexión de la historia: la imprenta, el Renacimiento y la recuperación del Nuevo Testamento griego. De repente, las personas comenzaron a leer la Biblia por sí mismas. Antes de esto, la Biblia a menudo estaba encadenada al púlpito para evitar que la gente común la leyera y la malinterpretara potencialmente. Pero cuando las cadenas se rompieron, hubo una explosión espiritual. Movimientos de reforma se levantaron por toda Europa. Los hombres comenzaron a desafiar las tradiciones — no porque quisieran algo nuevo, sino porque querían volver a algo original. Querían regresar a las Escrituras.</p><p>De eso vino el Protestantismo, y del Protestantismo vinieron las denominaciones. Y ese proceso nunca se ha detenido. Ahora, escuchen con atención: No todas las diferencias son peligrosas. No todas las denominaciones están equivocadas. Pero no todas las enseñanzas son inofensivas. Junto con expresiones legítimas del cristianismo, ha habido movimientos que han ido tan lejos que han distorsionado el Evangelio mismo.</p><p>Grupos como los Mormones y los Testigos de Jehová no simplemente difieren — <strong>redefinen</strong>. Redefinen a Cristo. Redefinen la salvación. Redefinen la naturaleza de Dios. Y cuando el Evangelio es cambiado, ya no es el Evangelio. El apóstol Pablo no tomó esto a la ligera. Dijo en <strong>Gálatas 1:9</strong>: "Si alguno os predica diferente evangelio del que habéis recibido, sea anatema". El Evangelio no es nuestro para mejorarlo o remodelarlo.</p></div>
+            <div class="lesson-section"><h3>Día 3 — La Iglesia Católica: Autoridad y Fundamento</h3><p>Comenzamos con la Iglesia Católica — la rama más grande e históricamente influyente del cristianismo.</p><p><strong>El Papa y la Roca:</strong> En el centro de la enseñanza católica hay una afirmación construida sobre las palabras de Jesús en Cesarea de Filipo en <strong>Mateo 16:13-18</strong>. Jesús pregunta a Sus discípulos: "¿Quién dicen los hombres que es el Hijo del Hombre?" Dan varias respuestas, pero Pedro responde: "Tú eres el Cristo, el Hijo del Dios viviente". Jesús responde: "Y yo también te digo, que tú eres Pedro, y sobre esta roca edificaré mi iglesia..."</p><p>La teología católica dice: Pedro es la roca. Pedro es el primer papa. Y la autoridad fluye de él. Pero mire nuevamente la pregunta central del pasaje: "¿Quién dicen ustedes que soy yo?" La respuesta de Pedro — la verdad de quién es Jesús — es la "Roca". Esa revelación es el fundamento de la iglesia. Jesús no está edificando Su iglesia sobre un hombre; está edificando Su iglesia sobre la verdad de Su propia deidad. La Escritura confirma esto: "Porque nadie puede poner otro fundamento que el que está puesto, el cual es Jesucristo" (1 Corintios 3:11). La iglesia no está anclada en Pedro; está anclada en Cristo, la principal piedra del ángulo (Efesios 2:20).</p><p><strong>El Sacerdocio y la Mediación:</strong> El catolicismo establece un sacerdocio — un sistema donde la gracia es mediada a través de una clase ordenada. Si bien había sacerdotes en el Antiguo Testamento, el Nuevo Testamento dice algo radicalmente diferente: "Vosotros... sois un sacerdocio santo" (1 Pedro 2:5). Cada creyente tiene acceso directo a Dios. Además, <strong>1 Timoteo 2:5</strong> dice: "Porque hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre". No hay muchos mediadores; hay uno. Esto significa que puede llevar sus oraciones y confesiones directamente al trono de gracia. No necesita un sacerdote porque usted es un sacerdote.</p><p><strong>El Tesoro de Méritos:</strong> Está la idea católica de "méritos acumulados" de Jesús, María y los santos. Sin embargo, en el Nuevo Testamento, cada cristiano era llamado un "santo". Somos santos no porque seamos buenos, sino porque Jesús fue bueno por nosotros. En segundo lugar, solo Jesús fue perfecto. Todos los demás, incluida María, fueron pecadores: "Por cuanto todos pecaron, y están destituidos de la gloria de Dios" (Romanos 3:23). No hay justo, ni aun uno.</p><p><strong>Los Sacramentos y la Tradición:</strong> La Iglesia Católica enseña que la gracia fluye a través de los sacramentos. Pero la Escritura enseña: "Porque por gracia sois salvos por medio de la fe... no por obras" (Efesios 2:8-9). La gracia no se administra a través del ritual; se recibe a través de la fe. Finalmente, la enseñanza católica coloca la tradición junto con la Escritura. Pero la Biblia dice que es suficiente por sí sola: "Toda la Escritura es inspirada por Dios... a fin de que el hombre de Dios sea perfecto" (2 Timoteo 3:16-17).</p></div>
+            <div class="lesson-section"><h3>Día 4 — Protestantismo: Calvinismo y la Tradición Reformada</h3><p>Ahora venimos a Juan Calvino y la tradición Reformada. Era una mente brillante y un pensador sistemático. Tenía puntos y subpuntos y sub-subpuntos. Escribió la <em>Institución de la Religión Cristiana</em>, dando forma a la teología por generaciones. Su enseñanza se resume en el acrónimo <strong>TULIP</strong>:</p><p><strong>Depravación Total:</strong> El hombre está tan afectado por el pecado que no puede elegir a Dios por sí mismo.</p><p><strong>Elección Incondicional:</strong> Dios elige a quién salvará basado en Su misericordia.</p><p><strong>Expiación Limitada:</strong> Cristo murió específicamente por los elegidos.</p><p><strong>Gracia Irresistible:</strong> Cuando Dios llama, el alma eventualmente responderá.</p><p><strong>Perseverancia de los Santos:</strong> Los verdaderos creyentes nunca caerán.</p><p><strong>El Peligro del Equilibrio y la Predestinación:</strong> Hay verdad aquí, pero el peligro está en lo que se enfatiza más allá del equilibrio. Romanos 8:29-30 y Efesios 1:4-5 hablan claramente de la predestinación. Pero algunos llevan esto más lejos y dicen que Dios ha predeterminado a algunos para el cielo y a algunos para el infierno. La Escritura nunca dice que Dios está dispuesto a que las personas perezcan; de hecho, <strong>2 Pedro 3:9</strong> dice: "El Señor... no quiere que ninguno perezca...". La soberanía de Dios y el corazón de Dios no están en conflicto.</p><p><strong>La Preservación de la Urgencia:</strong> Hay una historia de un presbiteriano que se cayó por las escaleras. Magullado pero vivo, se levantó, se sacudió la ropa y dijo: "Bueno... gracias a Dios que eso terminó". Es una historia graciosa, pero revela un problema más profundo. Cuando todo se ve como estrictamente predeterminado, el sentido de urgencia a menudo se desvanece. Esto se vio en la historia de las misiones. William Carey, un Bautista considerado el padre de las misiones modernas, quería ir a Asia. Un pastor mayor se levantó y dijo: "Siéntate, joven; si Dios quiere salvar a los paganos, puede hacerlo sin tu ayuda o la mía". Carey rechazó esa idea. Debido a que la rechazó, nacieron las misiones modernas.</p><p><strong>La Paradoja del Crecimiento:</strong> Casi cada despertar espiritual moderno comenzó con los Presbiterianos. Era como si el Espíritu Santo eligiera al grupo más "cerrado" y restrictivo para moverse con Su poder. Cientos de miles fueron convertidos en estos Despertares. Pero interesantemente, los Presbiterianos no experimentaron el mayor crecimiento. El crecimiento explotó entre los <strong>Metodistas</strong> y los <strong>Bautistas</strong>. Los Metodistas creían en nuestro libre albedrío para aceptar la oferta de salvación de Dios. Los Bautistas, aunque a menudo calvinistas, eran muy prácticos (después de todo, estos eran cuerpos cálidos nuevos para las bancas y diezmadores potenciales). No dejaron que un poco de teología se interpusiera en el camino del evangelismo, llevando eventualmente a los Bautistas a convertirse en un "híbrido" de las visiones calvinista y arminiana.</p></div>
+            <div class="illustration"><strong>💡 El Presbiteriano en las Escaleras:</strong> Un presbiteriano se cayó por las escaleras. Magullado pero vivo, se levantó, se sacudió la ropa y dijo: "Bueno... gracias a Dios que eso terminó." La historia revela que cuando todo se ve como estrictamente predeterminado, el sentido de urgencia a menudo se desvanece.</div>
+            <div class="lesson-section"><h3>Día 5 — El Pilar Arminiano: Libre Albedrío y Caída de la Gracia</h3><p>En contraste con la estricta soberanía del calvinismo está el <strong>Arminianismo</strong>, defendido famosamente por <strong>Juan Wesley</strong> y el movimiento metodista. Esta tradición coloca un fuerte énfasis en la responsabilidad del individuo.</p><p><strong>El Énfasis en el Libre Albedrío:</strong> Los arminianos creen que aunque el hombre está caído, Dios provee una "gracia preveniente" que permite al individuo elegir aceptar o rechazar la oferta de salvación. La salvación no es algo forzado sobre una persona por un decreto irresistible; es una relación en la que se debe entrar a través de un acto consciente de fe.</p><p><strong>La Doctrina de Caer de la Gracia (Apostasía):</strong> Esto lleva a la segunda distinción principal del Arminianismo: la posibilidad de <strong>caer de la gracia</strong>. Debido a que la salvación está atada al ejercicio continuo de la fe y la voluntad, los arminianos enseñan que un creyente puede elegir apartarse de Cristo. A diferencia de la "Perseverancia de los Santos" calvinista, que sostiene que un verdadero creyente nunca puede perder su salvación, la visión arminiana sugiere que si una persona cesa de creer o cae en pecado no arrepentido, puede perder su posición ante Dios. Señalan pasajes como <strong>Hebreos 6:4-6</strong> y <strong>Gálatas 5:4</strong>, donde Pablo habla de aquellos que han "caído de la gracia". En esta visión, la seguridad se encuentra en una relación permanente con Cristo, no en un evento pasado.</p><p><strong>La Expansión Carismática y Pentecostal:</strong> Bajo el paraguas arminiano más amplio, también encontramos los grupos que practican los <strong>dones carismáticos</strong>. Esto incluye a los Pentecostales, las Asambleas de Dios y muchos otros grupos Carismáticos. Estos grupos elevan ciertos dones espirituales, como el hablar en lenguas y la sanidad. Estemos o no de acuerdo con sus prácticas específicas, sabemos que son los <strong>grupos de más rápido crecimiento en el cristianismo en todo el mundo</strong>. El Espíritu Santo ciertamente está usando a los Carismáticos, y debemos tener mucho cuidado al criticar a cualquiera a quien el Espíritu Santo esté usando.</p></div>
+            <div class="lesson-section"><h3>Lecciones Finales</h3><p><strong>1. La Escritura está por encima de la Tradición:</strong> Esto incluye nuestras propias tradiciones. Si hay un conflicto, debemos volver al modelo del Nuevo Testamento.</p><p><strong>2. El Mandato de las Misiones:</strong> Las personas sin Cristo están perdidas. Jesús dijo en <strong>Mateo 28:19-20</strong>: "Por tanto, id, y haced discípulos a todas las naciones, bautizándolos... y he aquí yo estoy con vosotros todos los días".</p><p><strong>3. La Doctrina Esencial Debe Ser Protegida:</strong> El Evangelio no es nuestro para mejorarlo o remodelarlo. Cuando el Evangelio es cambiado, ya no es el Evangelio.</p><div class="scripture">"Si alguno os predica diferente evangelio del que habéis recibido, sea anatema." — Gálatas 1:9</div><div class="scripture">"Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo; enseñándoles que guarden todas las cosas que os he mandado." — Mateo 28:19-20</div></div>
+            <div class="lesson-section"><h3>Resumen Final</h3><p>La doctrina de las denominaciones y la autoridad nos enseña que si bien la iglesia nació en unidad, con el tiempo se desarrollaron diferencias. No todas las diferencias son peligrosas, pero cuando el Evangelio mismo se redefine, se convierte en otro evangelio en absoluto. La Iglesia Católica enfatiza la tradición y la autoridad papal. La tradición Reformada (Calvinismo) enfatiza la soberanía de Dios y la predestinación. La tradición Arminiana (Wesleyanismo) enfatiza el libre albedrío humano y la posibilidad de caer de la gracia. Los movimientos Carismáticos y Pentecostales enfatizan los dones espirituales y se han convertido en los grupos cristianos de más rápido crecimiento en todo el mundo. A través de todas estas tradiciones, la Escritura debe seguir siendo la autoridad final. El Evangelio debe ser protegido. Y la misión de hacer discípulos nunca debe ser abandonada.</p></div>
+
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 9 Examination</span><span class="lang-es">📋 Examen de la Unidad 9</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit10.html" class="btn-nav"><span class="lang-en">Next: Last Things →</span><span class="lang-es">Siguiente: Últimas Cosas →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 9;
+const NEXT_URL = "CTSSTUnit10.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:2,
+    en:{ q:"Where was the first church of the New Testament born?", opts:["Geneva","Rome","Jerusalem","Constantinople"], expl:"The first church was born in Jerusalem." },
+    es:{ q:"¿Dónde nació la primera iglesia del Nuevo Testamento?", opts:["Ginebra","Roma","Jerusalén","Constantinopla"], expl:"La primera iglesia nació en Jerusalén." } },
+  { id:2, correct:0,
+    en:{ q:"What does the text call for, but warns not to confuse with uniformity?", opts:["Unity","Authority","Doctrine","Tradition"], expl:"The text calls for unity, not uniformity." },
+    es:{ q:"¿A qué llama el texto, pero advierte que no se confunda con uniformidad?", opts:["Unidad","Autoridad","Doctrina","Tradición"], expl:"El texto llama a la unidad, no a la uniformidad." } },
+  { id:3, correct:1,
+    en:{ q:"The Great Schism of 1054 divided which two traditions?", opts:["Baptist and Methodist","Catholic and Orthodox","Calvinist and Arminian","Lutheran and Anglican"], expl:"The Great Schism divided the Roman Catholic (West) and Eastern Orthodox (East) churches." },
+    es:{ q:"El Gran Cisma de 1054 dividió ¿qué dos tradiciones?", opts:["Bautista y Metodista","Católica y Ortodoxa","Calvinista y Arminiana","Luterana y Anglicana"], expl:"El Gran Cisma dividió las iglesias Católica Romana (Occidente) y Ortodoxa Oriental (Oriente)." } },
+  { id:4, correct:1,
+    en:{ q:"What invention helped spark the Protestant Reformation?", opts:["The steam engine","The printing press","The telescope","The compass"], expl:"The printing press allowed people to read the Bible for themselves." },
+    es:{ q:"¿Qué invento ayudó a provocar la Reforma Protestante?", opts:["La máquina de vapor","La imprenta","El telescopio","La brújula"], expl:"La imprenta permitió que la gente leyera la Biblia por sí misma." } },
+  { id:5, correct:2,
+    en:{ q:"In Catholic theology, who is considered the 'rock' of Matthew 16?", opts:["The Holy Spirit","Jesus Christ","Peter","Paul"], expl:"Catholic theology identifies Peter as the rock on which the church is built." },
+    es:{ q:"En la teología católica, ¿quién es considerado la 'roca' de Mateo 16?", opts:["El Espíritu Santo","Jesucristo","Pedro","Pablo"], expl:"La teología católica identifica a Pedro como la roca sobre la cual se edifica la iglesia." } },
+  { id:6, correct:0,
+    en:{ q:"According to 1 Timothy 2:5, how many mediators are between God and man?", opts:["One (Jesus Christ)","None","Many (the saints)","Two (Mary and Jesus)"], expl:"There is one mediator between God and men — the man Christ Jesus." },
+    es:{ q:"Según 1 Timoteo 2:5, ¿cuántos mediadores hay entre Dios y el hombre?", opts:["Uno (Jesucristo)","Ninguno","Muchos (los santos)","Dos (María y Jesús)"], expl:"Hay un solo mediador entre Dios y los hombres — Jesucristo hombre." } },
+  { id:7, correct:3,
+    en:{ q:"The acronym TULIP is used to summarize the teachings of:", opts:["Martin Luther","The Pope","John Wesley","John Calvin"], expl:"TULIP summarizes the teachings of John Calvin and the Reformed tradition." },
+    es:{ q:"El acrónimo TULIP se usa para resumir las enseñanzas de:", opts:["Martín Lutero","El Papa","Juan Wesley","Juan Calvino"], expl:"TULIP resume las enseñanzas de Juan Calvino y la tradición Reformada." } },
+  { id:8, correct:2,
+    en:{ q:"The 'L' in TULIP stands for:", opts:["Legalism","Lasting Love","Limited Atonement","Lordship"], expl:"L stands for Limited Atonement — Christ died specifically for the elect." },
+    es:{ q:"La 'L' en TULIP significa:", opts:["Legalismo","Amor Duradero","Expiación Limitada","Señorío"], expl:"L significa Expiación Limitada — Cristo murió específicamente por los elegidos." } },
+  { id:9, correct:3,
+    en:{ q:"Who is known as the 'Father of Modern Missions'?", opts:["John Calvin","John Wesley","Martin Luther","William Carey"], expl:"William Carey, a Baptist, is considered the father of modern missions." },
+    es:{ q:"¿Quién es conocido como el 'Padre de las Misiones Modernas'?", opts:["Juan Calvino","Juan Wesley","Martín Lutero","William Carey"], expl:"William Carey, un bautista, es considerado el padre de las misiones modernas." } },
+  { id:10, correct:1,
+    en:{ q:"Which group is the fastest-growing in Christianity globally today?", opts:["Roman Catholics","Pentecostals and Charismatics","Anglicans","Presbyterians"], expl:"Pentecostals and Charismatics are the fastest-growing Christian groups worldwide." },
+    es:{ q:"¿Qué grupo es el de más rápido crecimiento en el cristianismo a nivel mundial hoy?", opts:["Católicos Romanos","Pentecostales y Carismáticos","Anglicanos","Presbiterianos"], expl:"Los pentecostales y carismáticos son los grupos cristianos de más rápido crecimiento en todo el mundo." } },
+  { id:11, correct:3,
+    en:{ q:"The Arminian view of 'Falling from Grace' suggests that:", opts:["No one can ever be lost","Sin doesn't matter","God forces people to leave","A believer can choose to turn away and lose salvation"], expl:"Arminianism teaches that salvation can be lost if a person turns away from Christ." },
+    es:{ q:"La visión arminiana de 'Caer de la Gracia' sugiere que:", opts:["Nadie puede perderse jamás","El pecado no importa","Dios obliga a las personas a irse","Un creyente puede elegir apartarse y perder la salvación"], expl:"El arminianismo enseña que la salvación puede perderse si una persona se aparta de Cristo." } },
+  { id:12, correct:0,
+    en:{ q:"The 'U' in TULIP stands for:", opts:["Unconditional Election","Ultimate Power","United Body","Universal Grace"], expl:"U stands for Unconditional Election — God chooses whom He will save based on His mercy." },
+    es:{ q:"La 'U' en TULIP significa:", opts:["Elección Incondicional","Poder Último","Cuerpo Unido","Gracia Universal"], expl:"U significa Elección Incondicional — Dios elige a quién salvará según Su misericordia." } },
+  { id:13, correct:1,
+    en:{ q:"The Catholic 'Treasury of Merit' includes merit from:", opts:["The local priest","Jesus, Mary, and the Saints","Only Jesus","Only the Pope"], expl:"The Treasury of Merit includes accumulated merit from Jesus, Mary, and the saints." },
+    es:{ q:"El 'Tesoro del Mérito' católico incluye mérito de:", opts:["El sacerdote local","Jesús, María y los Santos","Solo Jesús","Solo el Papa"], expl:"El Tesoro del Mérito incluye mérito acumulado de Jesús, María y los santos." } },
+  { id:14, correct:3,
+    en:{ q:"According to 1 Peter 2:5, the 'Holy Priesthood' consists of:", opts:["Only the 12 Apostles","Only the Pope","Only ordained clergy","Every believer"], expl:"Every believer is part of the holy priesthood with direct access to God." },
+    es:{ q:"Según 1 Pedro 2:5, el 'Sacerdocio Santo' consiste de:", opts:["Solo los 12 Apóstoles","Solo el Papa","Solo el clero ordenado","Todo creyente"], expl:"Todo creyente es parte del sacerdocio santo con acceso directo a Dios." } },
+  { id:15, correct:0,
+    en:{ q:"What did the Reformers primarily want to return to?", opts:["The Original Scripture","Greek Philosophy","Jewish Rituals","The Roman Empire"], expl:"The Reformers wanted to return to Scripture as the final authority." },
+    es:{ q:"¿A qué querían volver principalmente los Reformadores?", opts:["La Escritura Original","La Filosofía Griega","Los Rituales Judíos","El Imperio Romano"], expl:"Los Reformadores querían volver a la Escritura como autoridad final." } },
+  { id:16, correct:2,
+    en:{ q:"Paul's warning in Galatians 1:9 was directed at those who:", opts:["Pray in public","Translate the Bible","Preach another gospel","Use the printing press"], expl:"Paul says if anyone preaches another gospel, let him be accursed." },
+    es:{ q:"La advertencia de Pablo en Gálatas 1:9 fue dirigida a aquellos que:", opts:["Oran en público","Traducen la Biblia","Predican otro evangelio","Usan la imprenta"], expl:"Pablo dice que si alguien predica otro evangelio, sea anatema." } },
+  { id:17, correct:3,
+    en:{ q:"The 'Sovereignty' view of salvation is most associated with:", opts:["Methodists","Charismatics","Arminians","Calvinists"], expl:"Calvinism emphasizes God's sovereignty in salvation." },
+    es:{ q:"La visión de 'Soberanía' de la salvación se asocia más con:", opts:["Metodistas","Carismáticos","Arminianos","Calvinistas"], expl:"El calvinismo enfatiza la soberanía de Dios en la salvación." } },
+  { id:18, correct:1,
+    en:{ q:"Which group believes in 'Free Will' to accept God's offer?", opts:["Calvinists","Arminians/Methodists","Strict Presbyterians","None of the above"], expl:"Arminians and Methodists emphasize human free will to accept salvation." },
+    es:{ q:"¿Qué grupo cree en el 'Libre Albedrío' para aceptar la oferta de Dios?", opts:["Calvinistas","Arminianos/Metodistas","Presbiterianos estrictos","Ninguno de los anteriores"], expl:"Los arminianos y metodistas enfatizan el libre albedrío humano para aceptar la salvación." } },
+  { id:19, correct:0,
+    en:{ q:"The 'Jerusalem Model' of church was born in:", opts:["The upper room/homes","A seminary","A palace","A cathedral"], expl:"The first church met in the upper room and in homes, not in cathedrals." },
+    es:{ q:"El 'Modelo de Jerusalén' de la iglesia nació en:", opts:["El aposento alto/casas","Un seminario","Un palacio","Una catedral"], expl:"La primera iglesia se reunió en el aposento alto y en casas, no en catedrales." } },
+  { id:20, correct:2,
+    en:{ q:"The Great Commission (Matthew 28) is a command to:", opts:["Build stone cathedrals","Stay in Jerusalem","Go and make disciples of all nations","Study the Latin Vulgate"], expl:"Jesus commands His disciples to go and make disciples of all nations." },
+    es:{ q:"La Gran Comisión (Mateo 28) es un mandato para:", opts:["Construir catedrales de piedra","Quedarse en Jerusalén","Ir y hacer discípulos de todas las naciones","Estudiar la Vulgata Latina"], expl:"Jesús ordena a Sus discípulos ir y hacer discípulos de todas las naciones." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the difference between unity and uniformity. Why is this distinction important for understanding denominational differences?", kw:["unity","uniformity","spiritual","external","differences","essentials","non-essentials"], expl:"Unity is spiritual oneness in Christ despite differences; uniformity is external sameness. The church can have unity without uniformity, agreeing on essentials while differing on non-essentials." },
+    es:{ q:"Explique la diferencia entre unidad y uniformidad. ¿Por qué es importante esta distinción para entender las diferencias denominacionales?", kw:["unidad","uniformidad","espiritual","externa","diferencias","esenciales","no esenciales"], expl:"La unidad es unidad espiritual en Cristo a pesar de las diferencias; la uniformidad es igualdad externa. La iglesia puede tener unidad sin uniformidad, acordando lo esencial mientras difiere en lo no esencial." } },
+  { id:22,
+    en:{ q:"Analyze Acts 15. How did the early church resolve doctrinal disagreements? What can we learn from their process?", kw:["acts 15","council","jerusalem","gentiles","law","debate","resolution","scripture"], expl:"The early church gathered leaders, listened to testimony, searched Scripture, and reached a consensus grounded in the gospel. They did not dictate but discerned together." },
+    es:{ q:"Analice Hechos 15. ¿Cómo resolvió la iglesia primitiva los desacuerdos doctrinales? ¿Qué podemos aprender de su proceso?", kw:["hechos 15","concilio","jerusalén","gentiles","ley","debate","resolución","escritura"], expl:"La iglesia primitiva reunió a los líderes, escuchó testimonios, buscó en las Escrituras y alcanzó un consenso basado en el evangelio. No dictaron sino que discernieron juntos." } },
+  { id:23,
+    en:{ q:"Compare and contrast the Catholic understanding of Peter as the 'rock' (Matthew 16) with the Protestant understanding.", kw:["peter","rock","catholic","protestant","confession","christ","foundation","authority"], expl:"Catholics see Peter as the rock and first pope. Protestants see Peter's confession — the truth of Christ's deity — as the rock. The foundation is Christ, not Peter." },
+    es:{ q:"Compare y contraste la comprensión católica de Pedro como la 'roca' (Mateo 16) con la comprensión protestante.", kw:["pedro","roca","católic","protestante","confesión","cristo","fundamento","autoridad"], expl:"Los católicos ven a Pedro como la roca y el primer papa. Los protestantes ven la confesión de Pedro — la verdad de la deidad de Cristo — como la roca. El fundamento es Cristo, no Pedro." } },
+  { id:24,
+    en:{ q:"Explain the five points of Calvinism (TULIP). What does each point teach?", kw:["tulip","total depravity","unconditional election","limited atonement","irresistible grace","perseverance","saints"], expl:"Total Depravity (sin affects all), Unconditional Election (God chooses), Limited Atonement (Christ died for elect), Irresistible Grace (God's call cannot be ultimately resisted), Perseverance of the Saints (true believers cannot fall away)." },
+    es:{ q:"Explique los cinco puntos del calvinismo (TULIP). ¿Qué enseña cada punto?", kw:["tulip","depravación total","elección incondicional","expiación limitada","gracia irresistible","perseverancia","santos"], expl:"Depravación Total (el pecado afecta a todos), Elección Incondicional (Dios elige), Expiación Limitada (Cristo murió por los elegidos), Gracia Irresistible (el llamado de Dios no puede ser resistido finalmente), Perseverancia de los Santos (los verdaderos creyentes no pueden caerse)." } },
+  { id:25,
+    en:{ q:"Explain the Arminian understanding of free will and the possibility of falling from grace. What Scripture passages do Arminians point to?", kw:["arminian","free will","prevenient grace","falling from grace","hebrews 6","galatians 5","apostasy"], expl:"Arminians believe God's prevenient grace enables free choice. Salvation can be lost if one turns away. They cite Hebrews 6:4-6 and Galatians 5:4." },
+    es:{ q:"Explique la comprensión arminiana del libre albedrío y la posibilidad de caer de la gracia. ¿A qué pasajes de las Escrituras señalan los arminianos?", kw:["arminian","libre albedrío","gracia preveniente","caer de la gracia","hebreos 6","gálatas 5","apostasía"], expl:"Los arminianos creen que la gracia preveniente de Dios permite la libre elección. La salvación puede perderse si uno se aparta. Citan Hebreos 6:4-6 y Gálatas 5:4." } },
+  { id:26,
+    en:{ q:"What was William Carey's contribution to missions, and why did he reject the hyper-Calvinist view of his day?", kw:["william carey","missions","hyper-calvinist","urgency","responsibility","go","preach"], expl:"Carey believed Christians have a responsibility to preach the gospel to all nations, not wait for God to act without human involvement. He rejected the idea that if God wanted to save the heathen, He would do so without human help." },
+    es:{ q:"¿Cuál fue la contribución de William Carey a las misiones, y por qué rechazó la visión hipercalvinista de su día?", kw:["william carey","misiones","hipercalvinist","urgencia","responsabilidad","ir","predicar"], expl:"Carey creía que los cristianos tienen la responsabilidad de predicar el evangelio a todas las naciones, no esperar a que Dios actúe sin la participación humana. Rechazó la idea de que si Dios quisiera salvar a los paganos, lo haría sin ayuda humana." } },
+  { id:27,
+    en:{ q:"What does it mean to be 'non-denominational'? How can a non-denominational church avoid becoming 'belief-less'?", kw:["non-denominational","belief-less","convictions","doctrine","scripture","authority","statement of faith"], expl:"Non-denominational churches reject formal denominational structures but must still have deep, grounded convictions based on Scripture. They avoid being 'belief-less' by holding to clear doctrinal statements." },
+    es:{ q:"¿Qué significa ser 'no denominacional'? ¿Cómo puede una iglesia no denominacional evitar volverse 'sin creencias'?", kw:["no denominacional","sin creencias","convicciones","doctrina","escritura","autoridad","declaración"], expl:"Las iglesias no denominacionales rechazan las estructuras denominacionales formales pero aún deben tener convicciones profundas y fundamentadas basadas en las Escrituras. Evitan estar 'sin creencias' al mantener declaraciones doctrinales claras." } },
+  { id:28,
+    en:{ q:"Why does Paul say in Galatians 1:9 that those who preach another gospel should be 'accursed' (anathema)? What does this reveal about the importance of the gospel?", kw:["anathema","accursed","another gospel","galatians","distortion","essential","salvation"], expl:"The gospel is the power of God for salvation. Distorting it leads people away from salvation. Paul's strong language shows how essential it is to protect the gospel's purity." },
+    es:{ q:"¿Por qué Pablo dice en Gálatas 1:9 que aquellos que predican otro evangelio deben ser 'anatema'? ¿Qué revela esto sobre la importancia del evangelio?", kw:["anatema","maldit","otro evangelio","gálatas","distorsión","esencial","salvación"], expl:"El evangelio es el poder de Dios para salvación. Distorsionarlo aleja a las personas de la salvación. El lenguaje fuerte de Pablo muestra lo esencial que es proteger la pureza del evangelio." } },
+  { id:29,
+    en:{ q:"What should be the attitude of believers toward Charismatic and Pentecostal Christians, given that they are the fastest-growing groups worldwide?", kw:["charismatic","pentecostal","fastest-growing","spirit","unity","grace","respect"], expl:"The Holy Spirit is clearly using these groups. Believers should be careful about criticizing those whom the Holy Spirit is using, while still discerning based on Scripture." },
+    es:{ q:"¿Cuál debe ser la actitud de los creyentes hacia los cristianos carismáticos y pentecostales, dado que son los grupos de más rápido crecimiento en todo el mundo?", kw:["carismátic","pentecostal","rápido crecimiento","espíritu","unidad","gracia","respeto"], expl:"El Espíritu Santo claramente está usando estos grupos. Los creyentes deben tener cuidado al criticar a aquellos a quienes el Espíritu Santo está usando, mientras aún discernen basándose en las Escrituras." } },
+  { id:30,
+    en:{ q:"Summarize the main point of Unit 9. How should Christians relate to those in different denominations?", kw:["denominations","unity","authority","scripture","gospel","essentials","charity"], expl:"Differences in non-essentials should not divide. Scripture is the final authority. The gospel must be protected. Christians should relate with grace, truth, and a commitment to unity in Christ." },
+    es:{ q:"Resuma el punto principal de la Unidad 9. ¿Cómo deben relacionarse los cristianos con aquellos en diferentes denominaciones?", kw:["denominaciones","unidad","autoridad","escritura","evangelio","esenciales","caridad"], expl:"Las diferencias en lo no esencial no deberían dividir. La Escritura es la autoridad final. El evangelio debe ser protegido. Los cristianos deben relacionarse con gracia, verdad y un compromiso con la unidad en Cristo." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 7: The Doctrine of Salvation (Soteriology) | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 7: The Doctrine of Salvation (Soteriology)</span><span class="lang-es">📖 Unidad 7: La Doctrina de la Salvación (Soteriología)</span></h1>
+    <p><span class="lang-en">Justification, Sanctification, and Glorification</span><span class="lang-es">Justificación, Santificación y Glorificación</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">The Doctrine of Salvation (Soteriology)</div>
+            <div class="lesson-section"><h3>Day 1 — The Necessity of Salvation and the Threefold Work of Grace</h3><p>The doctrine of salvation answers the most urgent question raised by the doctrine of sin: if humanity is fallen and separated from God, how can that relationship be restored? Salvation is not a human achievement. It is God's work on behalf of humanity. What man cannot accomplish, God provides through grace. At the same time, salvation is not merely a single moment in isolation. It is a comprehensive work that addresses the past, the present, and the future of the believer. It is both an event and a process, grounded in what Christ has done and applied through the life of the believer.</p><p>Scripture presents humanity as separated from God, not by circumstance, but by nature. Sin has affected every part of the human person. It has distorted the mind, disordered the will, and corrupted the affections. Left to itself, humanity does not move toward God, but away from Him. This is why salvation is necessary. It is not an optional doctrine reserved for religious reflection—it is the only answer to the human condition.</p><p>Because of this, salvation cannot originate with man. What is broken at the level of nature cannot be repaired by effort, education, or moral reform. No accumulation of good works can undo guilt, and no discipline can reverse spiritual death. If salvation is to occur, it must come from outside of us. It must be provided by God.</p><p>Salvation, therefore, is not a human achievement. It is the work of God on behalf of humanity. What man cannot accomplish, God provides through grace.</p><p>This comprehensive nature of salvation is often described as the threefold work of grace. In justification, the believer is saved from the penalty of sin (past). In sanctification, the believer is being saved from the power of sin (present). In glorification, the believer will be saved from the presence of sin (future). These are not separate salvations, but one unified work of God. Together they show that salvation is not partial—it is complete.</p><div class="scripture">"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast." — Ephesians 2:8-9</div></div>
+            <div class="lesson-section"><h3>Day 2 — The Six Images of Salvation</h3><p>The first stage of salvation—what we call conversion—is strictly an Act of God. We cannot buy, earn, or deserve it; it is a free gift. Scripture uses six powerful metaphors to describe the miracle of conversion. Each metaphor places us in a different setting and reveals a different aspect of what Christ has done for us and what happens in the life of the believer.</p><p><strong>1. Regeneration (The Birthing Room):</strong> The setting is a birthing room. The first birth is physical. The second birth is spiritual. This new birth is by the Holy Spirit. The believer is born again—not merely improved, but made new. A new life begins. A new nature is given. Just as a baby is passive in its physical birth, the sinner is passive here as the Spirit breathes life into the spiritually dead.</p><div class="scripture">"Unless one is born again, he cannot see the kingdom of God." — John 3:3</div><p><strong>2. Reconciliation (The Broken Relationship):</strong> The setting is a broken relationship, like a marriage where the couple has divorced and been estranged. Humanity is not naturally in friendship with God, but in opposition. Scripture describes us as being at enmity with Him. The relationship is broken and out of alignment. It is as though it had been completely severed. Through Christ, that separation is removed. What was broken is restored. Peace replaces hostility. The believer is no longer distant, but brought near.</p><p><strong>Important theological note:</strong> In the Bible, we are always reconciled to God, and God has never reconciled to us. Why? Because God has never been hostile toward us; we have been hostile toward Him. He has always been ready to receive us, but we have been running away. Therefore, the biblical language is always that <em>we</em> are reconciled to God, not that God is reconciled to us. He does not need to change His attitude; we do.</p><div class="scripture">"And you, who once were alienated and enemies in your mind by wicked works, yet now He has reconciled." — Colossians 1:21-22</div><div class="scripture">"Now all things are of God, who has reconciled us to Himself through Jesus Christ." — 2 Corinthians 5:18</div><p><strong>3. Justification (The Courtroom):</strong> The setting is a courtroom. God is the judge. Humanity stands guilty before Him. The evidence is clear, and the verdict is certain. There is no defense that can be offered and no righteousness that can be presented. But in this courtroom, Jesus Christ stands as the defense attorney. He does not argue that we are innocent. He declares that the penalty has already been paid—paid by His own blood. Because of this, the judge declares the guilty sinner to be righteous. This is justification. It is not a process, but a declaration. It happens once and is complete. The sentence has been satisfied. The case is closed. The believer leaves the courtroom not on probation, but fully accepted.</p><div class="scripture">"Therefore, having been justified by faith, we have peace with God through our Lord Jesus Christ." — Romans 5:1</div><p><strong>4. Redemption (The Slave Market):</strong> The setting is a slave market. Humanity is in bondage to sin, death, and hell. We are chained by sin, unable to free ourselves. There is no ability to free ourselves. Christ enters and pays the price to set us free. The cost is His own life. Because the price has been paid, the believer is no longer a slave. Freedom has been purchased. The chains of sin, death, and hell have been broken.</p><div class="scripture">"You were not redeemed with corruptible things, like silver or gold... but with the precious blood of Christ." — 1 Peter 1:18-19</div><p><strong>5. Conversion (The Road):</strong> The setting is a road. A person is walking in one direction—away from God. At a certain point, that person stops, turns, and begins walking in the opposite direction. This is not a small adjustment. It is a complete turning. The traveler on a highway makes a definitive U-turn. This turning involves two elements: Repentance (turning from sin) and Faith (turning toward God). This is the narrow way, not the broad way.</p><div class="scripture">"Enter by the narrow gate... because narrow is the gate and difficult is the way which leads to life." — Matthew 7:13-14</div><p><strong>6. Adoption (The Family Court):</strong> The setting is a family court. A spiritual orphan is legally taken into God's family, receiving the full rights and inheritance of a child. The believer is no longer a stranger or an outsider but a son or daughter of God.</p><div class="scripture">"But when the fullness of the time had come, God sent forth His Son... that we might receive the adoption as sons." — Galatians 4:4-5</div><p>Together, these images show that salvation is complete. Christ deals with guilt, bondage, separation, direction, nature, and orphanhood. Because the penalty of sin has been fully dealt with, the believer does not work toward acceptance, but from acceptance. The first stage of salvation is 100% God's work. All we can do is receive it.</p></div>
+            <div class="illustration"><strong>💡 The Scarlet Thread:</strong> The Bible establishes a non-negotiable spiritual law: "Without the shedding of blood, there is no forgiveness of sin" (Hebrews 9:22). This requirement reveals that sin is not a minor debt; it is a capital offense requiring a life for a life. The thread begins in Eden (animal skins), continues through the Passover (lamb's blood), and finds its ultimate fulfillment in the cross of Christ (the Lamb of God who takes away the sin of the world).</div>
+            <div class="lesson-section"><h3>Day 3 — Sanctification: Being Saved from the Power of Sin</h3><p>If justification answers the problem of guilt, sanctification addresses the ongoing reality of sin within the believer. Though the penalty of sin has been removed, its influence is still present. The believer is no longer under condemnation, but is not yet fully free from the struggle with sin.</p><div class="scripture">"There is therefore now no condemnation to those who are in Christ Jesus." — Romans 8:1</div><p>Sanctification is the process of becoming like Christ. It is the unfolding of the new life that has already been given. The believer now engages actively in obedience—resisting sin, pursuing righteousness, and growing in holiness. God works in the believer, and the believer responds. Growth is expected—not perfection, but direction. Not completion, but progress. The goal is Christlikeness.</p><div class="scripture">"Work out your own salvation with fear and trembling, for it is God who works in you both to will and to do for His good pleasure." — Philippians 2:12-13</div><p>The Christian life is not a matter of trying harder in our own strength. It is a matter of walking in the Spirit—living in daily dependence upon His power and guidance. When we walk in the Spirit, we will not fulfill the lusts of the flesh (Galatians 5:16). This walk requires surrender, prayer, and obedience to the Word. The Spirit does not force us; He invites us to yield. The more we yield, the more He produces His fruit and manifests His power through us.</p></div>
+            <div class="lesson-section"><h3>Day 4 — Glorification: Saved from the Presence of Sin</h3><p>While salvation has already dealt with the penalty of sin and is presently dealing with its power, it has not yet reached its final stage. The believer still lives in a world affected by sin and still experiences its presence. Glorification speaks to the day when that will no longer be true.</p><p>Glorification is the final and complete stage of salvation. It is the moment when the work God has begun is brought to its full conclusion. In glorification, the presence of sin is removed entirely. There will be no more struggle, no more temptation, and no more internal conflict. The body is transformed. The relationship with God is fully restored. This future is certain.</p><div class="scripture">"Whom He justified, these He also glorified." — Romans 8:30</div><p>The most significant element of glorification is not merely the change in our surroundings, but the change in our nature. We shall be made perfect in truth. As the Apostle John writes: "We shall see Him as He is, and we shall be like Him" (1 John 3:2). How God accomplishes this remains one of the great mysteries of the faith. It is the moment where the "germ" of sin is finally and completely eradicated, and we are brought into total alignment with the truth of God.</p></div>
+            <div class="illustration"><strong>💡 The Michelangelo Illustration:</strong> Michelangelo once said that every block of stone has a statue inside it, and it is the task of the sculptor to set it free. In salvation, God is not merely chipping away at our flaws; He is setting free the perfect creation He intended us to be. In glorification, the work is complete. Like Michelangelo "setting the angel free" from the marble, God completes His work, making us perfectly holy and incorruptible forever.</div>
+            <div class="lesson-section"><h3>Day 5 — Grace, Faith, and the Transformed Life</h3><p>Salvation is grounded in grace. Grace is the unearned favor of God toward those who deserve the opposite. It is not a reward for effort, nor a response to human worthiness. It is given freely, not because of what humanity has done, but because of who God is. If grace is misunderstood, the entire doctrine of salvation is distorted.</p><div class="scripture">"God demonstrates His own love toward us, in that while we were still sinners, Christ died for us." — Romans 5:8</div><p>Faith is the means by which this grace is received. Faith is not merely agreement with certain truths, nor is it a vague sense of belief. Faith is personal trust in Jesus Christ. It does not earn salvation. It receives what grace provides in Christ.</p><p>The result of salvation is a transformed life. It produces humility because it is not earned. It produces assurance because it rests on God's work. It produces transformation because it is real. The believer does not live to achieve salvation, but from the reality of having received it. The Christian life is not an attempt to secure God's favor, but the outworking of a relationship already established by grace.</p><p>This guards against two common errors. On one hand, it prevents legalism—the idea that salvation must be maintained through effort. On the other hand, it prevents indifference—the idea that salvation produces no real change. The gospel rejects both. The believer lives from grace, not for grace.</p><div class="scripture">"Therefore, if anyone is in Christ, he is a new creation; old things have passed away; behold, all things have become new." — 2 Corinthians 5:17</div></div>
+            <div class="lesson-section"><h3>Final Summary</h3><p>The Doctrine of Salvation teaches us that God has done for us what we could never do for ourselves. In justification, He declares us righteous. In sanctification, He makes us holy. In glorification, He will make us perfect. All of this is by grace, received through faith, and results in a transformed life. Salvation is not a reward for the righteous but a gift for the guilty. To receive it is to receive Christ. To receive Christ is to receive eternal life. Therefore, we boast not in ourselves, but in the cross of our Lord Jesus Christ.</p><div class="scripture">"For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord." — Romans 6:23</div></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">La Doctrina de la Salvación (Soteriología)</div>
+            <div class="lesson-section"><h3>Día 1 — La Necesidad de la Salvación y la Triple Obra de la Gracia</h3><p>La doctrina de la salvación responde a la pregunta más urgente planteada por la doctrina del pecado: si la humanidad está caída y separada de Dios, ¿cómo puede restaurarse esa relación? La salvación no es un logro humano. Es la obra de Dios a favor de la humanidad. Lo que el hombre no puede lograr, Dios lo provee a través de la gracia. Al mismo tiempo, la salvación no es meramente un único momento aislado. Es una obra integral que aborda el pasado, el presente y el futuro del creyente. Es tanto un evento como un proceso, fundamentado en lo que Cristo ha hecho y aplicado a través de la vida del creyente.</p><p>La Escritura presenta a la humanidad separada de Dios, no por circunstancias, sino por naturaleza. El pecado ha afectado cada parte de la persona humana. Ha distorsionado la mente, desordenado la voluntad y corrompido los afectos. Dejada a sí misma, la humanidad no se mueve hacia Dios, sino que se aleja de Él. Por eso la salvación es necesaria. No es una doctrina opcional reservada para la reflexión religiosa—es la única respuesta a la condición humana.</p><p>Debido a esto, la salvación no puede originarse en el hombre. Lo que está quebrantado a nivel de naturaleza no puede ser reparado por el esfuerzo, la educación o la reforma moral. Ninguna acumulación de buenas obras puede deshacer la culpa, y ninguna disciplina puede revertir la muerte espiritual. Si la salvación ha de ocurrir, debe venir de fuera de nosotros. Debe ser provista por Dios.</p><p>La salvación, por lo tanto, no es un logro humano. Es la obra de Dios a favor de la humanidad. Lo que el hombre no puede lograr, Dios lo provee a través de la gracia.</p><p>La naturaleza integral de la salvación se describe a menudo como la triple obra de la gracia. En la justificación, el creyente es salvo de la pena del pecado (pasado). En la santificación, el creyente está siendo salvo del poder del pecado (presente). En la glorificación, el creyente será salvo de la presencia del pecado (futuro). Estas no son salvaciones separadas, sino una obra unificada de Dios. Juntas muestran que la salvación no es parcial—es completa.</p><div class="scripture">"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe." — Efesios 2:8-9</div></div>
+            <div class="lesson-section"><h3>Día 2 — Las Seis Imágenes de la Salvación</h3><p>La primera etapa de la salvación—lo que llamamos conversión—es estrictamente un Acto de Dios. No podemos comprarla, ganarla ni merecerla; es un regalo gratuito. La Escritura usa seis poderosas metáforas para describir el milagro de la conversión. Cada metáfora nos ubica en un escenario diferente y revela un aspecto diferente de lo que Cristo ha hecho por nosotros y lo que sucede en la vida del creyente.</p><p><strong>1. Regeneración (La Sala de Nacimiento):</strong> El escenario es una sala de nacimiento. El primer nacimiento es físico. El segundo nacimiento es espiritual. Este nuevo nacimiento es por el Espíritu Santo. El creyente nace de nuevo—no meramente mejorado, sino hecho nuevo. Una nueva vida comienza. Una nueva naturaleza es dada. Así como un bebé es pasivo en su nacimiento físico, el pecador es pasivo aquí mientras el Espíritu sopla vida en el espiritualmente muerto.</p><div class="scripture">"El que no naciere de nuevo, no puede ver el reino de Dios." — Juan 3:3</div><p><strong>2. Reconciliación (La Relación Rota):</strong> El escenario es una relación rota, como un matrimonio donde la pareja se ha divorciado y distanciado. La humanidad no está naturalmente en amistad con Dios, sino en oposición. La Escritura nos describe como enemigos de Él. La relación está rota y desalineada. Es como si hubiera sido completamente cortada. A través de Cristo, esa separación es removida. Lo que estaba roto es restaurado. La paz reemplaza la hostilidad. El creyente ya no está distante, sino traído cerca.</p><p><strong>Nota teológica importante:</strong> En la Biblia, siempre somos reconciliados con Dios, y Dios nunca ha sido reconciliado con nosotros. ¿Por qué? Porque Dios nunca ha sido hostil hacia nosotros; nosotros hemos sido hostiles hacia Él. Él siempre ha estado listo para recibirnos, pero nosotros hemos estado huyendo. Por lo tanto, el lenguaje bíblico es siempre que <em>nosotros</em> somos reconciliados con Dios, no que Dios es reconciliado con nosotros. Él no necesita cambiar Su actitud; nosotros sí.</p><div class="scripture">"Y a vosotros también, que erais en otro tiempo extraños y enemigos en vuestra mente, haciendo malas obras, ahora os ha reconciliado." — Colosenses 1:21-22</div><div class="scripture">"Y todo esto proviene de Dios, quien nos reconcilió consigo mismo por Cristo." — 2 Corintios 5:18</div><p><strong>3. Justificación (La Sala del Tribunal):</strong> El escenario es una sala de tribunal. Dios es el juez. La humanidad está culpable ante Él. La evidencia es clara, y el veredicto es cierto. No hay defensa que pueda ofrecerse ni justicia que pueda presentarse. Pero en este tribunal, Jesucristo está como abogado defensor. No argumenta que somos inocentes. Declara que la pena ya ha sido pagada—pagada por Su propia sangre. Debido a esto, el juez declara justo al pecador culpable. Esta es la justificación. No es un proceso, sino una declaración. Sucede una vez y es completa. La sentencia ha sido satisfecha. El caso está cerrado. El creyente sale del tribunal no en libertad condicional, sino plenamente aceptado.</p><div class="scripture">"Justificados, pues, por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo." — Romanos 5:1</div><p><strong>4. Redención (El Mercado de Esclavos):</strong> El escenario es un mercado de esclavos. La humanidad está en esclavitud al pecado, la muerte y el infierno. Estamos encadenados por el pecado, incapaces de liberarnos. No hay capacidad de liberarnos a nosotros mismos. Cristo entra y paga el precio para liberarnos. El costo es Su propia vida. Debido a que el precio ha sido pagado, el creyente ya no es esclavo. La libertad ha sido comprada. Las cadenas del pecado, la muerte y el infierno han sido rotas.</p><div class="scripture">"Fuisteis rescatados de vuestra vana manera de vivir... no con cosas corruptibles, como oro o plata, sino con la sangre preciosa de Cristo." — 1 Pedro 1:18-19</div><p><strong>5. Conversión (El Camino):</strong> El escenario es un camino. Una persona camina en una dirección—lejos de Dios. En cierto punto, esa persona se detiene, se vuelve y comienza a caminar en la dirección opuesta. Esto no es un pequeño ajuste. Es un giro completo. El viajero en una autopista hace un giro definitivo. Este giro involucra dos elementos: Arrepentimiento (volverse del pecado) y Fe (volverse hacia Dios). Este es el camino angosto, no el camino ancho.</p><div class="scripture">"Entrad por la puerta estrecha... porque estrecha es la puerta, y angosto el camino que lleva a la vida." — Mateo 7:13-14</div><p><strong>6. Adopción (El Tribunal de Familia):</strong> El escenario es un tribunal de familia. Un huérfano espiritual es legalmente tomado en la familia de Dios, recibiendo todos los derechos y la herencia de un hijo. El creyente ya no es un extraño o forastero sino un hijo o hija de Dios.</p><div class="scripture">"Pero cuando vino el cumplimiento del tiempo, Dios envió a su Hijo... para que recibiésemos la adopción de hijos." — Gálatas 4:4-5</div><p>Juntas, estas imágenes muestran que la salvación es completa. Cristo se ocupa de la culpa, la esclavitud, la separación, la dirección, la naturaleza y la orfandad. Debido a que la pena del pecado ha sido tratada plenamente, el creyente no trabaja hacia la aceptación, sino desde la aceptación. La primera etapa de la salvación es 100% obra de Dios. Lo único que podemos hacer es recibirla.</p></div>
+            <div class="illustration"><strong>💡 El Hilo Escarlata:</strong> La Biblia establece una ley espiritual no negociable: "Sin derramamiento de sangre no hay perdón de pecados" (Hebreos 9:22). Este requisito revela que el pecado no es una deuda menor; es una ofensa capital que requiere vida por vida. El hilo comienza en Edén (pieles de animales), continúa a través de la Pascua (sangre del cordero) y encuentra su cumplimiento final en la cruz de Cristo (el Cordero de Dios que quita el pecado del mundo).</div>
+            <div class="lesson-section"><h3>Día 3 — Santificación: Siendo Salvos del Poder del Pecado</h3><p>Si la justificación responde al problema de la culpa, la santificación aborda la realidad continua del pecado dentro del creyente. Aunque la pena del pecado ha sido removida, su influencia todavía está presente. El creyente ya no está bajo condenación, pero aún no está plenamente libre de la lucha con el pecado.</p><div class="scripture">"Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús." — Romanos 8:1</div><p>La santificación es el proceso de llegar a ser como Cristo. Es el desarrollo de la nueva vida que ya ha sido dada. El creyente ahora se compromete activamente en obediencia—resistiendo el pecado, persiguiendo la justicia y creciendo en santidad. Dios obra en el creyente, y el creyente responde. Se espera crecimiento—no perfección, sino dirección. No consumación, sino progreso. La meta es la semejanza a Cristo.</p><div class="scripture">"Ocupaos en vuestra salvación con temor y temblor, porque Dios es el que en vosotros produce así el querer como el hacer, por su buena voluntad." — Filipenses 2:12-13</div><p>La vida cristiana no es asunto de esforzarse más en nuestra propia fuerza. Es asunto de caminar en el Espíritu—viviendo en dependencia diaria de Su poder y guía. Cuando caminamos en el Espíritu, no cumpliremos los deseos de la carne (Gálatas 5:16). Este caminar requiere rendición, oración y obediencia a la Palabra. El Espíritu no nos fuerza; nos invita a someternos. Mientras más nos rendimos, más Él produce Su fruto y manifiesta Su poder a través de nosotros.</p></div>
+            <div class="lesson-section"><h3>Día 4 — Glorificación: Salvos de la Presencia del Pecado</h3><p>Mientras la salvación ya ha tratado con la pena del pecado y está tratando actualmente con su poder, aún no ha llegado a su etapa final. El creyente todavía vive en un mundo afectado por el pecado y aún experimenta su presencia. La glorificación habla del día en que eso ya no será verdad.</p><p>La glorificación es la etapa final y completa de la salvación. Es el momento en que la obra que Dios ha comenzado es llevada a su consumación. En la glorificación, la presencia del pecado es eliminada por completo. No habrá más lucha, no más tentación, y no más conflicto interno. El cuerpo es transformado. La relación con Dios es completamente restaurada. Este futuro es cierto.</p><div class="scripture">"A los que justificó, a éstos también glorificó." — Romanos 8:30</div><p>El elemento más significativo de la glorificación no es meramente el cambio en nuestro entorno, sino el cambio en nuestra naturaleza. Seremos hechos perfectos en la verdad. Como escribe el apóstol Juan: "Le veremos tal como él es, y seremos semejantes a él" (1 Juan 3:2). Cómo Dios logra esto sigue siendo uno de los grandes misterios de la fe. Es el momento donde el "germen" del pecado es finalmente y completamente erradicado, y somos traídos a alineación total con la verdad de Dios.</p></div>
+            <div class="illustration"><strong>💡 La Ilustración de Miguel Ángel:</strong> Miguel Ángel dijo una vez que cada bloque de piedra tiene una estatua dentro, y la tarea del escultor es liberarla. En la salvación, Dios no está simplemente tallando nuestros defectos; está liberando la creación perfecta que Él intentó que fuéramos. En la glorificación, la obra está completa. Como Miguel Ángel "liberando al ángel" del mármol, Dios completa Su obra, haciéndonos perfectamente santos e incorruptibles para siempre.</div>
+            <div class="lesson-section"><h3>Día 5 — Gracia, Fe y la Vida Transformada</h3><p>La salvación está fundada en la gracia. La gracia es el favor inmerecido de Dios hacia aquellos que merecen lo opuesto. No es una recompensa por el esfuerzo, ni una respuesta al mérito humano. Es dada gratuitamente, no por lo que la humanidad ha hecho, sino por quien Dios es. Si la gracia se malinterpreta, la doctrina completa de la salvación se distorsiona.</p><div class="scripture">"Mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros." — Romanos 5:8</div><p>La fe es el medio por el cual esta gracia es recibida. La fe no es meramente el acuerdo con ciertas verdades, ni es un sentimiento vago de creencia. La fe es confianza personal en Jesucristo. No gana la salvación. Recibe lo que la gracia provee en Cristo.</p><p>El resultado de la salvación es una vida transformada. Produce humildad porque no es ganada. Produce seguridad porque descansa en la obra de Dios. Produce transformación porque es real. El creyente no vive para lograr la salvación, sino desde la realidad de haberla recibido. La vida cristiana no es un intento de asegurar el favor de Dios, sino el desarrollo de una relación ya establecida por gracia.</p><p>Esto protege contra dos errores comunes. Por un lado, previene el legalismo—la idea de que la salvación debe mantenerse a través del esfuerzo. Por otro lado, previene la indiferencia—la idea de que la salvación no produce cambio real. El evangelio rechaza ambos. El creyente vive desde la gracia, no para la gracia.</p><div class="scripture">"De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas." — 2 Corintios 5:17</div></div>
+            <div class="lesson-section"><h3>Resumen Final</h3><p>La Doctrina de la Salvación nos enseña que Dios ha hecho por nosotros lo que nunca podríamos hacer por nosotros mismos. En la justificación, nos declara justos. En la santificación, nos hace santos. En la glorificación, nos hará perfectos. Todo esto es por gracia, recibida mediante la fe, y resulta en una vida transformada. La salvación no es una recompensa para los justos sino un regalo para los culpables. Recibirla es recibir a Cristo. Recibir a Cristo es recibir vida eterna. Por lo tanto, no nos gloriamos en nosotros mismos, sino en la cruz de nuestro Señor Jesucristo.</p><div class="scripture">"Porque la paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro." — Romanos 6:23</div></div>
+
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 7 Examination</span><span class="lang-es">📋 Examen de la Unidad 7</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit8.html" class="btn-nav"><span class="lang-en">Next: The Church →</span><span class="lang-es">Siguiente: La Iglesia →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 7;
+const NEXT_URL = "CTSSTUnit8.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:0,
+    en:{ q:"What does salvation primarily address?", opts:["Restoration to God","Social justice","Religious activity","Behavior improvement"], expl:"Salvation restores the relationship between humanity and God." },
+    es:{ q:"¿Qué aborda principalmente la salvación?", opts:["Restauración a Dios","Justicia social","Actividad religiosa","Mejora del comportamiento"], expl:"La salvación restaura la relación entre la humanidad y Dios." } },
+  { id:2, correct:0,
+    en:{ q:"Salvation is whose work?", opts:["God's work","Church activity","Moral reform","Human effort"], expl:"Salvation is God's work on behalf of humanity." },
+    es:{ q:"¿De quién es la obra de la salvación?", opts:["Obra de Dios","Actividad de la iglesia","Reforma moral","Esfuerzo humano"], expl:"La salvación es la obra de Dios a favor de la humanidad." } },
+  { id:3, correct:0,
+    en:{ q:"Justification deals with:", opts:["Penalty of sin","Power of sin","Presence of sin","Social consequences"], expl:"Justification saves us from the penalty of sin." },
+    es:{ q:"La justificación trata con:", opts:["La pena del pecado","El poder del pecado","La presencia del pecado","Consecuencias sociales"], expl:"La justificación nos salva de la pena del pecado." } },
+  { id:4, correct:2,
+    en:{ q:"Sanctification is:", opts:["Optional","Instant perfection","Ongoing process","Future hope"], expl:"Sanctification is the ongoing process of being made holy." },
+    es:{ q:"La santificación es:", opts:["Opcional","Perfección instantánea","Proceso continuo","Esperanza futura"], expl:"La santificación es el proceso continuo de ser hechos santos." } },
+  { id:5, correct:2,
+    en:{ q:"Glorification removes:", opts:["Penalty of sin","Power of sin","Presence of sin","Memory of sin"], expl:"Glorification removes the presence of sin entirely." },
+    es:{ q:"La glorificación elimina:", opts:["La pena del pecado","El poder del pecado","La presencia del pecado","El recuerdo del pecado"], expl:"La glorificación elimina por completo la presencia del pecado." } },
+  { id:6, correct:0,
+    en:{ q:"Grace is:", opts:["Unearned favor","A reward","A wage","Earned favor"], expl:"Grace is unearned favor from God." },
+    es:{ q:"La gracia es:", opts:["Favor inmerecido","Una recompensa","Un salario","Favor merecido"], expl:"La gracia es el favor inmerecido de Dios." } },
+  { id:7, correct:3,
+    en:{ q:"Faith does what?", opts:["Purchases salvation","Replaces grace","Earns salvation","Receives salvation"], expl:"Faith receives what grace provides." },
+    es:{ q:"¿Qué hace la fe?", opts:["Compra la salvación","Reemplaza la gracia","Gana la salvación","Recibe la salvación"], expl:"La fe recibe lo que la gracia provee." } },
+  { id:8, correct:2,
+    en:{ q:"According to the Bible, who is reconciled to whom?", opts:["Neither is reconciled","God is reconciled to us","We are reconciled to God","Both are reconciled to each other"], expl:"The Bible always speaks of us being reconciled to God because God has never been hostile; we have." },
+    es:{ q:"Según la Biblia, ¿quién es reconciliado con quién?", opts:["Ninguno es reconciliado","Dios es reconciliado con nosotros","Nosotros somos reconciliados con Dios","Ambos son reconciliados el uno con el otro"], expl:"La Biblia siempre habla de nosotros siendo reconciliados con Dios porque Dios nunca ha sido hostil; nosotros sí." } },
+  { id:9, correct:3,
+    en:{ q:"What setting does Regeneration picture?", opts:["A road","A courtroom","A slave market","A birthing room"], expl:"Regeneration pictures a birthing room — being born again." },
+    es:{ q:"¿Qué escenario representa la Regeneración?", opts:["Un camino","Un tribunal","Un mercado de esclavos","Una sala de nacimiento"], expl:"La Regeneración representa una sala de nacimiento — nacer de nuevo." } },
+  { id:10, correct:1,
+    en:{ q:"What setting does Redemption picture?", opts:["A courtroom","A slave market","A birthing room","A family court"], expl:"Redemption pictures a slave market — being bought out of bondage." },
+    es:{ q:"¿Qué escenario representa la Redención?", opts:["Un tribunal","Un mercado de esclavos","Una sala de nacimiento","Un tribunal de familia"], expl:"La Redención representa un mercado de esclavos — siendo comprado fuera de la esclavitud." } },
+  { id:11, correct:2,
+    en:{ q:"What setting does Justification picture?", opts:["A birthing room","A road","A courtroom","A slave market"], expl:"Justification pictures a courtroom — being declared righteous." },
+    es:{ q:"¿Qué escenario representa la Justificación?", opts:["Una sala de nacimiento","Un camino","Un tribunal","Un mercado de esclavos"], expl:"La Justificación representa un tribunal — siendo declarado justo." } },
+  { id:12, correct:1,
+    en:{ q:"What setting does Reconciliation picture?", opts:["A courtroom","A broken relationship","A birthing room","A road"], expl:"Reconciliation pictures a broken relationship being restored." },
+    es:{ q:"¿Qué escenario representa la Reconciliación?", opts:["Un tribunal","Una relación rota","Una sala de nacimiento","Un camino"], expl:"La Reconciliación representa una relación rota siendo restaurada." } },
+  { id:13, correct:3,
+    en:{ q:"What setting does Conversion picture?", opts:["A courtroom","A slave market","A birthing room","A road with a U-turn"], expl:"Conversion pictures a road — turning from the wrong direction to the right direction." },
+    es:{ q:"¿Qué escenario representa la Conversión?", opts:["Un tribunal","Un mercado de esclavos","Una sala de nacimiento","Un camino con un cambio de dirección"], expl:"La Conversión representa un camino — girando de la dirección equivocada a la dirección correcta." } },
+  { id:14, correct:1,
+    en:{ q:"What setting does Adoption picture?", opts:["A slave market","A family court","A road","A courtroom"], expl:"Adoption pictures a family court — being taken into God's family." },
+    es:{ q:"¿Qué escenario representa la Adopción?", opts:["Un mercado de esclavos","Un tribunal de familia","Un camino","Un tribunal"], expl:"La Adopción representa un tribunal de familia — siendo tomado en la familia de Dios." } },
+  { id:15, correct:1,
+    en:{ q:"The first stage of salvation (conversion) is:", opts:["A cooperative effort","100% God's work","100% man's work","Mostly man's work"], expl:"The first stage is strictly an act of God; we cannot buy, earn, or deserve it." },
+    es:{ q:"La primera etapa de la salvación (conversión) es:", opts:["Un esfuerzo cooperativo","100% obra de Dios","100% obra del hombre","Mayormente obra del hombre"], expl:"La primera etapa es estrictamente un acto de Dios; no podemos comprarla, ganarla ni merecerla." } },
+  { id:16, correct:0,
+    en:{ q:"The scarlet thread of Scripture is:", opts:["Substitutionary blood sacrifice","Good works","Love","Faith"], expl:"The scarlet thread is substitutionary blood sacrifice, from Genesis to Revelation." },
+    es:{ q:"El hilo escarlata de la Escritura es:", opts:["Sacrificio de sangre sustitutivo","Buenas obras","Amor","Fe"], expl:"El hilo escarlata es el sacrificio de sangre sustitutivo, desde Génesis hasta Apocalipsis." } },
+  { id:17, correct:1,
+    en:{ q:"The goal of sanctification is:", opts:["Wealth","Christlikeness","Fame","Happiness"], expl:"The goal of sanctification is to become like Christ." },
+    es:{ q:"La meta de la santificación es:", opts:["Riqueza","Semejanza a Cristo","Fama","Felicidad"], expl:"La meta de la santificación es llegar a ser como Cristo." } },
+  { id:18, correct:2,
+    en:{ q:"Glorification includes:", opts:["Return to earth","Loss of identity","Transformation of the body","Only spiritual change"], expl:"Glorification includes the transformation of the body (Philippians 3:21)." },
+    es:{ q:"La glorificación incluye:", opts:["Regreso a la tierra","Pérdida de identidad","Transformación del cuerpo","Solo cambio espiritual"], expl:"La glorificación incluye la transformación del cuerpo (Filipenses 3:21)." } },
+  { id:19, correct:3,
+    en:{ q:"Faith is:", opts:["Emotional feeling","Religious ritual","Blind belief","Personal trust in Christ"], expl:"Faith is personal trust in Jesus Christ." },
+    es:{ q:"La fe es:", opts:["Sentimiento emocional","Ritual religioso","Creencia ciega","Confianza personal en Cristo"], expl:"La fe es confianza personal en Jesucristo." } },
+  { id:20, correct:3,
+    en:{ q:"The threefold work of grace is:", opts:["Faith, hope, love","Past, present, future","Creation, fall, redemption","Justification, sanctification, glorification"], expl:"The threefold work is justification (past), sanctification (present), and glorification (future)." },
+    es:{ q:"La triple obra de la gracia es:", opts:["Fe, esperanza, amor","Pasado, presente, futuro","Creación, caída, redención","Justificación, santificación, glorificación"], expl:"La triple obra es justificación (pasado), santificación (presente) y glorificación (futuro)." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the six images of salvation: Regeneration, Reconciliation, Justification, Redemption, Conversion, and Adoption. What does each teach about what Christ has done?", kw:["regeneration","reconciliation","justification","redemption","conversion","adoption","images"], expl:"Each image shows a different aspect of salvation: new birth (regeneration), restored relationship (reconciliation), declared righteous (justification), freed from bondage (redemption), turning to God (conversion), becoming a child of God (adoption)." },
+    es:{ q:"Explique las seis imágenes de la salvación: Regeneración, Reconciliación, Justificación, Redención, Conversión y Adopción. ¿Qué enseña cada una sobre lo que Cristo ha hecho?", kw:["regeneración","reconciliación","justificación","redención","conversión","adopción","imágenes"], expl:"Cada imagen muestra un aspecto diferente de la salvación: nuevo nacimiento (regeneración), relación restaurada (reconciliación), declarado justo (justificación), liberado de la esclavitud (redención), volverse a Dios (conversión), llegar a ser hijo de Dios (adopción)." } },
+  { id:22,
+    en:{ q:"Why is it theologically significant that the Bible says we are reconciled to God, not that God is reconciled to us?", kw:["reconciled","hostile","enmity","god","us","attitude","change"], expl:"God has never been hostile toward us; we have been hostile toward Him. He does not need to change His attitude; we do. Therefore, we are reconciled to God." },
+    es:{ q:"¿Por qué es teológicamente significativo que la Biblia diga que nosotros somos reconciliados con Dios, no que Dios es reconciliado con nosotros?", kw:["reconciliad","hostil","enemistad","dios","nosotros","actitud","cambio"], expl:"Dios nunca ha sido hostil hacia nosotros; nosotros hemos sido hostiles hacia Él. Él no necesita cambiar Su actitud; nosotros sí. Por lo tanto, nosotros somos reconciliados con Dios." } },
+  { id:23,
+    en:{ q:"Explain the role of Jesus as the defense attorney in the courtroom of justification. What does He declare?", kw:["courtroom","judge","defense","attorney","penalty","paid","declare"], expl:"Jesus declares that the penalty for our sin has already been paid—paid by His own blood. The judge then declares the guilty sinner righteous. The case is closed." },
+    es:{ q:"Explique el papel de Jesús como abogado defensor en el tribunal de la justificación. ¿Qué declara Él?", kw:["tribunal","juez","defensa","abogado","pena","pagado","declarad"], expl:"Jesús declara que la pena por nuestro pecado ya ha sido pagada—pagada con Su propia sangre. El juez entonces declara justo al pecador culpable. El caso está cerrado." } },
+  { id:24,
+    en:{ q:"Explain the threefold work of grace: justification, sanctification, and glorification. What does each address?", kw:["justification","sanctification","glorification","penalty","power","presence","sin"], expl:"Justification addresses the penalty of sin (past). Sanctification addresses the power of sin (present). Glorification addresses the presence of sin (future)." },
+    es:{ q:"Explique la triple obra de la gracia: justificación, santificación y glorificación. ¿Qué aborda cada una?", kw:["justificación","santificación","glorificación","pena","poder","presencia","pecado"], expl:"La justificación aborda la pena del pecado (pasado). La santificación aborda el poder del pecado (presente). La glorificación aborda la presencia del pecado (futuro)." } },
+  { id:25,
+    en:{ q:"Trace the 'Scarlet Thread' of substitutionary blood sacrifice from Genesis to Revelation.", kw:["scarlet","thread","blood","sacrifice","eden","passover","cross","lamb"], expl:"The thread begins in Eden (animal skins), continues through the Passover (lamb's blood), and culminates at the cross (Christ, the Lamb of God)." },
+    es:{ q:"Trace el 'Hilo Escarlata' del sacrificio de sangre sustitutivo desde Génesis hasta Apocalipsis.", kw:["hilo","escarlata","sangre","sacrificio","edén","pascua","cruz","cordero"], expl:"El hilo comienza en el Edén (pieles de animales), continúa a través de la Pascua (sangre del cordero) y culmina en la cruz (Cristo, el Cordero de Dios)." } },
+  { id:26,
+    en:{ q:"Explain the meaning of 'the believer does not work toward acceptance but from acceptance.' How does this shape the Christian life?", kw:["acceptance","work","from","toward","grace","performance","rest"], expl:"Salvation is already secured in Christ. We serve not to earn God's favor but out of gratitude for the favor already given. This produces joyful obedience, not anxious striving." },
+    es:{ q:"Explique el significado de 'el creyente no trabaja para alcanzar aceptación sino desde la aceptación.' ¿Cómo moldea esto la vida cristiana?", kw:["aceptación","trabaja","desde","hacia","gracia","desempeño","descans"], expl:"La salvación ya está asegurada en Cristo. Servimos no para ganar el favor de Dios sino por gratitud por el favor ya dado. Esto produce obediencia gozosa, no esfuerzo ansioso." } },
+  { id:27,
+    en:{ q:"Describe the Michelangelo illustration and explain what it teaches about glorification.", kw:["michelangelo","statue","marble","set free","glorification","perfection","complete"], expl:"Michelangelo saw the statue within the marble. God sees the perfected saint within the fallen sinner. Glorification is when He finally sets us free from all sin and makes us complete." },
+    es:{ q:"Describa la ilustración de Miguel Ángel y explique qué enseña sobre la glorificación.", kw:["miguel ángel","estatua","mármol","liberar","glorificación","perfección","complet"], expl:"Miguel Ángel veía la estatua dentro del mármol. Dios ve al santo perfeccionado dentro del pecador caído. La glorificación es cuando finalmente nos libera de todo pecado y nos completa." } },
+  { id:28,
+    en:{ q:"How does the doctrine of salvation guard against both legalism and indifference?", kw:["legalism","indifference","grace","works","transformation","gospel"], expl:"Legalism says we must earn salvation; grace says it is a gift. Indifference says salvation doesn't change behavior; grace produces transformation. The gospel rejects both errors." },
+    es:{ q:"¿Cómo protege la doctrina de la salvación contra el legalismo y la indiferencia?", kw:["legalismo","indiferencia","gracia","obras","transformación","evangelio"], expl:"El legalismo dice que debemos ganar la salvación; la gracia dice que es un regalo. La indiferencia dice que la salvación no cambia el comportamiento; la gracia produce transformación. El evangelio rechaza ambos errores." } },
+  { id:29,
+    en:{ q:"Explain the statement: 'Salvation is not a reward for the righteous but a gift for the guilty.'", kw:["reward","righteous","gift","guilty","grace","unearned","savior"], expl:"No one is righteous enough to earn salvation. It is given freely to those who admit their guilt and trust in Christ. The only qualification is recognizing that you are unqualified." },
+    es:{ q:"Explique la declaración: 'La salvación no es una recompensa para los justos sino un regalo para los culpables.'", kw:["recompensa","justos","regalo","culpables","gracia","inmerecid","salvador"], expl:"Nadie es lo suficientemente justo para ganar la salvación. Se da gratuitamente a aquellos que admiten su culpa y confían en Cristo. El único requisito es reconocer que no se cumplen los requisitos." } },
+  { id:30,
+    en:{ q:"Summarize the main point of Unit 7. Why is salvation the 'central heartbeat' of the Bible?", kw:["salvation","heartbeat","gospel","cross","rescue","grace","eternal life"], expl:"Salvation is the central message of Scripture—God's rescue of fallen humanity through Christ. From Genesis to Revelation, the story is about how God saves sinners. Without salvation, there is no hope." },
+    es:{ q:"Resuma el punto principal de la Unidad 7. ¿Por qué es la salvación el 'latido central' de la Biblia?", kw:["salvación","corazón","evangelio","cruz","rescate","gracia","vida eterna"], expl:"La salvación es el mensaje central de la Escritura—el rescate de Dios de la humanidad caída a través de Cristo. Desde Génesis hasta Apocalipsis, la historia trata de cómo Dios salva a los pecadores. Sin salvación, no hay esperanza." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 5: The Doctrine of Humanity (Anthropology) | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 5: The Doctrine of Humanity (Anthropology)</span><span class="lang-es">📖 Unidad 5: La Doctrina de la Humanidad (Antropología)</span></h1>
+    <p><span class="lang-en">Created in God's Image, Fallen, and Restored</span><span class="lang-es">Creado a Imagen de Dios, Caído y Restaurado</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">The Doctrine of Humanity (Anthropology)</div>
+            <div class="lesson-section"><h3>Day 1 — What Is Man? The Central Question</h3><p>To understand theology correctly, one must eventually ask a simple but profound question: <strong>What is man?</strong></p><p>This question cannot be avoided. Every worldview attempts to answer it. Some say man is nothing more than a biological organism shaped by evolution and environment. Others define him by culture, experience, or personal identity. Still others assume that man is essentially good and only needs improvement.</p><p>Scripture presents a very different picture. Man is not self-defined or self-created, nor is he independent. He is a created being, and his identity can only be understood in relation to the One who made him.</p><p>The Bible begins with God, not man. This is not accidental. Until we understand God, we will never understand ourselves. The moment man attempts to define himself apart from God, he loses both his identity and his purpose.</p><p>Man is created, accountable, and dependent. He does not originate himself, he does not sustain himself, and he is not the final authority over himself. Man is not only created by God—he is created for God.</p><p>Human dignity and human responsibility are inseparable. Man has value because he is created by God, and he has responsibility because he lives under God.</p><p>If we misunderstand man at this point, everything else in theology begins to unravel. Sin will be misunderstood. Salvation will be misunderstood. Even the gospel itself will be distorted. The doctrine of man is not secondary. It is foundational.</p></div>
+            <div class="lesson-section"><h3>Day 2 — Created in the Image of God</h3><p>The foundational truth of human existence is that man is created in the image of God.</p><div class="scripture">"Let us make man in our image, after our likeness." — Genesis 1:26</div><p>This declaration sets humanity apart from everything else in creation. Nothing else is said to bear the image of God in this way.</p><p>At first, it may seem that this image refers primarily to intelligence. God is intelligent, so man must reflect Him in that way. Yet this explanation is insufficient. There are animals that display remarkable intelligence. Chimpanzees demonstrate exceptional short-term memory. An octopus can solve complex puzzles. Crows have been observed dropping nuts into traffic so that cars will crack them open, then waiting at crosswalks for the signal to change so they can safely retrieve their food. Intelligence alone cannot explain the image of God.</p><p>If it did, we would have to conclude that animals share in that image in the same way. Scripture makes clear that they do not. Man is set apart in a deeper and more significant way. The image of God includes rational thought, but it also includes moral awareness, the ability to discern right from wrong, the capacity for relationship, and the ability to reflect God's character.</p><p>Man does not simply think—he evaluates. He does not simply act—he is accountable. He does not simply exist—he relates to God. Man's greatest distinction is not merely that he can think or create, but that he can know God. No animal, regardless of intelligence, has the capacity for a personal relationship with the Creator. Man was designed not only to live in the world, but to walk with God. The image of God is most clearly seen in this capacity—to hear from God, to respond to Him, and to live in relationship with Him.</p><p>Because man bears the image of God, human life possesses inherent dignity. This dignity is not earned. It is not based on performance, success, or usefulness. It is rooted in creation itself. A person has value because he bears the image of his Creator.</p></div>
+            <div class="illustration"><strong>💡 The 1,000-Peso Bill:</strong> Whether it is crisp and new or worn and lying in the gutter, its value does not change. The condition of the bill does not determine its worth. Its value rests on whose image and seal it bears. In the same way, every human being carries the image and seal of God. That image may be distorted or obscured, but it is not erased. No one is insignificant. No one is disposable. No one falls outside the boundary of dignity.</div>
+            <div class="lesson-section"><h3>Day 3 — Human Dignity Lived Out</h3><p>The truth of the image of God must move beyond definition into lived reality.</p><p>My youngest son is, in many ways, what people often call a "spitting image" of me. When others look at him, they see a resemblance—not only in appearance, but in expression and manner. There is something in him that reflects me.</p><p>This helps us understand what Scripture means when it says that man is made in the image of God. We are not identical to God, nor do we possess His attributes in their fullness. Yet there is a resemblance. There is something about man that reflects his Creator. Even in a broken world, that resemblance has not disappeared.</p><p>This truth becomes unmistakable when it is lived out. One Thanksgiving, our family sat down to a full meal—turkey, mashed potatoes, green beans, everything prepared and served. We ate together and enjoyed the time as a family. After we finished, my oldest son quietly stood, prepared another full plate—the same meal we had just eaten—and said he would be right back. He carried the plate downstairs and out the door. We soon understood what he had done. A man was living nearby on the street in a makeshift shelter along the curb. My son took that plate of food and gave it to him. He did not offer leftovers or something less. He gave him the same meal we had received. Not long ago, he mentioned that the man is still there. Each time he passes by, he looks for an opportunity to give him something—a banana, some coins, whatever he has available.</p><p>Why does he do this? Because that man is made in the image of God. His life may be broken. His circumstances may conceal what once reflected dignity. Yet the image remains.</p><p>The executive and the homeless man stand on equal ground. The unborn child and the elderly person share the same worth. The successful and the forgotten are equal before God. To believe in the image of God is to see people differently—and to treat them accordingly.</p></div>
+            <div class="lesson-section"><h3>Day 4 — The Fall and the Distortion of Man</h3><p>If man is created in the image of God, then the brokenness of the world demands an explanation. That explanation is found in the fall.</p><p>Genesis 3 records the moment when man rejected God's authority. This was not a minor misstep; it was rebellion. Man chose independence over dependence and self-rule over submission.</p><p>The consequences were immediate and far-reaching. The image of God was not destroyed, but it was profoundly distorted. The mind became darkened, the will became bent, and the desires became disordered. This condition is described as <strong>total depravity</strong>. This does not mean that man is as evil as he could possibly be. Rather, it means that every part of his being is affected by sin. There is no area that remains untouched.</p><p>The problem is not merely external—it is internal. Man does not simply commit sin; he is a sinner by nature. This is why human effort cannot solve the human problem. Education cannot remove sin. Culture cannot eliminate it. Laws cannot cure it. The issue lies within the human heart.</p><p>The fall explains why humanity is capable of both remarkable good and profound evil. It explains why man can create beauty and cause destruction—often within the same life.</p></div>
+            <div class="lesson-section"><h3>Day 5 — Restoration in Christ</h3><p>The doctrine of man does not end with the fall. It leads directly to the need for redemption. What man cannot restore, God does. In Christ, the image of God is being renewed.</p><p>Salvation is not merely forgiveness—it is transformation. Through regeneration, man is made spiritually alive. Through sanctification, the process of change begins. The Holy Spirit works within the believer to restore what sin has distorted.</p><p>This restoration is both immediate and progressive. Immediately, the believer is reconciled to God. His standing is changed. Progressively, his life is transformed, and he begins to reflect more clearly the image he was created to bear.</p><p>This doctrine explains why we possess dignity, why we are broken, and why we need salvation. Salvation restores more than moral behavior—it restores relationship. What was lost in the fall was not merely innocence, but fellowship with God. What is regained in Christ is not simply forgiveness, but access. Man is brought back into the very purpose for which he was created—to know God, to walk with Him, and to live in His presence. This process continues throughout the Christian life and reaches completion when we see Christ face to face.</p></div>
+            <div class="lesson-section"><h3>Final Integration</h3><p>The doctrine of man stands at the center of theology because it explains both our dignity and our need. We are not what we were created to be, yet we are not beyond restoration. In Christ, God is not abandoning His design—He is restoring it. To understand man rightly is to see both his fall and his future, and to recognize that the only true explanation of humanity is found in the God who made him.</p><div class="scripture">"For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand that we should walk in them." — Ephesians 2:10</div></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">La Doctrina de la Humanidad (Antropología)</div>
+            <div class="lesson-section"><h3>Día 1 — ¿Qué es el Hombre? La Pregunta Central</h3><p>Para entender correctamente la teología, uno debe eventualmente preguntar una pregunta simple pero profunda: <strong>¿Qué es el hombre?</strong></p><p>Esta pregunta no puede evitarse. Cada cosmovisión intenta responderla. Algunos dicen que el hombre no es más que un organismo biológico moldeado por la evolución y el medio ambiente. Otros lo definen por la cultura, la experiencia o la identidad personal. Otros asumen que el hombre es esencialmente bueno y solo necesita mejora.</p><p>La Escritura presenta una imagen muy diferente. El hombre no es autodefinido ni autocreado, ni es independiente. Es un ser creado, y su identidad solo puede entenderse en relación con Aquel que lo hizo.</p><p>La Biblia comienza con Dios, no con el hombre. Esto no es accidental. Hasta que entendamos a Dios, nunca nos entenderemos a nosotros mismos. En el momento en que el hombre intenta definirse aparte de Dios, pierde tanto su identidad como su propósito.</p><p>El hombre es creado, responsable y dependiente. No se origina a sí mismo, no se sostiene a sí mismo y no es la autoridad final sobre sí mismo. El hombre no solo es creado por Dios—es creado para Dios.</p><p>La dignidad humana y la responsabilidad humana son inseparables. El hombre tiene valor porque es creado por Dios, y tiene responsabilidad porque vive bajo Dios.</p><p>Si malinterpretamos al hombre en este punto, todo lo demás en la teología comienza a desmoronarse. El pecado será malinterpretado. La salvación será malinterpretada. Incluso el evangelio mismo se distorsionará. La doctrina del hombre no es secundaria. Es fundamental.</p></div>
+            <div class="lesson-section"><h3>Día 2 — Creado a Imagen de Dios</h3><p>La verdad fundamental de la existencia humana es que el hombre es creado a imagen de Dios.</p><div class="scripture">"Hagamos al hombre a nuestra imagen, conforme a nuestra semejanza." — Génesis 1:26</div><p>Esta declaración aparta a la humanidad de todo lo demás en la creación. Nada más se dice que lleva la imagen de Dios de esta manera.</p><p>A primera vista, podría parecer que esta imagen se refiere principalmente a la inteligencia. Dios es inteligente, así que el hombre debe reflejarlo de esa manera. Sin embargo, esta explicación es insuficiente. Hay animales que muestran inteligencia notable. Los chimpancés demuestran una memoria excepcional a corto plazo. Un pulpo puede resolver rompecabezas complejos. Se ha observado que los cuervos dejan caer nueces en el tráfico para que los autos las rompan, y luego esperan en los cruces peatonales a que cambie la señal para recuperar su comida con seguridad. La inteligencia por sí sola no puede explicar la imagen de Dios.</p><p>Si así fuera, tendríamos que concluir que los animales comparten esa imagen de la misma manera. La Escritura deja claro que no es así. El hombre está apartado de un modo más profundo y significativo. La imagen de Dios incluye el pensamiento racional, pero también incluye la conciencia moral, la capacidad de discernir el bien del mal, la capacidad de relación y la capacidad de reflejar el carácter de Dios.</p><p>El hombre no simplemente piensa—evalúa. No simplemente actúa—es responsable. No simplemente existe—se relaciona con Dios. La mayor distinción del hombre no es meramente que pueda pensar o crear, sino que puede conocer a Dios. Ningún animal, sin importar su inteligencia, tiene la capacidad de una relación personal con el Creador. El hombre fue diseñado no solo para vivir en el mundo, sino para caminar con Dios. La imagen de Dios se ve más claramente en esta capacidad—escuchar de Dios, responderle y vivir en relación con Él.</p><p>Porque el hombre lleva la imagen de Dios, la vida humana posee dignidad inherente. Esta dignidad no se gana. No se basa en el desempeño, el éxito o la utilidad. Está arraigada en la creación misma. Una persona tiene valor porque lleva la imagen de su Creador.</p></div>
+            <div class="illustration"><strong>💡 El Billete de 1,000 Pesos:</strong> Ya sea que esté crujiente y nuevo o gastado y tirado en la cuneta, su valor no cambia. La condición del billete no determina su valor. Su valor reside en cuya imagen y sello lleva. De la misma manera, cada ser humano lleva la imagen y el sello de Dios. Esa imagen puede estar distorsionada u oscurecida, pero no está borrada. Nadie es insignificante. Nadie es desechable. Nadie está fuera del límite de la dignidad.</div>
+            <div class="lesson-section"><h3>Día 3 — La Dignidad Humana Vivida</h3><p>La verdad de la imagen de Dios debe moverse más allá de la definición a la realidad vivida.</p><p>Mi hijo menor es, en muchos aspectos, lo que la gente a menudo llama una "imagen escupida" de mí. Cuando otros lo miran, ven un parecido—no solo en apariencia, sino en expresión y manera. Hay algo en él que me refleja.</p><p>Esto nos ayuda a entender lo que la Escritura quiere decir cuando dice que el hombre está hecho a imagen de Dios. No somos idénticos a Dios, ni poseemos Sus atributos en su plenitud. Sin embargo, hay un parecido. Hay algo en el hombre que refleja a su Creador. Incluso en un mundo quebrantado, ese parecido no ha desaparecido.</p><p>Esta verdad se vuelve inconfundible cuando se vive. Un Día de Acción de Gracias, nuestra familia se sentó a una comida completa—pavo, puré de papas, ejotes, todo preparado y servido. Comimos juntos y disfrutamos del tiempo en familia. Después de terminar, mi hijo mayor se paró en silencio, preparó otro plato completo—la misma comida que acabábamos de comer—y dijo que regresaría pronto. Llevó el plato abajo y salió por la puerta. Pronto entendimos lo que había hecho. Un hombre vivía cerca en la calle en un refugio improvisado junto a la acera. Mi hijo tomó ese plato de comida y se lo dio. No ofreció sobras ni algo menos. Le dio la misma comida que habíamos recibido. No hace mucho, mencionó que el hombre todavía está allí. Cada vez que pasa, busca una oportunidad para darle algo—un plátano, algunas monedas, lo que tenga disponible.</p><p>¿Por qué hace esto? Porque ese hombre está hecho a imagen de Dios. Su vida puede estar quebrantada. Sus circunstancias pueden ocultar lo que una vez reflejó dignidad. Sin embargo, la imagen permanece.</p><p>El ejecutivo y el indigente están sobre terreno igual. El niño no nacido y el anciano comparten el mismo valor. El exitoso y el olvidado son iguales ante Dios. Creer en la imagen de Dios es ver a las personas de manera diferente—y tratarlas en consecuencia.</p></div>
+            <div class="lesson-section"><h3>Día 4 — La Caída y la Distorsión del Hombre</h3><p>Si el hombre es creado a imagen de Dios, entonces el quebrantamiento del mundo exige una explicación. Esa explicación se encuentra en la caída.</p><p>Génesis 3 registra el momento en que el hombre rechazó la autoridad de Dios. Esto no fue un pequeño error; fue rebelión. El hombre eligió la independencia sobre la dependencia y el autogobierno sobre la sumisión.</p><p>Las consecuencias fueron inmediatas y de gran alcance. La imagen de Dios no fue destruida, sino profundamente distorsionada. La mente se oscureció, la voluntad se dobló y los deseos se desordenaron. Esta condición se describe como <strong>depravación total</strong>. Esto no significa que el hombre sea tan malo como podría ser. Más bien, significa que cada parte de su ser es afectada por el pecado. No hay área que permanezca intacta.</p><p>El problema no es meramente externo—es interno. El hombre no simplemente comete pecado; es pecador por naturaleza. Por eso el esfuerzo humano no puede resolver el problema humano. La educación no puede eliminar el pecado. La cultura no puede erradicarlo. Las leyes no pueden curarlo. El problema yace dentro del corazón humano.</p><p>La caída explica por qué la humanidad es capaz tanto de un bien notable como de un mal profundo. Explica por qué el hombre puede crear belleza y causar destrucción—a menudo dentro de la misma vida.</p></div>
+            <div class="lesson-section"><h3>Día 5 — Restauración en Cristo</h3><p>La doctrina del hombre no termina con la caída. Conduce directamente a la necesidad de redención. Lo que el hombre no puede restaurar, Dios lo hace. En Cristo, la imagen de Dios se está renovando.</p><p>La salvación no es meramente perdón—es transformación. A través de la regeneración, el hombre es hecho espiritualmente vivo. A través de la santificación, el proceso de cambio comienza. El Espíritu Santo obra dentro del creyente para restaurar lo que el pecado ha distorsionado.</p><p>Esta restauración es tanto inmediata como progresiva. Inmediatamente, el creyente es reconciliado con Dios. Su posición cambia. Progresivamente, su vida se transforma y comienza a reflejar más claramente la imagen que fue creado para llevar.</p><p>Esta doctrina explica por qué poseemos dignidad, por qué estamos quebrantados y por qué necesitamos salvación. La salvación restaura más que el comportamiento moral—restaura la relación. Lo que se perdió en la caída no fue meramente la inocencia, sino la comunión con Dios. Lo que se recupera en Cristo no es simplemente el perdón, sino el acceso. El hombre es traído de vuelta al propósito mismo para el cual fue creado—conocer a Dios, caminar con Él y vivir en Su presencia. Este proceso continúa a lo largo de la vida cristiana y alcanza su consumación cuando veamos a Cristo cara a cara.</p></div>
+            <div class="lesson-section"><h3>Integración Final</h3><p>La doctrina del hombre está en el centro de la teología porque explica tanto nuestra dignidad como nuestra necesidad. No somos lo que fuimos creados para ser, pero no estamos más allá de la restauración. En Cristo, Dios no abandona Su diseño—lo está restaurando. Entender al hombre correctamente es ver tanto su caída como su futuro, y reconocer que la única explicación verdadera de la humanidad se encuentra en el Dios que lo hizo.</p><div class="scripture">"Porque somos hechura suya, creados en Cristo Jesús para buenas obras, las cuales Dios preparó de antemano para que anduviésemos en ellas." — Efesios 2:10</div></div>
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 5 Examination</span><span class="lang-es">📋 Examen de la Unidad 5</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit6.html" class="btn-nav"><span class="lang-en">Next: Sin →</span><span class="lang-es">Siguiente: Pecado →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 5;
+const NEXT_URL = "CTSSTUnit6.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:2,
+    en:{ q:"What question stands at the center of this unit?", opts:["What is salvation?","What is the church?","What is man?","What is worship?"], expl:"The unit opens by asking 'What is man?'" },
+    es:{ q:"¿Qué pregunta está en el centro de esta unidad?", opts:["¿Qué es la salvación?","¿Qué es la iglesia?","¿Qué es el hombre?","¿Qué es la adoración?"], expl:"La unidad comienza preguntando '¿Qué es el hombre?'" } },
+  { id:2, correct:2,
+    en:{ q:"According to this unit, man is best understood as:", opts:["Essentially good needing improvement","Self-defined and independent","A created being understood in relation to God","An advanced animal only"], expl:"Man can only be understood in relation to the One who made him." },
+    es:{ q:"Según esta unidad, el hombre se entiende mejor como:", opts:["Esencialmente bueno que necesita mejora","Autodefinido e independiente","Un ser creado entendido en relación con Dios","Solo un animal avanzado"], expl:"El hombre solo puede entenderse en relación con Aquel que lo hizo." } },
+  { id:3, correct:0,
+    en:{ q:"What is the foundational truth of human existence?", opts:["Man is created in the image of God","Man is defined by culture","Man is self-determining","Man is morally neutral"], expl:"Man is created in the image of God (Genesis 1:26)." },
+    es:{ q:"¿Cuál es la verdad fundamental de la existencia humana?", opts:["El hombre es creado a imagen de Dios","El hombre está definido por la cultura","El hombre es autodeterminante","El hombre es moralmente neutral"], expl:"El hombre es creado a imagen de Dios (Génesis 1:26)." } },
+  { id:4, correct:1,
+    en:{ q:"Why does the unit reject intelligence alone as the image of God?", opts:["Because intelligence is unimportant","Because some animals also show notable intelligence","Because only angels think","Because humans are not intelligent"], expl:"Animals display intelligence, so it cannot alone explain the image of God." },
+    es:{ q:"¿Por qué la unidad rechaza la inteligencia sola como la imagen de Dios?", opts:["Porque la inteligencia no es importante","Porque algunos animales también muestran inteligencia notable","Porque solo los ángeles piensan","Porque los humanos no son inteligentes"], expl:"Los animales muestran inteligencia, por lo que no puede explicar sola la imagen de Dios." } },
+  { id:5, correct:1,
+    en:{ q:"According to this unit, man's greatest distinction is that he can:", opts:["Control nature","Know God","Outperform animals","Build civilizations"], expl:"Man's greatest distinction is that he can know God personally." },
+    es:{ q:"Según esta unidad, la mayor distinción del hombre es que puede:", opts:["Controlar la naturaleza","Conocer a Dios","Superar a los animales","Construir civilizaciones"], expl:"La mayor distinción del hombre es que puede conocer a Dios personalmente." } },
+  { id:6, correct:0,
+    en:{ q:"Why does every human being possess inherent dignity?", opts:["Each person bears the image of the Creator","Society grants it","Talent and achievement","Intelligence and usefulness"], expl:"Human dignity is rooted in creation, not performance." },
+    es:{ q:"¿Por qué todo ser humano posee dignidad inherente?", opts:["Cada persona lleva la imagen del Creador","La sociedad lo concede","Talento y logro","Inteligencia y utilidad"], expl:"La dignidad humana está arraigada en la creación, no en el rendimiento." } },
+  { id:7, correct:1,
+    en:{ q:"What does the 1,000-peso bill illustration teach?", opts:["Value changes with outward condition","Human worth remains because of whose image is borne","Only the rich have dignity","Money solves human need"], expl:"The bill's value remains because of whose image it bears; likewise, human dignity remains because of the image of God." },
+    es:{ q:"¿Qué enseña la ilustración del billete de 1,000 pesos?", opts:["El valor cambia con la condición externa","El valor humano permanece debido a cuya imagen se lleva","Solo los ricos tienen dignidad","El dinero resuelve la necesidad humana"], expl:"El valor del billete permanece debido a cuya imagen lleva; del mismo modo, la dignidad humana permanece debido a la imagen de Dios." } },
+  { id:8, correct:2,
+    en:{ q:"What event explains the brokenness of the world?", opts:["The flood","The exile","The fall","The tower of Babel"], expl:"The fall (Genesis 3) explains the world's brokenness." },
+    es:{ q:"¿Qué evento explica el quebrantamiento del mundo?", opts:["El diluvio","El exilio","La caída","La torre de Babel"], expl:"La caída (Génesis 3) explica el quebrantamiento del mundo." } },
+  { id:9, correct:3,
+    en:{ q:"What happened to the image of God in the fall?", opts:["It became stronger","It was destroyed entirely","It was replaced by instinct","It was profoundly distorted but not erased"], expl:"The image was distorted but not destroyed." },
+    es:{ q:"¿Qué sucedió con la imagen de Dios en la caída?", opts:["Se hizo más fuerte","Fue destruida por completo","Fue reemplazada por instinto","Fue profundamente distorsionada pero no borrada"], expl:"La imagen fue distorsionada pero no destruida." } },
+  { id:10, correct:3,
+    en:{ q:"What does 'total depravity' mean?", opts:["People cannot do civil good","Only some people are fallen","Every person is as evil as possible","Every part of man is affected by sin"], expl:"Total depravity means every part of human nature is affected by sin." },
+    es:{ q:"¿Qué significa 'depravación total'?", opts:["Las personas no pueden hacer el bien civil","Solo algunas personas están caídas","Cada persona es tan malvada como es posible","Cada parte del hombre es afectada por el pecado"], expl:"La depravación total significa que cada parte de la naturaleza humana es afectada por el pecado." } },
+  { id:11, correct:3,
+    en:{ q:"In Christ, what is happening to the image of God?", opts:["It is being hidden","It is being exchanged","It is being abandoned","It is being renewed"], expl:"In Christ, the image of God is being renewed." },
+    es:{ q:"En Cristo, ¿qué está sucediendo con la imagen de Dios?", opts:["Está siendo escondida","Está siendo intercambiada","Está siendo abandonada","Está siendo renovada"], expl:"En Cristo, la imagen de Dios está siendo renovada." } },
+  { id:12, correct:1,
+    en:{ q:"What was chiefly lost in the fall and restored in Christ?", opts:["Political authority","Fellowship with God","Natural intelligence","Cultural influence"], expl:"Fellowship with God was lost in the fall and restored in Christ." },
+    es:{ q:"¿Qué se perdió principalmente en la caída y se restauró en Cristo?", opts:["Autoridad política","Comunión con Dios","Inteligencia natural","Influencia cultural"], expl:"La comunión con Dios se perdió en la caída y se restauró en Cristo." } },
+  { id:13, correct:0,
+    en:{ q:"What final truth best summarizes this unit?", opts:["Man is created in God's image, fallen in sin, and restored through Christ","Man is valuable only if redeemed","Man is best understood apart from theology","Man is self-made and self-repaired"], expl:"Man is created, fallen, and restored through Christ." },
+    es:{ q:"¿Qué verdad final resume mejor esta unidad?", opts:["El hombre es creado a imagen de Dios, caído en pecado y restaurado a través de Cristo","El hombre es valioso solo si es redimido","El hombre se entiende mejor fuera de la teología","El hombre es autosuficiente y se repara a sí mismo"], expl:"El hombre es creado, caído y restaurado a través de Cristo." } },
+  { id:14, correct:1,
+    en:{ q:"What does the Thanksgiving story about the son's meal teach?", opts:["Charity is optional","The homeless man bore the image of God and deserved the same meal","Leftovers are sufficient for the poor","Family meals should be private"], expl:"The son gave the same meal because the man bore the image of God." },
+    es:{ q:"¿Qué enseña la historia de Acción de Gracias sobre la comida del hijo?", opts:["La caridad es opcional","El hombre sin hogar llevaba la imagen de Dios y merecía la misma comida","Las sobras son suficientes para los pobres","Las comidas familiares deben ser privadas"], expl:"El hijo dio la misma comida porque el hombre llevaba la imagen de Dios." } },
+  { id:15, correct:0,
+    en:{ q:"According to the unit, the mind is:", opts:["Darkened by sin","Perfectly enlightened","Irrelevant to theology","Unaffected by sin"], expl:"The noetic effects of sin mean the mind is darkened." },
+    es:{ q:"Según la unidad, la mente está:", opts:["Oscurecida por el pecado","Perfectamente iluminada","Irrelevante para la teología","No afectada por el pecado"], expl:"Los efectos noéticos del pecado significan que la mente está oscurecida." } },
+  { id:16, correct:2,
+    en:{ q:"According to the unit, the will is:", opts:["Irrelevant","Perfectly free","Weakened by sin","Completely removed"], expl:"The will is weakened and enslaved to selfish desires." },
+    es:{ q:"Según la unidad, la voluntad está:", opts:["Irrelevante","Perfectamente libre","Debilitada por el pecado","Completamente eliminada"], expl:"La voluntad está debilitada y esclavizada a los deseos egoístas." } },
+  { id:17, correct:3,
+    en:{ q:"According to the unit, emotions are:", opts:["Unaffected by the fall","The most reliable guide","Pure and holy","Disordered by sin"], expl:"Emotions are disordered and prone to love what we should hate." },
+    es:{ q:"Según la unidad, las emociones están:", opts:["No afectadas por la caída","La guía más confiable","Puras y santas","Desordenadas por el pecado"], expl:"Las emociones están desordenadas y propensas a amar lo que deberíamos odiar." } },
+  { id:18, correct:3,
+    en:{ q:"Sin is ultimately against:", opts:["People","Self","Nature","God"], expl:"Every sin is first and foremost an offense against God." },
+    es:{ q:"El pecado es en última instancia contra:", opts:["Las personas","Uno mismo","La naturaleza","Dios"], expl:"Cada pecado es ante todo una ofensa contra Dios." } },
+  { id:19, correct:2,
+    en:{ q:"What is the ultimate consequence of sin?", opts:["Guilt only","Temporary inconvenience","Death and separation from God","Social rejection"], expl:"The wages of sin is death—spiritual separation from God." },
+    es:{ q:"¿Cuál es la consecuencia final del pecado?", opts:["Solo culpa","Inconveniencia temporal","Muerte y separación de Dios","Rechazo social"], expl:"La paga del pecado es muerte—separación espiritual de Dios." } },
+  { id:20, correct:0,
+    en:{ q:"What does the cross show?", opts:["The seriousness of sin and greatness of God's love","That sin doesn't matter","That God is only love","That justice is unimportant"], expl:"The cross reveals both the seriousness of sin and the depth of God's love." },
+    es:{ q:"¿Qué muestra la cruz?", opts:["La seriedad del pecado y la grandeza del amor de Dios","Que el pecado no importa","Que Dios es solo amor","Que la justicia no es importante"], expl:"La cruz revela tanto la seriedad del pecado como la profundidad del amor de Dios." } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the tension between 'Inherent Dignity' and 'Total Depravity.' How can both be true?", kw:["dignity","depravity","image of god","fall","value","sin","both"], expl:"We are deeply valuable due to our origin (Creation) but deeply corrupted due to our history (The Fall). One establishes our worth, the other our need for a Savior." },
+    es:{ q:"Explique la tensión entre 'Dignidad Inherente' y 'Depravación Total.' ¿Cómo pueden ser ambas verdaderas?", kw:["dignidad","depravación","imagen de dios","caída","valor","pecado","ambas"], expl:"Somos profundamente valiosos debido a nuestro origen (Creación) pero profundamente corruptos debido a nuestra historia (La Caída). Una establece nuestro valor, la otra nuestra necesidad de un Salvador." } },
+  { id:22,
+    en:{ q:"Explain the ontological (being) versus functional (doing) views of the Imago Dei.", kw:["ontological","functional","being","doing","image","reflection","purpose"], expl:"Ontological views focus on who we are (rational souls), while functional views focus on what we do (rule over creation as God's representatives)." },
+    es:{ q:"Explique las visiones ontológica (ser) versus funcional (hacer) del Imago Dei.", kw:["ontológic","funcional","ser","hacer","imagen","reflejo","propósito"], expl:"Las visiones ontológicas se centran en quiénes somos (almas racionales), mientras que las visiones funcionales se centran en lo que hacemos (gobernar la creación como representantes de Dios)." } },
+  { id:23,
+    en:{ q:"How does the doctrine of the Trinity provide a blueprint for human relationality?", kw:["trinity","community","relationship","image","love","fellowship","persons"], expl:"As God exists in eternal community (Father, Son, Holy Spirit), being made in His image means humans are inherently social and communal beings." },
+    es:{ q:"¿Cómo proporciona la doctrina de la Trinidad un modelo para la relacionalidad humana?", kw:["trinidad","comunidad","relación","imagen","amor","comunión","personas"], expl:"Así como Dios existe en comunidad eterna (Padre, Hijo, Espíritu Santo), ser hechos a Su imagen significa que los humanos son seres inherentemente sociales y comunitarios." } },
+  { id:24,
+    en:{ q:"In what way does the Incarnation of Christ affirm the goodness of the human body?", kw:["incarnation","body","flesh","good","creation","jesus","physical"], expl:"By God taking on human flesh, He demonstrates that the physical body is a good creation, not inherently evil or 'lesser' than the spirit." },
+    es:{ q:"¿De qué manera la Encarnación de Cristo afirma la bondad del cuerpo humano?", kw:["encarnación","cuerpo","carne","bueno","creación","jesús","físico"], expl:"Al tomar Dios carne humana, demuestra que el cuerpo físico es una buena creación, no inherentemente malvado o 'menor' que el espíritu." } },
+  { id:25,
+    en:{ q:"Distinguish between the 'Noetic Effects' of sin and a complete loss of reason.", kw:["noetic","effects","reason","darkened","sin","intellect","spiritual"], expl:"Sin darkens and biases human reason regarding spiritual truths, but it does not remove the ability to perform logical functions or understand natural laws." },
+    es:{ q:"Distinga entre los 'Efectos Noéticos' del pecado y una pérdida completa de la razón.", kw:["noético","efectos","razón","oscurecid","pecado","intelecto","espiritual"], expl:"El pecado oscurece y sesga la razón humana con respecto a las verdades espirituales, pero no elimina la capacidad de realizar funciones lógicas o comprender las leyes naturales." } },
+  { id:26,
+    en:{ q:"Evaluate the statement: 'Man is a soul that has a body.'", kw:["soul","body","psychosomatic","unity","whole","inseparable","biblical"], expl:"This is imprecise in biblical anthropology; man is a 'living soul'—a psychosomatic unity where body and spirit are inextricably linked." },
+    es:{ q:"Evalúe la declaración: 'El hombre es un alma que tiene un cuerpo'.", kw:["alma","cuerpo","psicosomátic","unidad","todo","inseparabl","bíblic"], expl:"Esto es impreciso en la antropología bíblica; el hombre es un 'alma viviente'—una unidad psicosomática donde el cuerpo y el espíritu están inextricablemente unidos." } },
+  { id:27,
+    en:{ q:"What role does 'Common Grace' play in preventing humanity from being as evil as possible?", kw:["common grace","restraint","sin","conscience","society","evil","prevent"], expl:"Common grace is God's restraint of sin through conscience and social laws, preventing the full outworking of depravity in society." },
+    es:{ q:"¿Qué papel juega la 'Gracia Común' en prevenir que la humanidad sea tan malvada como sea posible?", kw:["gracia común","freno","pecado","conciencia","sociedad","mal","prevenir"], expl:"La gracia común es el freno de Dios al pecado a través de la conciencia y las leyes sociales, evitando que la depravación se manifieste plenamente en la sociedad." } },
+  { id:28,
+    en:{ q:"Explain the concept of 'Sub-creativity' in the context of the Imago Dei.", kw:["sub-creativity","create","ex nihilo","raw materials","art","culture","reflection"], expl:"Man does not create ex nihilo (out of nothing), but as a sub-creator, he takes God's raw materials and fashions them into culture and art." },
+    es:{ q:"Explique el concepto de 'Sub-creatividad' en el contexto del Imago Dei.", kw:["sub-creatividad","creador","ex nihilo","materiales","arte","cultura","reflejo"], expl:"El hombre no crea ex nihilo (de la nada), sino como sub-creador, toma los materiales en bruto de Dios y los transforma en cultura y arte." } },
+  { id:29,
+    en:{ q:"How does the 'Last Adam' (Christ) succeed where the 'First Adam' failed?", kw:["last adam","first adam","obedience","disobedience","succeed","failed","redemption"], expl:"Adam failed under perfect conditions (Eden); Christ succeeded under the pressure of the Fall, becoming the new head of a restored humanity." },
+    es:{ q:"¿Cómo tiene éxito el 'Último Adán' (Cristo) donde el 'Primer Adán' falló?", kw:["último adán","primer adán","obediencia","desobediencia","éxito","falló","redención"], expl:"Adán falló bajo condiciones perfectas (Edén); Cristo tuvo éxito bajo la presión de la Caída, convirtiéndose en la nueva cabeza de una humanidad restaurada." } },
+  { id:30,
+    en:{ q:"Define the teleological (purpose-driven) end of a restored human person.", kw:["teleological","purpose","restored","glorification","christ","image","perfection"], expl:"The ultimate end of man is to be perfectly conformed to the image of Christ and to reflect God's glory throughout eternity." },
+    es:{ q:"Defina el fin teleológico (impulsado por el propósito) de una persona humana restaurada.", kw:["teleológic","propósito","restaurad","glorificación","cristo","imagen","perfección"], expl:"El fin último del hombre es ser perfectamente conformado a la imagen de Cristo y reflejar la gloria de Dios por toda la eternidad." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 12: The Kingdom of God | Systematic Theology | CTS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: #f5f1e8; color: #1a1a2e; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #2c3e36; color: white; padding: 25px 30px; text-align: center; }
+.header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.header a { color: #f4c542; text-decoration: none; font-size: 0.85rem; display: inline-block; margin-top: 12px; }
+.controls-bar { background: #faf7f0; padding: 15px 30px; border-bottom: 1px solid #e0d5c0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.lang-group, .track-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.lang-group strong, .track-group strong { color: #2c3e36; margin-right: 6px; }
+.lang-btn { background: #e8e0d0; border: none; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-family: inherit; color: #2c3e36; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-group label { cursor: pointer; padding: 4px 10px; border-radius: 6px; }
+.track-group label:hover { background: #f0e8da; }
+.track-group input { margin-right: 5px; cursor: pointer; }
+.content-panel { padding: 30px; }
+.lesson-content > .lang-en, .lesson-content > .lang-es { display: none; }
+body.lang-en .lesson-content > .lang-en { display: block; }
+body.lang-es .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+body.lang-both .lesson-content > .lang-en, body.lang-both .lesson-content > .lang-es { display: block; }
+body.lang-both .lesson-content > .lang-es { border-left: 2px dashed #c8b29a; padding-left: 25px; }
+.unit-title { font-size: 1.7rem; color: #2c3e36; margin-bottom: 20px; border-left: 5px solid #f4c542; padding-left: 20px; }
+.lesson-section { margin-bottom: 25px; }
+.lesson-section h3 { color: #3a2a1a; margin-bottom: 10px; font-size: 1.25rem; }
+.lesson-section p { margin-bottom: 12px; text-align: justify; }
+.lesson-content h2 { color: #2c3e36; margin: 25px 0 12px 0; font-size: 1.35rem; border-bottom: 1px solid #c8b29a; padding-bottom: 6px; }
+.scripture { background: #f5efe6; padding: 12px 18px; border-radius: 12px; font-style: italic; margin: 15px 0; border-left: 4px solid #f4c542; }
+span.scripture { background: transparent; padding: 0; border: none; border-radius: 0; margin: 0; display: inline; font-style: italic; color: #4a3018; font-weight: 500; }
+.illustration { background: #e8f0ee; padding: 15px 20px; border-radius: 12px; margin: 20px 0; }
+.exam-section { margin-top: 30px; border-top: 2px solid #e0d5c0; padding-top: 25px; }
+.exam-header { background: #f5efe6; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; }
+.exam-header h3 { color: #2c3e36; margin-bottom: 8px; }
+.exam-header p { font-size: 0.9rem; color: #5a4a2a; }
+.question-card { border: 1px solid #e0d5c0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #fefcf8; }
+.question-card.essay-question { border-left: 4px solid #c49a3c; }
+/* CTS audit 2026-05-23: Cert students may now SEE and attempt the M.Th./M.Div. short-answer questions; grader still scores Cert on MC only, so attempts have no score impact. Prior rule hid them: body.track-cert .essay-question { display: none; } */
+.question-text { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+.question-badge { display: inline-block; background: #2c3e36; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; margin-right: 6px; margin-bottom: 10px; }
+.advanced-badge { background: #c49a3c; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; background: #faf7f0; }
+.option:hover { background: #f0e8da; }
+.option input { width: 18px; height: 18px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+.option .opt-text { flex: 1; }
+.essay-input { width: 100%; padding: 12px; border: 1px solid #ddd0b8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; margin: 10px 0; resize: vertical; min-height: 80px; }
+.feedback { margin-top: 10px; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; display: none; }
+.feedback.correct { background: #d4edda; color: #155724; display: block; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; display: block; border-left: 4px solid #dc3545; }
+.action-buttons { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+.btn-primary { background: #2c3e36; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-primary:hover { background: #1f2d28; }
+.btn-secondary { background: #b0a088; color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-secondary:hover { background: #968874; }
+.lockout-timer { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+.score-display { padding: 18px; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 1.05rem; display: none; }
+.score-display.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; display: block; }
+.score-display.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; display: block; }
+.nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0d5c0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-nav { background: #2c3e36; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+.btn-nav:hover { background: #1f2d28; }
+.footer { text-align: center; padding: 20px; color: #6b5a4a; font-size: 0.8rem; background: #fefcf8; border-top: 1px solid #e0d5c0; }
+span.lang-en, span.lang-es { display: none; }
+body.lang-en span.lang-en { display: inline; }
+body.lang-es span.lang-es { display: inline; }
+body.lang-both span.lang-en, body.lang-both span.lang-es { display: block; }
+body.lang-both span.lang-es { margin-top: 4px; opacity: 0.85; font-size: 0.95em; }
+body.lang-both .header span.lang-en, body.lang-both .header span.lang-es { display: inline; }
+body.lang-both .controls-bar span.lang-en, body.lang-both .controls-bar span.lang-es { display: inline; }
+body.lang-both .header span.lang-es::before { content: " / "; opacity: 0.7; }
+body.lang-both .controls-bar span.lang-es::before { content: " / "; opacity: 0.6; }
+@media (max-width: 900px) {
+  body.lang-both .lesson-content { grid-template-columns: 1fr; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; border-top: 2px dashed #c8b29a; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+}
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .content-panel { padding: 20px; }
+  .controls-bar { padding: 12px 20px; }
+}
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+  .header { background: #2c3e36 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .lesson-section { page-break-inside: avoid; }
+  .exam-section { page-break-before: always; }
+  .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.lang-en .lesson-content > .lang-en, body.lang-es .lesson-content > .lang-es { display: block; }
+  body.lang-both .lesson-content { display: block; }
+  body.lang-both .lesson-content > .lang-es { border-left: none; padding-left: 0; margin-top: 20px; }
+}
+</style>
+</head>
+<body class="lang-en track-mdiv">
+<div class="container">
+  <div class="header">
+    <h1><span class="lang-en">📖 Unit 12: The Kingdom of God</span><span class="lang-es">📖 Unidad 12: El Reino de Dios</span></h1>
+    <p><span class="lang-en">Heaven, Hell, Judgment, and the Reign of the Creator</span><span class="lang-es">Cielo, Infierno, Juicio y el Reinado del Creador</span></p>
+    <a href="Index.html"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+  </div>
+  <div class="controls-bar">
+    <div class="lang-group">
+      <strong><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></strong>
+      <button class="lang-btn active" id="btnEn" type="button">English</button>
+      <button class="lang-btn" id="btnEs" type="button">Español</button>
+      <button class="lang-btn" id="btnBoth" type="button"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+    </div>
+    <div class="track-group">
+      <strong><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></strong>
+      <label><input type="radio" name="track" value="cert" id="trackCert"><span class="lang-en">Cert. Ministry</span><span class="lang-es">Cert. Ministerio</span></label>
+      <label><input type="radio" name="track" value="mth" id="trackMth">M.Th.</label>
+      <label><input type="radio" name="track" value="mdiv" id="trackMdiv" checked>M.Div.</label>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="lesson-content">
+      <div class="lang-en">
+<div class="unit-title">The Kingdom of God</div>
+            <div class="scripture">"The kingdom of the world has become the kingdom of our Lord and of his Messiah, and he will reign for ever and ever." — Revelation 11:15</div>
+
+            <div class="lesson-section"><h3>The Reality of Judgment</h3><p>Every person who has ever lived is moving toward a fixed and unavoidable appointment. The writer of Hebrews states it with unmistakable clarity: "It is appointed unto man once to die, and after that the judgment" (Hebrews 9:27). This is not a possibility or a remote contingency. It is certain. Every life will stand before God. Nothing is hidden. Ecclesiastes 12:14 declares, "For God will bring every work into judgment, including every secret thing, whether good or evil."</p><p>For the unbeliever, judgment is based on works alone. There is no mediator, no advocate, no one to plead their case. Their own righteousness — or more accurately, their lack of it — is the standard by which they are measured. Paul writes in Romans 1:20 that they are "without excuse." The evidence of God in creation is sufficient to leave humanity accountable. Those who have rejected God's self-disclosure will be judged according to what they have done with the knowledge they received.</p><p>For the believer, however, there is a different reality altogether. "There is therefore now no condemnation to those who are in Christ Jesus" (Romans 8:1). The condemnation that sin deserves has already been borne by Christ on the cross. The believer will not face judgment for sin, because the penalty has been fully paid. The case is closed. The debt is satisfied. Yet believers are still evaluated. Paul writes, "We must all appear before the judgment seat of Christ, that each one may receive the things done in the body, according to what he has done, whether good or bad" (2 Corinthians 5:10). This is not a judgment for sin — that has been settled at the cross. This is an evaluation for reward. It is the difference between a criminal trial, where guilt or innocence is determined, and an awards ceremony, where faithfulness is recognized.</p></div>
+
+            <div class="lesson-section"><h3>The Reality of Hell</h3><p>Few subjects are more avoided in modern preaching than hell. It is uncomfortable. It is unpopular. It seems harsh to the modern mind. Yet despite this cultural aversion, Jesus spoke more about hell than anyone else in Scripture. He did not shy away from warning people about the reality of eternal judgment. He said, "Fear Him who is able to destroy both soul and body in hell" (Matthew 10:28).</p><p>Hell is not an invention of the medieval church. It is not a scare tactic designed to manipulate people into religious compliance. It is the solemn teaching of Jesus Christ Himself. He described it as a place of "weeping and gnashing of teeth" (Matthew 8:12). He spoke of it as a fire that is not quenched (Mark 9:48). He called it "outer darkness" (Matthew 25:30). He described it as a place of conscious, unending suffering.</p><p>Hell is punishment. It is not rehabilitation. It is not purgatory. It is not a second chance. It is the just and holy response of a righteous God to unrepentant sin. The Apostle Paul declares, "These shall be punished with everlasting destruction from the presence of the Lord" (2 Thessalonians 1:9). The essence of hell is separation — separation from God, from His goodness, from His grace, from everything that makes life meaningful. Paul also states plainly, "The wages of sin is death" (Romans 6:23).</p><p>The doctrine of hell is difficult. No one should speak of it with glee or satisfaction. But neither should it be silenced out of fear or embarrassment. Jesus spoke of hell because He loved people and wanted to warn them. To remove the doctrine of hell from Christian teaching is to remove the very reason for the urgency of evangelism.</p></div>
+
+            <div class="lesson-section"><h3>The Reality of Heaven</h3><p>If hell is the bad news, heaven is the good news. The same Jesus who warned about hell also promised a place of eternal blessing for His followers. "I go to prepare a place for you" (John 14:2). Heaven is not a vague, disembodied state of floating on clouds. It is not an endless church service of boredom. It is a real place. It is the dwelling place of God. It is the final home of all who have trusted in Christ.</p><p>The Apostle John gives us a glimpse of heaven in Revelation 21. He describes the New Jerusalem as a city of unimaginable beauty — "having the glory of God" (Revelation 21:11). These images are symbolic, but they point to a reality that exceeds our capacity to fully comprehend. No eye has seen, no ear has heard, no mind has conceived what God has prepared for those who love Him (1 Corinthians 2:9).</p><p>One of the most significant aspects of heaven is that we will have new bodies. Paul writes that our earthly bodies, which are subject to weakness, decay, and death, will be "conformed to His glorious body" (Philippians 3:21). John adds, "We shall be like Him" (1 John 3:2). The resurrection body of Jesus after His resurrection is the pattern for our glorified bodies. He could eat fish by the seashore (Luke 24:42-43), yet He could appear behind locked doors (John 20:19). He was recognizable, yet at times appeared different — as with the disciples on the road to Emmaus (Luke 24:16).</p><p>But the greatest blessing of heaven is not its beauty or its comfort. The greatest blessing is the presence of God Himself. John writes, "He will dwell with them, and they will be His people, and God Himself will be with them and be their God" (Revelation 21:3). Heaven is heaven because God is there. "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away" (Revelation 21:4).</p></div>
+
+            <!-- New section: The Intermediate State (added to ensure word count >1500) -->
+            <div class="lesson-section"><h3>The Intermediate State: Where Are We Now?</h3><p>What happens to believers immediately after death, before the final resurrection? This is called the intermediate state. Scripture indicates that for the believer, to be absent from the body is to be present with the Lord (2 Corinthians 5:8). The Apostle Paul was torn between remaining in the body for the sake of ministry and departing to be with Christ, which he said was "far better" (Philippians 1:23). This suggests a conscious, joyful existence in the presence of Christ. The intermediate state is not the final state — we still await the resurrection of the body and the renewal of all things. But it is a state of peace, rest, and fellowship with the Lord. For the unbeliever, the intermediate state is described as a place of conscious suffering (Luke 16:19-31). The doctrine of the intermediate state gives believers confidence that death is not an end but a transition into the presence of Christ, where we will await the glorious resurrection at His return.</p></div>
+
+            <div class="lesson-section"><h3>The Kingdom of God</h3><p>During the time of the judges, before Israel had a human king, the final verse of the book summarizes the spiritual condition of the nation: "Everyone did what was right in his own eyes" (Judges 21:25). There was no recognized authority. There was no acknowledged King. Every person became a law unto themselves. The result was chaos, corruption, and suffering.</p><p>The Kingdom of God is the answer to that chaos. God alone is King. He does not share His throne with any other. The Old Testament promises are clear: "Your throne shall be established forever" (2 Samuel 7:16). Daniel declares, "His dominion is an everlasting dominion, and His kingdom endures from generation to generation" (Daniel 4:34). The Kingdom of God is not a physical territory with borders, but the sovereignty, rule, and reign of God over all creation. As William Barclay notes, the Kingdom exists wherever God's will is perfectly obeyed. It is the condition wherein human hearts and actions align with the Creator's intent.</p></div>
+
+            <div class="lesson-section"><h3>The Kingdom Fulfilled</h3><p>Despite the chaos of the present age, the Kingdom of God is moving toward a fixed and certain conclusion. History is not random. It is not meaningless. It is not spiraling into nothingness. History is the unfolding of God's purposes, and those purposes will culminate in the visible, eternal reign of Christ.</p><p>Jesus taught that the Kingdom is both present and future. He said, "The Kingdom of God is among you" (Luke 17:21), indicating its present spiritual reality. Yet He also taught His disciples to pray, "Your Kingdom come" (Matthew 6:10), looking forward to its future, physical manifestation. The Kingdom is where God's will is done perfectly and completely.</p><p>The fulfillment of the Kingdom will come when Christ returns. Revelation 11:15 announces the final victory: "The kingdom of the world has become the kingdom of our Lord and of his Messiah, and he will reign for ever and ever." At that moment, every knee will bow and every tongue will confess that Jesus Christ is Lord (Philippians 2:10-11). The rebellion will end. The enemies will be vanquished. The King will take His throne.</p><p>The final state is the new heaven and the new earth, where God dwells with His people, and every tear is wiped away. There will be no more curse. The throne of God and of the Lamb will be in it, and His servants will serve Him. They will see His face (Revelation 22:3-4). This is the consummation — the end toward which all of history has been moving.</p></div>
+
+            <div class="lesson-section"><h3>Final Word</h3><div class="scripture">"Shall not the Judge of all the earth do right?" — Genesis 18:25</div><p>We do not presume outcomes. We do not speculate on who is saved and who is not. That judgment belongs to God alone. He is just. He is righteous. He will do what is right, even when we cannot understand His ways. Our task is not to judge the world, but to proclaim the gospel. Our task is not to determine who is worthy, but to invite all to come.</p><div class="scripture">"The Lord shall reign forever" — Exodus 15:18</div><p>This is the final truth. Whatever happens in the interim — whatever wars rage, whatever empires rise and fall, whatever suffering we endure — this remains certain: God reigns. His Kingdom will come. His will will be done. And those who trust in Christ will dwell in His presence forever. Maranatha — Come, Lord Jesus.</p></div>
+      </div>
+      <div class="lang-es">
+<div class="unit-title">El Reino de Dios</div>
+            <div class="scripture">"Los reinos del mundo han venido a ser de nuestro Señor y de su Cristo; y él reinará por los siglos de los siglos." — Apocalipsis 11:15</div>
+            <div class="lesson-section"><h3>La Realidad del Juicio</h3><p>Cada persona que ha vivido se mueve hacia una cita fija e inevitable. El escritor de Hebreos lo declara con claridad inconfundible: "Está establecido para los hombres que mueran una sola vez, y después de esto el juicio" (Hebreos 9:27). Esto no es una posibilidad o una contingencia remota. Es cierto. Cada vida se presentará ante Dios. Nada está oculto. Eclesiastés 12:14 declara: "Porque Dios traerá toda obra a juicio, juntamente con toda cosa encubierta, sea buena o sea mala".</p><p>Para el incrédulo, el juicio se basa solo en las obras. No hay mediador, ni abogado, ni nadie que defienda su caso. Su propia justicia — o más exactamente, su falta de ella — es el estándar por el cual son medidos. Pablo escribe en Romanos 1:20 que ellos están "sin excusa". La evidencia de Dios en la creación es suficiente para dejar a la humanidad responsable. Aquellos que han rechazado la auto-revelación de Dios serán juzgados según lo que han hecho con el conocimiento que recibieron.</p><p>Para el creyente, sin embargo, hay una realidad completamente diferente. "Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús" (Romanos 8:1). La condenación que el pecado merece ya ha sido llevada por Cristo en la cruz. El creyente no enfrentará juicio por el pecado, porque la pena ha sido plenamente pagada. El caso está cerrado. La deuda está satisfecha. Sin embargo, los creyentes todavía son evaluados. Pablo escribe: "Porque es necesario que todos nosotros comparezcamos ante el tribunal de Cristo, para que cada uno reciba según lo que haya hecho mientras estaba en el cuerpo, sea bueno o sea malo" (2 Corintios 5:10). Esto no es un juicio por el pecado — eso fue resuelto en la cruz. Esta es una evaluación para recompensa. Es la diferencia entre un juicio criminal, donde se determina la culpabilidad o inocencia, y una ceremonia de premiación, donde se reconoce la fidelidad.</p></div>
+            <div class="lesson-section"><h3>La Realidad del Infierno</h3><p>Pocos temas se evitan más en la predicación moderna que el infierno. Es incómodo. Es impopular. Parece duro para la mente moderna. Sin embargo, a pesar de esta aversión cultural, Jesús habló más sobre el infierno que cualquier otro en la Escritura. No rehuyó advertir a la gente sobre la realidad del juicio eterno. Dijo: "Temed más bien a aquel que puede destruir el alma y el cuerpo en el infierno" (Mateo 10:28).</p><p>El infierno no es una invención de la iglesia medieval. No es una táctica de miedo diseñada para manipular a las personas hacia el cumplimiento religioso. Es la enseñanza solemne de Jesucristo mismo. Lo describió como un lugar de "llanto y crujir de dientes" (Mateo 8:12). Habló de él como un fuego que no se apaga (Marcos 9:48). Lo llamó "las tinieblas de afuera" (Mateo 25:30). Lo describió como un lugar de sufrimiento consciente e interminable.</p><p>El infierno es castigo. No es rehabilitación. No es purgatorio. No es una segunda oportunidad. Es la respuesta justa y santa de un Dios justo al pecado no arrepentido. El apóstol Pablo declara: "Los cuales sufrirán pena de eterna perdición, excluidos de la presencia del Señor" (2 Tesalonicenses 1:9). La esencia del infierno es la separación — separación de Dios, de Su bondad, de Su gracia, de todo lo que hace la vida significativa. Pablo también declara claramente: "La paga del pecado es muerte" (Romanos 6:23).</p><p>La doctrina del infierno es difícil. Nadie debería hablar de ella con regocijo o satisfacción. Pero tampoco debería silenciarse por miedo o vergüenza. Jesús habló del infierno porque amaba a las personas y quería advertirles. Quitar la doctrina del infierno de la enseñanza cristiana es quitar la razón misma de la urgencia del evangelismo.</p></div>
+            <div class="lesson-section"><h3>La Realidad del Cielo</h3><p>Si el infierno es la mala noticia, el cielo es la buena noticia. El mismo Jesús que advirtió sobre el infierno también prometió un lugar de bendición eterna para Sus seguidores. "Voy, pues, a preparar lugar para vosotros" (Juan 14:2). El cielo no es un estado vago y desencarnado de flotar en las nubes. No es un servicio eclesiástico interminable de aburrimiento. Es un lugar real. Es la morada de Dios. Es el hogar final de todos los que han confiado en Cristo.</p><p>El apóstol Juan nos da un vislumbre del cielo en Apocalipsis 21. Describe la Nueva Jerusalén como una ciudad de belleza inimaginable — "teniendo la gloria de Dios" (Apocalipsis 21:11). Estas imágenes son simbólicas, pero apuntan a una realidad que excede nuestra capacidad de comprender plenamente. Ningún ojo ha visto, ningún oído ha oído, ninguna mente ha concebido lo que Dios ha preparado para los que le aman (1 Corintios 2:9).</p><p>Uno de los aspectos más significativos del cielo es que tendremos cuerpos nuevos. Pablo escribe que nuestros cuerpos terrenales, que están sujetos a debilidad, decadencia y muerte, serán "transformados a la semejanza de su cuerpo glorioso" (Filipenses 3:21). Juan añade: "Seremos semejantes a él" (1 Juan 3:2). El cuerpo de resurrección de Jesús después de Su resurrección es el patrón para nuestros cuerpos glorificados. Podía comer pescado a la orilla del mar (Lucas 24:42-43), sin embargo podía aparecer detrás de puertas cerradas (Juan 20:19). Era reconocible, sin embargo a veces aparecía diferente — como con los discípulos en el camino a Emaús (Lucas 24:16).</p><p>Pero la mayor bendición del cielo no es su belleza o su comodidad. La mayor bendición es la presencia de Dios mismo. Juan escribe: "He aquí el tabernáculo de Dios con los hombres, y él morará con ellos; y ellos serán su pueblo, y Dios mismo estará con ellos como su Dios" (Apocalipsis 21:3). El cielo es el cielo porque Dios está allí. "Enjugará Dios toda lágrima de los ojos de ellos; y ya no habrá muerte, ni habrá más llanto, ni clamor, ni dolor; porque las primeras cosas pasaron" (Apocalipsis 21:4).</p></div>
+            <div class="lesson-section"><h3>El Estado Intermedio: ¿Dónde Estamos Ahora?</h3><p>¿Qué sucede con los creyentes inmediatamente después de la muerte, antes de la resurrección final? Esto se llama el estado intermedio. La Escritura indica que para el creyente, estar ausente del cuerpo es estar presente con el Señor (2 Corintios 5:8). El apóstol Pablo estaba dividido entre permanecer en el cuerpo por el bien del ministerio y partir para estar con Cristo, lo cual dijo era "muchísimo mejor" (Filipenses 1:23). Esto sugiere una existencia consciente y gozosa en la presencia de Cristo. El estado intermedio no es el estado final — todavía esperamos la resurrección del cuerpo y la renovación de todas las cosas. Pero es un estado de paz, descanso y comunión con el Señor. Para el incrédulo, el estado intermedio se describe como un lugar de sufrimiento consciente (Lucas 16:19-31). La doctrina del estado intermedio da a los creyentes la confianza de que la muerte no es un fin sino una transición a la presencia de Cristo, donde esperaremos la gloriosa resurrección en Su regreso.</p></div>
+            <div class="lesson-section"><h3>El Reino de Dios</h3><p>Durante el tiempo de los jueces, antes que Israel tuviera un rey humano, el versículo final del libro resume la condición espiritual de la nación: "Cada uno hacía lo que bien le parecía" (Jueces 21:25). No había autoridad reconocida. No había Rey reconocido. Cada persona se convirtió en ley para sí misma. El resultado fue el caos, la corrupción y el sufrimiento.</p><p>El Reino de Dios es la respuesta a ese caos. Solo Dios es Rey. Él no comparte Su trono con ningún otro. Las promesas del Antiguo Testamento son claras: "Tu trono será estable eternamente" (2 Samuel 7:16). Daniel declara: "Su dominio es dominio eterno, y su reino por todas las edades" (Daniel 4:34). El Reino de Dios no es un territorio físico con fronteras, sino la soberanía, el gobierno y el reinado de Dios sobre toda la creación. Como William Barclay nota, el Reino existe dondequiera que la voluntad de Dios sea perfectamente obedecida. Es la condición en la que los corazones humanos y las acciones se alinean con la intención del Creador.</p></div>
+            <div class="lesson-section"><h3>El Reino Consumado</h3><p>A pesar del caos de la edad presente, el Reino de Dios se mueve hacia una conclusión fija y cierta. La historia no es aleatoria. No es sin sentido. No está dando vueltas hacia la nada. La historia es el desarrollo de los propósitos de Dios, y esos propósitos culminarán en el reinado visible y eterno de Cristo.</p><p>Jesús enseñó que el Reino es tanto presente como futuro. Dijo: "El reino de Dios está entre vosotros" (Lucas 17:21), indicando su realidad espiritual presente. Sin embargo, también enseñó a Sus discípulos a orar: "Venga tu reino" (Mateo 6:10), mirando hacia su manifestación física y futura. El Reino es donde la voluntad de Dios se hace perfecta y completamente.</p><p>El cumplimiento del Reino vendrá cuando Cristo regrese. Apocalipsis 11:15 anuncia la victoria final: "Los reinos del mundo han venido a ser de nuestro Señor y de su Cristo; y él reinará por los siglos de los siglos". En ese momento, toda rodilla se doblará y toda lengua confesará que Jesucristo es Señor (Filipenses 2:10-11). La rebelión terminará. Los enemigos serán vencidos. El Rey tomará Su trono.</p><p>El estado final es el nuevo cielo y la nueva tierra, donde Dios mora con Su pueblo, y toda lágrima es enjugada. No habrá más maldición. El trono de Dios y del Cordero estará en ella, y Sus siervos le servirán. Verán Su rostro (Apocalipsis 22:3-4). Esta es la consumación — el fin hacia el cual toda la historia se ha estado moviendo.</p></div>
+            <div class="lesson-section"><h3>Palabra Final</h3><div class="scripture">"El Juez de toda la tierra, ¿no ha de hacer lo que es justo?" — Génesis 18:25</div><p>No presumimos resultados. No especulamos sobre quién es salvo y quién no. Ese juicio pertenece solo a Dios. Él es justo. Él es recto. Hará lo que es correcto, aun cuando no podamos entender Sus caminos. Nuestra tarea no es juzgar al mundo, sino proclamar el evangelio. Nuestra tarea no es determinar quién es digno, sino invitar a todos a venir.</p><div class="scripture">"Jehová reinará eternamente y para siempre." — Éxodo 15:18</div><p>Esta es la verdad final. Cualquier cosa que suceda en el ínterin — cualesquiera guerras que se desaten, cualesquiera imperios que se levanten y caigan, cualquier sufrimiento que soportemos — esto permanece cierto: Dios reina. Su Reino vendrá. Su voluntad se hará. Y aquellos que confían en Cristo morarán en Su presencia para siempre. Maranata — Ven, Señor Jesús.</p></div>
+
+      </div>
+    </div>
+    <div class="exam-section">
+      <div class="exam-header">
+        <h3><span class="lang-en">📋 Unit 12 Examination</span><span class="lang-es">📋 Examen de la Unidad 12</span></h3>
+        <p id="examInstructions"></p>
+      </div>
+      <div class="lockout-timer" id="lockoutTimer"></div>
+      <div id="questionsContainer"></div>
+      <div class="action-buttons">
+        <button class="btn-primary" id="submitExam" type="button"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="btn-secondary" id="resetExam" type="button"><span class="lang-en">Reset Answers</span><span class="lang-es">Restablecer Respuestas</span></button>
+      </div>
+      <div id="scoreContainer" class="score-display"></div>
+    </div>
+    <div class="nav-links">
+      <a href="Index.html" class="btn-nav"><span class="lang-en">← Back to Dashboard</span><span class="lang-es">← Volver al Tablero</span></a>
+      <a href="CTSSTUnit13.html" class="btn-nav"><span class="lang-en">Next: Christian Nationalism →</span><span class="lang-es">Siguiente: Nacionalismo Cristiano →</span></a>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="lang-en">Chapala Theological Seminary | Faithful to Scripture | Committed to Truth</span>
+    <span class="lang-es">Seminario Teológico de Chapala | Fieles a la Escritura | Comprometidos con la Verdad</span>
+  </div>
+</div>
+<script>
+const UNIT_NUM = 12;
+const NEXT_URL = "CTSSTUnit13.html";
+const STORAGE_KEY_PROGRESS = "cts_st_progress";
+const PASS_FLAG = "st_unit" + UNIT_NUM + "_passed";
+const LOCKOUT_KEY = "st_unit" + UNIT_NUM + "_lockout";
+const LANG_KEY = "st_unit" + UNIT_NUM + "_lang";
+const TRACK_KEY = "cts_track";
+const MC_PASS = 18, SA_PASS = 9, LOCKOUT_MS = 15*60*1000, SA_MIN_HITS = 3, SA_MIN_LEN = 30;
+
+const MC = [
+  { id:1, correct:0,
+    en:{ q:"According to Hebrews 9:27, what happens after death?", opts:["Judgment","Purgatory","Nothing","Reincarnation"], expl:"It is appointed to die once, and after that the judgment." },
+    es:{ q:"Según Hebreos 9:27, ¿qué sucede después de la muerte?", opts:["Juicio","Purgatorio","Nada","Reencarnación"], expl:"Está establecido que los hombres mueran una sola vez, y después de esto el juicio." } },
+  { id:2, correct:0,
+    en:{ q:"Unbelievers are judged by:", opts:["Their works alone","The prayers of others","Church membership","Their good intentions"], expl:"For the unbeliever, judgment is based on works alone." },
+    es:{ q:"Los incrédulos son juzgados por:", opts:["Sus obras solamente","Las oraciones de otros","La membresía de la iglesia","Sus buenas intenciones"], expl:"Para el incrédulo, el juicio se basa únicamente en las obras." } },
+  { id:3, correct:2,
+    en:{ q:"Believers are:", opts:["Without hope","Condemned","Not condemned","Still under law"], expl:"Romans 8:1: no condemnation for those in Christ." },
+    es:{ q:"Los creyentes están:", opts:["Sin esperanza","Condenados","No condenados","Todavía bajo la ley"], expl:"Romanos 8:1: ninguna condenación para los que están en Cristo." } },
+  { id:4, correct:3,
+    en:{ q:"Believers are still evaluated at:", opts:["The valley of decision","The temple","The Great White Throne","The judgment seat of Christ"], expl:"2 Corinthians 5:10: we appear before the judgment seat of Christ for reward." },
+    es:{ q:"Los creyentes todavía son evaluados en:", opts:["El valle de la decisión","El templo","El Gran Trono Blanco","El tribunal de Cristo"], expl:"2 Corintios 5:10: comparecemos ante el tribunal de Cristo para recompensa." } },
+  { id:5, correct:0,
+    en:{ q:"Hell is:", opts:["Separation from God","Purgatory","Temporary punishment","A metaphor for suffering on earth"], expl:"Hell is punishment and eternal separation from the presence of the Lord (2 Thessalonians 1:9)." },
+    es:{ q:"El infierno es:", opts:["Separación de Dios","Purgatorio","Castigo temporal","Una metáfora del sufrimiento en la tierra"], expl:"El infierno es castigo y separación eterna de la presencia del Señor (2 Tesalonicenses 1:9)." } },
+  { id:6, correct:1,
+    en:{ q:"Jesus spoke most about:", opts:["Heaven","Hell","Money","Politics"], expl:"Jesus spoke more about hell than anyone else in Scripture." },
+    es:{ q:"Jesús habló más sobre:", opts:["El cielo","El infierno","El dinero","La política"], expl:"Jesús habló más sobre el infierno que cualquier otra persona en las Escrituras." } },
+  { id:7, correct:2,
+    en:{ q:"Heaven includes:", opts:["Reincarnation","Only spiritual existence","Glorified bodies","Disembodied souls"], expl:"We will have glorified bodies like Christ's resurrected body (Philippians 3:21)." },
+    es:{ q:"El cielo incluye:", opts:["Reencarnación","Solo existencia espiritual","Cuerpos glorificados","Almas sin cuerpo"], expl:"Tendremos cuerpos glorificados como el cuerpo resucitado de Cristo (Filipenses 3:21)." } },
+  { id:8, correct:2,
+    en:{ q:"Our glorified bodies will be:", opts:["Destroyed","Left in the grave","Like Christ's glorified body","Replaced with new souls"], expl:"Philippians 3:21 says we will be 'conformed to His glorious body.'" },
+    es:{ q:"Nuestros cuerpos glorificados serán:", opts:["Destruidos","Dejados en la tumba","Como el cuerpo glorificado de Cristo","Reemplazados con nuevas almas"], expl:"Filipenses 3:21 dice que seremos 'transformados en un cuerpo semejante al suyo glorioso.'" } },
+  { id:9, correct:3,
+    en:{ q:"Earthly kingdoms:", opts:["Are eternal","Last forever","Never change","Fall"], expl:"All human kingdoms eventually fall; only God's Kingdom is eternal." },
+    es:{ q:"Los reinos terrenales:", opts:["Son eternos","Duran para siempre","Nunca cambian","Caen"], expl:"Todos los reinos humanos eventualmente caen; solo el Reino de Dios es eterno." } },
+  { id:10, correct:1,
+    en:{ q:"God's Kingdom is:", opts:["Earthly","Eternal","Political","Temporary"], expl:"God's Kingdom is everlasting and will never end (Daniel 4:34)." },
+    es:{ q:"El Reino de Dios es:", opts:["Terrenal","Eterno","Político","Temporal"], expl:"El Reino de Dios es eterno y nunca terminará (Daniel 4:34)." } },
+  { id:11, correct:0,
+    en:{ q:"Kingdom means:", opts:["God's will done","A building","A political party","A territory"], expl:"The Kingdom exists wherever God's will is perfectly obeyed." },
+    es:{ q:"Reino significa:", opts:["La voluntad de Dios hecha","Un edificio","Un partido político","Un territorio"], expl:"El Reino existe dondequiera que la voluntad de Dios es perfectamente obedecida." } },
+  { id:12, correct:3,
+    en:{ q:"Judgment belongs to:", opts:["Humans","The church","Government","God"], expl:"God alone is the Judge. We do not presume outcomes." },
+    es:{ q:"El juicio pertenece a:", opts:["Los humanos","La iglesia","El gobierno","Dios"], expl:"Solo Dios es el Juez. No presumimos resultados." } },
+  { id:13, correct:0,
+    en:{ q:"We cannot:", opts:["Assume who is saved","Trust God","Obey Scripture","Know anything"], expl:"We do not presume who is saved; that judgment belongs to God alone." },
+    es:{ q:"No podemos:", opts:["Suponer quién está salvo","Confiar en Dios","Obedecer las Escrituras","Saber nada"], expl:"No presumimos quién está salvo; ese juicio le pertenece solo a Dios." } },
+  { id:14, correct:2,
+    en:{ q:"God is:", opts:["Unjust","Sometimes wrong","Just","Indifferent"], expl:"God is just and will do what is right (Genesis 18:25)." },
+    es:{ q:"Dios es:", opts:["Injusto","A veces equivocado","Justo","Indiferente"], expl:"Dios es justo y hará lo que es correcto (Génesis 18:25)." } },
+  { id:15, correct:1,
+    en:{ q:"The final truth is:", opts:["Humanity is hopeless","God reigns forever","Evil wins","Death has the last word"], expl:"The Lord shall reign forever (Exodus 15:18)." },
+    es:{ q:"La verdad final es:", opts:["La humanidad no tiene esperanza","Dios reina para siempre","El mal gana","La muerte tiene la última palabra"], expl:"El Señor reinará para siempre (Éxodo 15:18)." } },
+  { id:16, correct:3,
+    en:{ q:"What does Jesus promise in John 14:2?", opts:["Political power","Health and prosperity","Wealth on earth","A place prepared for us"], expl:"Jesus said, 'I go to prepare a place for you.'" },
+    es:{ q:"¿Qué promete Jesús en Juan 14:2?", opts:["Poder político","Salud y prosperidad","Riqueza en la tierra","Un lugar preparado para nosotros"], expl:"Jesús dijo: 'Voy, pues, a preparar lugar para vosotros.'" } },
+  { id:17, correct:1,
+    en:{ q:"What does 'Maranatha' mean?", opts:["God is love","Come, Lord Jesus","Peace be with you","The Lord is risen"], expl:"Maranatha is an Aramaic phrase meaning 'Come, Lord Jesus.'" },
+    es:{ q:"¿Qué significa 'Maranata'?", opts:["Dios es amor","Ven, Señor Jesús","La paz sea con vosotros","El Señor ha resucitado"], expl:"Maranata es una frase aramea que significa 'Ven, Señor Jesús.'" } },
+  { id:18, correct:1,
+    en:{ q:"What will happen to every knee according to Philippians 2:10-11?", opts:["It will stand","It will bow","It will run","It will be silent"], expl:"Every knee will bow and every tongue confess that Jesus Christ is Lord." },
+    es:{ q:"¿Qué sucederá con toda rodilla según Filipenses 2:10-11?", opts:["Se levantará","Se doblará","Correrá","Estará en silencio"], expl:"Toda rodilla se doblará y toda lengua confesará que Jesucristo es el Señor." } },
+  { id:19, correct:3,
+    en:{ q:"What does Revelation 21:4 say God will wipe away?", opts:["Memories","Dust","Sins","Every tear"], expl:"God will wipe away every tear from their eyes." },
+    es:{ q:"¿Qué dice Apocalipsis 21:4 que Dios enjugará?", opts:["Recuerdos","Polvo","Pecados","Toda lágrima"], expl:"Dios enjugará toda lágrima de los ojos de ellos." } },
+  { id:20, correct:2,
+    en:{ q:"During the time of the judges, everyone did what?", opts:["What the prophet said","What the king ordered","What was right in his own eyes","What God commanded"], expl:"Judges 21:25 says, 'Everyone did what was right in his own eyes.'" },
+    es:{ q:"Durante el tiempo de los jueces, ¿cada uno hacía qué?", opts:["Lo que el profeta decía","Lo que el rey ordenaba","Lo que bien le parecía","Lo que Dios mandaba"], expl:"Jueces 21:25 dice: 'Cada uno hacía lo que bien le parecía.'" } }
+];
+
+const SA = [
+  { id:21,
+    en:{ q:"Explain the difference between the judgment of unbelievers and the evaluation of believers at the judgment seat of Christ.", kw:["judgment","unbelievers","believers","condemnation","evaluation","rewards","judgment seat"], expl:"Unbelievers face judgment for sin leading to condemnation. Believers face evaluation for rewards at the judgment seat of Christ; their salvation is secure." },
+    es:{ q:"Explique la diferencia entre el juicio de los incrédulos y la evaluación de los creyentes en el tribunal de Cristo.", kw:["juicio","incrédulos","creyentes","condenación","evaluación","recompensas","tribunal"], expl:"Los incrédulos enfrentan juicio por pecado que lleva a condenación. Los creyentes enfrentan evaluación por recompensas en el tribunal de Cristo; su salvación está segura." } },
+  { id:22,
+    en:{ q:"Why did Jesus speak more about hell than anyone else? What does this reveal about His character?", kw:["jesus","hell","warn","love","urgency","salvation","compassion"], expl:"Jesus spoke about hell out of love, to warn people of real danger. His warnings show His compassion and His desire for all to be saved." },
+    es:{ q:"¿Por qué Jesús habló más sobre el infierno que nadie? ¿Qué revela esto sobre Su carácter?", kw:["jesús","infierno","advertir","amor","urgencia","salvación","compasión"], expl:"Jesús habló del infierno por amor, para advertir a la gente del peligro real. Sus advertencias muestran Su compasión y Su deseo de que todos sean salvos." } },
+  { id:23,
+    en:{ q:"Describe what the Bible teaches about glorified bodies. How do they differ from our current bodies?", kw:["glorified","bodies","resurrection","christ","immortal","transformed","incorruptible"], expl:"Glorified bodies are like Christ's resurrected body — physical yet transcendent, no longer subject to death, decay, or weakness." },
+    es:{ q:"Describa lo que la Biblia enseña sobre los cuerpos glorificados. ¿En qué se diferencian de nuestros cuerpos actuales?", kw:["glorificad","cuerpos","resurrección","cristo","inmortal","transformad","incorruptible"], expl:"Los cuerpos glorificados son como el cuerpo resucitado de Cristo — físicos pero trascendentes, ya no sujetos a muerte, deterioro o debilidad." } },
+  { id:24,
+    en:{ q:"Explain the concept of the Kingdom of God. Is it present, future, or both? Support your answer with Scripture.", kw:["kingdom","present","future","already","not yet","luke 17:21","matthew 6:10"], expl:"The Kingdom is both present (Luke 17:21 — 'among you') and future (Matthew 6:10 — 'Your kingdom come'). It is already here spiritually but not yet fully manifested." },
+    es:{ q:"Explique el concepto del Reino de Dios. ¿Es presente, futuro o ambos? Apoye su respuesta con las Escrituras.", kw:["reino","presente","futuro","ya","todavía no","lucas 17:21","mateo 6:10"], expl:"El Reino es tanto presente (Lucas 17:21 — 'entre vosotros') como futuro (Mateo 6:10 — 'Venga tu reino'). Ya está aquí espiritualmente pero aún no se manifiesta completamente." } },
+  { id:25,
+    en:{ q:"What is the significance of the phrase 'Maranatha'? How should this shape the Christian's daily life?", kw:["maranatha","come lord jesus","hope","readiness","expectation","daily life","urgency"], expl:"Maranatha ('Come, Lord Jesus') expresses the church's longing for Christ's return. It should produce hope, readiness, and urgency in daily living." },
+    es:{ q:"¿Cuál es el significado de la frase 'Maranata'? ¿Cómo debería esto moldear la vida diaria del cristiano?", kw:["maranata","ven señor jesús","esperanza","preparación","expectación","vida diaria","urgencia"], expl:"Maranata ('Ven, Señor Jesús') expresa el anhelo de la iglesia por el regreso de Cristo. Debería producir esperanza, preparación y urgencia en la vida diaria." } },
+  { id:26,
+    en:{ q:"What does Revelation 21:1-4 teach about the final state? What will be absent, and what will be present?", kw:["new heaven","new earth","no tears","no death","no pain","god dwells","restoration"], expl:"God will dwell with His people. There will be no more death, mourning, crying, or pain. The old order has passed away. All things are restored." },
+    es:{ q:"¿Qué enseña Apocalipsis 21:1-4 sobre el estado final? ¿Qué estará ausente y qué estará presente?", kw:["nuevo cielo","nueva tierra","sin lágrimas","sin muerte","sin dolor","dios mora","restauración"], expl:"Dios morará con Su pueblo. No habrá más muerte, duelo, llanto ni dolor. El viejo orden ha pasado. Todas las cosas son restauradas." } },
+  { id:27,
+    en:{ q:"How does the doctrine of final judgment produce hope and motivate holiness in believers?", kw:["judgment","hope","holiness","evaluation","reward","accountability","motivation"], expl:"Knowing we will give an account motivates holy living. The promise of reward produces hope and encourages faithful service." },
+    es:{ q:"¿Cómo produce esperanza y motiva la santidad en los creyentes la doctrina del juicio final?", kw:["juicio","esperanza","santidad","evaluación","recompensa","responsabilidad","motivación"], expl:"Saber que daremos cuenta motiva una vida santa. La promesa de recompensa produce esperanza y anima al servicio fiel." } },
+  { id:28,
+    en:{ q:"What does it mean that 'the Lord shall reign forever' (Exodus 15:18)? How does this truth provide comfort in suffering?", kw:["reign","forever","sovereignty","comfort","suffering","control","hope"], expl:"God is sovereign over all circumstances. Even when we don't understand our suffering, we trust that He reigns and will ultimately make all things right." },
+    es:{ q:"¿Qué significa que 'el Señor reinará para siempre' (Éxodo 15:18)? ¿Cómo proporciona consuelo esta verdad en el sufrimiento?", kw:["reinado","siempre","soberanía","consuelo","sufrimiento","control","esperanza"], expl:"Dios es soberano sobre todas las circunstancias. Incluso cuando no entendemos nuestro sufrimiento, confiamos en que Él reina y que finalmente hará todas las cosas bien." } },
+  { id:29,
+    en:{ q:"Explain the significance of the intermediate state. Where are believers immediately after death?", kw:["intermediate","state","absent from body","present with lord","2 corinthians 5:8","conscious"], expl:"Believers are consciously present with the Lord (2 Corinthians 5:8), awaiting the resurrection of the body. It is a state of peace and fellowship with Christ." },
+    es:{ q:"Explique el significado del estado intermedio. ¿Dónde están los creyentes inmediatamente después de la muerte?", kw:["intermedio","estado","ausente del cuerpo","presente con el señor","2 corintios 5:8","consciente"], expl:"Los creyentes están conscientemente presentes con el Señor (2 Corintios 5:8), esperando la resurrección del cuerpo. Es un estado de paz y comunión con Cristo." } },
+  { id:30,
+    en:{ q:"Summarize the main point of Unit 12. How should the certainty of judgment, the reality of hell, the hope of heaven, and the reign of God affect the way we live today?", kw:["judgment","hell","heaven","kingdom","reign","hope","holiness","urgency","eternity"], expl:"The certainty of judgment produces accountability. The reality of hell produces urgency for evangelism. The hope of heaven produces comfort in suffering. The reign of God produces trust and worship. Together, they shape a life of faithfulness, hope, and mission." },
+    es:{ q:"Resuma el punto principal de la Unidad 12. ¿Cómo deberían la certeza del juicio, la realidad del infierno, la esperanza del cielo y el reinado de Dios afectar la forma en que vivimos hoy?", kw:["juicio","infierno","cielo","reino","reinado","esperanza","santidad","urgencia","eternidad"], expl:"La certeza del juicio produce responsabilidad. La realidad del infierno produce urgencia por el evangelismo. La esperanza del cielo produce consuelo en el sufrimiento. El reinado de Dios produce confianza y adoración. Juntos, moldean una vida de fidelidad, esperanza y misión." } }
+];
+
+let currentLang = localStorage.getItem(LANG_KEY) || "en";
+let currentTrack = localStorage.getItem(TRACK_KEY) || "mdiv";
+let lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.body.classList.remove("lang-en","lang-es","lang-both");
+  document.body.classList.add("lang-" + lang);
+  document.documentElement.lang = (lang === "es") ? "es" : "en";
+  ["btnEn","btnEs","btnBoth"].forEach(id => document.getElementById(id).classList.remove("active"));
+  document.getElementById(lang === "en" ? "btnEn" : lang === "es" ? "btnEs" : "btnBoth").classList.add("active");
+  updateInstructions();
+  renderQuestions();
+}
+function setTrack(track) {
+  currentTrack = track;
+  localStorage.setItem(TRACK_KEY, track);
+  document.body.classList.remove("track-cert","track-mth","track-mdiv");
+  document.body.classList.add("track-" + track);
+  document.getElementById("trackCert").checked = (track === "cert");
+  document.getElementById("trackMth").checked = (track === "mth");
+  document.getElementById("trackMdiv").checked = (track === "mdiv");
+  updateInstructions();
+}
+function updateInstructions() {
+  const el = document.getElementById("examInstructions");
+  const trackName = currentTrack === "cert" ? (currentLang === "es" ? "Certificado de Ministerio" : "Certificate of Ministry") : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  const en = (currentTrack === "cert")
+    ? "<strong>Certificate of Ministry:</strong> Answer Questions 1\u201320 (multiple choice). Pass = 18/20 correct (90%)."
+    : "<strong>" + trackName + ":</strong> Answer Questions 1\u201320 (multiple choice) and Questions 21\u201330 (short answer). Pass = 18/20 MC <em>and</em> 9/10 SA (independent gating).";
+  const es = (currentTrack === "cert")
+    ? "<strong>Certificado de Ministerio:</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple). Aprobar = 18/20 correctas (90%)."
+    : "<strong>" + trackName + ":</strong> Responda las Preguntas 1\u201320 (opci\u00f3n m\u00faltiple) y las Preguntas 21\u201330 (respuesta corta). Aprobar = 18/20 OM <em>y</em> 9/10 RC (gating independiente).";
+  el.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function escapeHTML(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderQuestions() {
+  const c = document.getElementById("questionsContainer");
+  let html = "";
+  MC.forEach((item, idx) => {
+    const num = idx + 1;
+    html += '<div class="question-card" id="qcard-mc-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<div class="options">';
+    for (let i = 0; i < 4; i++) {
+      const letter = String.fromCharCode(65 + i);
+      html += '<label class="option"><input type="radio" name="mc' + item.id + '" value="' + i + '">';
+      html += '<span class="opt-text"><span class="lang-en">' + letter + '. ' + escapeHTML(item.en.opts[i]) + '</span><span class="lang-es">' + letter + '. ' + escapeHTML(item.es.opts[i]) + '</span></span></label>';
+    }
+    html += '</div><div class="feedback" id="fb-mc-' + item.id + '"></div></div>';
+  });
+  SA.forEach((item, idx) => {
+    const num = 21 + idx;
+    html += '<div class="question-card essay-question" id="qcard-sa-' + item.id + '">';
+    html += '<div><span class="question-badge"><span class="lang-en">Question ' + num + '</span><span class="lang-es">Pregunta ' + num + '</span></span>';
+    html += '<span class="question-badge advanced-badge"><span class="lang-en">Short Answer \u00b7 M.Th./M.Div.</span><span class="lang-es">Respuesta Corta \u00b7 M.Th./M.Div.</span></span></div>';
+    html += '<div class="question-text"><span class="lang-en">' + escapeHTML(item.en.q) + '</span><span class="lang-es">' + escapeHTML(item.es.q) + '</span></div>';
+    html += '<textarea id="sa-' + item.id + '" class="essay-input" rows="4"></textarea>';
+    html += '<div class="feedback" id="fb-sa-' + item.id + '"></div></div>';
+  });
+  c.innerHTML = html;
+  updateLockoutDisplay();
+}
+function gradeMC() {
+  let correct = 0;
+  MC.forEach(item => {
+    const sel = document.querySelector('input[name="mc' + item.id + '"]:checked');
+    const fb = document.getElementById('fb-mc-' + item.id);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correctLetter = String.fromCharCode(65 + item.correct);
+    if (chosen === item.correct) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Correct.</strong> ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Correcto.</strong> ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Incorrect.</strong> Correct answer: ' + correctLetter + '. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2717 Incorrecto.</strong> Respuesta correcta: ' + correctLetter + '. ' + escapeHTML(item.es.expl) + '</span>';
+    }
+  });
+  return correct;
+}
+function gradeSA() {
+  let correct = 0;
+  SA.forEach(item => {
+    const ta = document.getElementById('sa-' + item.id);
+    const fb = document.getElementById('fb-sa-' + item.id);
+    const txt = (ta && ta.value ? ta.value : "").toLowerCase();
+    let pool;
+    if (currentLang === "en") pool = item.en.kw;
+    else if (currentLang === "es") pool = item.es.kw;
+    else pool = item.en.kw.concat(item.es.kw);
+    const hits = pool.filter(k => txt.indexOf(String(k).toLowerCase()) !== -1).length;
+    const passed = (hits >= SA_MIN_HITS) && (txt.length >= SA_MIN_LEN);
+    if (passed) {
+      correct++;
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2713 Good answer.</strong> Key concepts present. ' + escapeHTML(item.en.expl) + '</span><span class="lang-es"><strong>\u2713 Buena respuesta.</strong> Conceptos clave presentes. ' + escapeHTML(item.es.expl) + '</span>';
+    } else {
+      const sampleEn = item.en.kw.slice(0,4).join(", ");
+      const sampleEs = item.es.kw.slice(0,4).join(", ");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en"><strong>\u2717 Needs improvement.</strong> Include concepts like: ' + escapeHTML(sampleEn) + '. <em>' + escapeHTML(item.en.expl) + '</em></span><span class="lang-es"><strong>\u2717 Necesita mejorar.</strong> Incluya conceptos como: ' + escapeHTML(sampleEs) + '. <em>' + escapeHTML(item.es.expl) + '</em></span>';
+    }
+  });
+  return correct;
+}
+function submitExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "El examen est\u00e1 bloqueado. Espere." : "Exam is locked. Please wait."); return; }
+  const mcCorrect = gradeMC();
+  let saCorrect = 0;
+  let passed;
+  if (currentTrack === "cert") passed = mcCorrect >= MC_PASS;
+  else { saCorrect = gradeSA(); passed = (mcCorrect >= MC_PASS) && (saCorrect >= SA_PASS); }
+  const box = document.getElementById("scoreContainer");
+  const trackLabel = currentTrack === "cert" ? "Cert" : currentTrack === "mth" ? "M.Th." : "M.Div.";
+  let detailEn, detailEs;
+  if (currentTrack === "cert") {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ").";
+  } else {
+    detailEn = "MC: " + mcCorrect + "/20 (need " + MC_PASS + ") \u00b7 SA: " + saCorrect + "/10 (need " + SA_PASS + ").";
+    detailEs = "OM: " + mcCorrect + "/20 (necesita " + MC_PASS + ") \u00b7 RC: " + saCorrect + "/10 (necesita " + SA_PASS + ").";
+  }
+  if (passed) {
+    box.className = "score-display pass";
+    box.innerHTML = '<span class="lang-en"><strong>\u2713 Passed (' + trackLabel + ').</strong> ' + detailEn + ' Advancing in 3 seconds\u2026</span><span class="lang-es"><strong>\u2713 Aprobado (' + trackLabel + ').</strong> ' + detailEs + ' Avanzando en 3 segundos\u2026</span>';
+    localStorage.setItem(PASS_FLAG, "true");
+    saveProgress(mcCorrect, saCorrect, true);
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    box.className = "score-display fail";
+    box.innerHTML = '<span class="lang-en"><strong>\u2717 Not yet (' + trackLabel + ').</strong> ' + detailEn + ' Review the feedback above. Locked for 15 minutes.</span><span class="lang-es"><strong>\u2717 A\u00fan no (' + trackLabel + ').</strong> ' + detailEs + ' Revise los comentarios arriba. Bloqueado por 15 minutos.</span>';
+    lockoutUntil = Date.now() + LOCKOUT_MS;
+    localStorage.setItem(LOCKOUT_KEY, lockoutUntil);
+    saveProgress(mcCorrect, saCorrect, false);
+    updateLockoutDisplay();
+  }
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function saveProgress(mc, sa, passed) {
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"); } catch(e) { store = {}; }
+  store["unit" + UNIT_NUM] = { mc: mc, sa: sa, passed: passed, track: currentTrack, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(store));
+}
+function resetExam() {
+  if (lockoutUntil > Date.now()) { alert(currentLang === "es" ? "No se puede restablecer durante el bloqueo." : "Cannot reset during lockout."); return; }
+  const msg = currentLang === "es" ? "\u00bfEst\u00e1 seguro de que desea restablecer todas las respuestas?" : "Are you sure you want to reset all answers?";
+  if (!confirm(msg)) return;
+  document.querySelectorAll('input[type="radio"][name^="mc"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = "");
+  document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+  const box = document.getElementById("scoreContainer");
+  box.className = "score-display"; box.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateLockoutDisplay() {
+  const t = document.getElementById("lockoutTimer");
+  if (lockoutUntil > Date.now()) {
+    t.style.display = "block";
+    const update = () => {
+      const rem = Math.max(0, lockoutUntil - Date.now());
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+      t.innerHTML = (currentLang === "es" ? "\u23f0 BLOQUEO: " + m + ":" + String(s).padStart(2,"0") + " restantes." : "\u23f0 LOCKOUT: " + m + ":" + String(s).padStart(2,"0") + " remaining.");
+      if (rem <= 0) { clearInterval(window.__lockInt); t.style.display = "none"; lockoutUntil = 0; localStorage.removeItem(LOCKOUT_KEY); }
+    };
+    update();
+    if (window.__lockInt) clearInterval(window.__lockInt);
+    window.__lockInt = setInterval(update, 1000);
+  } else { t.style.display = "none"; }
+}
+document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+document.getElementById("btnEs").addEventListener("click", () => setLang("es"));
+document.getElementById("btnBoth").addEventListener("click", () => setLang("both"));
+document.getElementById("trackCert").addEventListener("change", () => setTrack("cert"));
+document.getElementById("trackMth").addEventListener("change", () => setTrack("mth"));
+document.getElementById("trackMdiv").addEventListener("change", () => setTrack("mdiv"));
+document.getElementById("submitExam").addEventListener("click", submitExam);
+document.getElementById("resetExam").addEventListener("click", resetExam);
+setTrack(currentTrack);
+setLang(currentLang);
+</script>
+</body>
+</html>
