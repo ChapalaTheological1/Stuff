@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive — Unit 6: The First Journey and the First Council (Acts 12:25–16:5)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Acts Intensive</span><span class="lang-es">Bienvenido al Intensivo de Hechos</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="mth"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📖 Acts Intensive — Unit 6: The First Journey and the First Council (Acts 12:25–16:5)</span><span class="lang-es">📖 Intensivo de Hechos — Unidad 6: El primer viaje y el primer concilio (Hechos 12:25–16:5)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. Hands Laid On in Antioch</h2>
+        <p>Open Acts 13. Antioch is now the center of gravity in the new movement. Jerusalem still has the apostles and James the Lord's brother, but the cutting edge has moved three hundred miles to the north. Five men are leading the church there. Luke names them in the order they sat in the room. <em>"Now in the church that was at Antioch there were certain prophets and teachers: Barnabas, Simeon who was called Niger, Lucius of Cyrene, Manaen who had been brought up with Herod the tetrarch, and Saul"</em> (Acts 13:1, NKJV).</p>
+
+        <p>Stop and look at that list. A Cypriot Levite. A black African nicknamed Niger. A North African from Cyrene. A man who had grown up in the very palace of the Herod who beheaded John the Baptist. And a former persecutor from Tarsus. The first multi-ethnic, multi-class leadership team in church history sat together in one room in Antioch and listened to the Holy Spirit. They had been fasting and ministering to the Lord. And then the Spirit spoke. <em>"Now separate to Me Barnabas and Saul for the work to which I have called them"</em> (Acts 13:2, NKJV). Brothers, the way the Spirit calls people into missions has not changed. He still calls them out of a praying, fasting, ministering church.</p>
+
+        <p>The Antioch leaders fasted, prayed, laid hands on Barnabas and Saul, and sent them away. Notice how Luke phrases the next sentence. <em>"So, being sent out by the Holy Spirit, they went down to Seleucia"</em> (Acts 13:4, NKJV). Antioch sent them. The Holy Spirit sent them. Both are true at once. Every legitimate missionary call is endorsed both vertically and horizontally — by the inward voice of the Spirit and by the outward affirmation of a local church. Beware the missionary who says God called him personally and never let his church confirm it. Beware the church that sends out a missionary the Spirit has not first called. The two confirmations sit on top of each other like a cornerstone. Antioch had both.</p>
+
+        <h2>II. Cyprus and a Showdown with a Sorcerer</h2>
+        <p>Barnabas and Saul, with John Mark as their assistant, sailed to Cyprus, Barnabas's home island. They preached in the synagogues across the island until they came to the western city of Paphos, the seat of the Roman proconsul. The proconsul, Sergius Paulus, was an intelligent man who wanted to hear the word of God. But his court astrologer, a Jewish sorcerer named Bar-Jesus — also called Elymas, "the magician" — kept getting in the way, trying to turn the proconsul away from the faith. Then Saul, who from this point on Luke calls Paul, fixed his eyes on Elymas and pronounced one of the harshest sentences any apostle ever gave. <em>"O full of all deceit and all fraud, you son of the devil, you enemy of all righteousness, will you not cease perverting the straight ways of the Lord? And now, indeed, the hand of the Lord is upon you, and you shall be blind, not seeing the sun for a time"</em> (Acts 13:10–11, NKJV).</p>
+
+        <p>The hand that had given Paul his sight back on the Damascus road took the sight away from the man who was opposing the gospel. Mist and darkness fell on Elymas, and he went around looking for someone to lead him by the hand. Sergius Paulus, watching this, believed. The first Roman official to convert in the Acts narrative did so because he watched a sorcerer go blind. The hand of the Lord is the same hand in every century, and it sometimes opens eyes by closing them.</p>
+
+        <p>Notice that from Acts 13:13 onward Luke stops calling them "Barnabas and Saul" and starts calling them "Paul and his party." The senior partner has stepped back, and the new convert from Tarsus is leading the team. Barnabas the Encourager has done what every great mentor eventually does — let the protégé take the lead. May we have grace enough to do the same when the day comes.</p>
+
+        <h2>III. The Defection of John Mark</h2>
+        <p>From Cyprus the team sailed north to the mainland of Asia Minor and landed at Perga. And here Luke drops a sentence that will sting later. <em>"Now when Paul and his party set sail from Paphos, they came to Perga in Pamphylia; and John, departing from them, returned to Jerusalem"</em> (Acts 13:13, NKJV). Mark went home. Luke does not tell us why. Maybe Mark was homesick. Maybe he thought the mission had taken a wrong turn when Paul replaced his cousin Barnabas as the leader. Maybe the road through the Pamphylian malarial swamps to the Pisidian highlands looked too dangerous for a young man from a comfortable Jerusalem home. Whatever the reason, Mark quit.</p>
+
+        <p>I want to stop here, because Mark's failure becomes one of the most beautiful recoveries in the New Testament. Two chapters from now Paul will refuse to take Mark on the second journey, and that disagreement will split him from Barnabas. But the long game ends differently. Twenty years later, writing his last letter from a Roman prison and waiting for his execution, Paul will dictate, <em>"Get Mark and bring him with you, for he is useful to me for ministry"</em> (2 Timothy 4:11, NKJV). The young man who quit at Perga ended up writing the second Gospel and dying for the Lord whose work he had walked out on. And along the way somebody had to refuse to give up on him. That somebody was Barnabas. There is a splinter in Mark's foot at Perga, and there will be a sermon written by his hand in Rome twenty years later, because his cousin would not throw him away. There are Marks all around you tonight. Don't throw them away.</p>
+
+        <h2>IV. The Pisidian Antioch Sermon</h2>
+        <p>Paul and Barnabas pressed on inland to Pisidian Antioch — a different Antioch from their sending church, a Roman colony in the highlands of central Asia Minor. They went into the synagogue on the Sabbath and after the reading of the Law and the Prophets the rulers of the synagogue invited any visitor with a word of exhortation to share. Paul stood up, motioned with his hand, and preached the first sermon of his Luke-recorded ministry.</p>
+
+        <p>The sermon is structured almost identically to Stephen's defense in Acts 7. Paul walked his hearers through Old Testament history — the patriarchs, the Exodus, the wilderness, the judges, Saul the king, David the king, then forward to a son of David named Jesus — His baptism by John, His rejection by the rulers, His crucifixion, His burial, His resurrection on the third day, His appearances to the disciples. Paul ended with the line that distilled the apostles' message into one sentence. <em>"Therefore let it be known to you, brethren, that through this Man is preached to you the forgiveness of sins; and by Him everyone who believes is justified from all things from which you could not be justified by the law of Moses"</em> (Acts 13:38–39, NKJV). Forgiveness preached. Justification offered. Two doors the law of Moses had never opened. Paul opened them in one paragraph.</p>
+
+        <p>The synagogue begged Paul to preach the same things the next Sabbath. By the next Sabbath almost the whole city had come out to hear. The Jewish leaders, seeing the crowds, became jealous and contradicted Paul. So Paul announced the great pivot of his ministry. <em>"It was necessary that the word of God should be spoken to you first; but since you reject it, and judge yourselves unworthy of everlasting life, behold, we turn to the Gentiles"</em> (Acts 13:46, NKJV). The Gentiles of Pisidian Antioch heard that sentence and rejoiced. Luke says one of the most quietly thunderous things in the New Testament. <em>"And as many as had been appointed to eternal life believed"</em> (Acts 13:48, NKJV). The doctrine of election is in the bedrock of Acts. The Lord knows His own, and He calls them when the gospel comes through town.</p>
+
+        <h2>V. Iconium, Lystra, Derbe — and a Stoning</h2>
+        <p>The Jewish leaders ran Paul and Barnabas out of Pisidian Antioch. The two missionaries shook the dust off their feet and traveled east to Iconium. The same pattern repeated. Synagogue preaching, many Jews and Greeks believing, opposition arising, an attempt to stone them, and Paul and Barnabas slipping out before the stones fell.</p>
+
+        <p>At Lystra Paul healed a man who had been crippled from his mother's womb. The crowd, looking up at the foreigners who had just done what no Lystran had ever seen, decided Paul and Barnabas must be Hermes and Zeus walking among men. The temple priest of Zeus came running with garlands and oxen to offer sacrifice. Paul and Barnabas tore their clothes, ran into the crowd, and shouted <em>"Men, why are you doing these things? We also are men with the same nature as you, and preach to you that you should turn from these useless things to the living God"</em> (Acts 14:15, NKJV). They had to argue the crowd out of worshiping them. With great difficulty, Luke says, they restrained the people from offering sacrifice.</p>
+
+        <p>Then the same Jewish opposition that had pursued Paul from Pisidian Antioch arrived in Lystra. The crowd that had wanted to crown him as a god half an hour earlier turned on him in a moment, and the same hands that had lifted garlands picked up rocks. Paul was stoned, dragged outside the city, and left for dead. Read the next sentence carefully. <em>"However, when the disciples gathered around him, he rose up and went into the city"</em> (Acts 14:20, NKJV). What disciples? The new converts of the past few weeks. The man they thought was Hermes was lying in a heap of stones, and the Lystran believers gathered around him and prayed, and he stood up and walked back into the city that had just tried to kill him. The next day he and Barnabas were on the road to Derbe to keep preaching. There is no other religion on earth whose front-line workers have done this kind of thing for two thousand years. Christianity is not a hobby. It is a war, and the Lord supplies the marching orders and the wounds and the resurrections.</p>
+
+        <p>From Derbe Paul and Barnabas turned around and retraced their steps — Lystra, Iconium, Pisidian Antioch — back through the very cities that had thrown them out. Why go back? <em>"Strengthening the souls of the disciples, exhorting them to continue in the faith, and saying, 'We must through many tribulations enter the kingdom of God'"</em> (Acts 14:22, NKJV). The cost of discipleship preached at every stop. They appointed elders in every church, prayed and fasted, commended them to the Lord, and finally sailed home to Antioch in Syria. Luke notes that they reported to the sending church <em>"all that God had done with them, and that He had opened the door of faith to the Gentiles"</em> (Acts 14:27, NKJV). The first missionary journey was over. The door was open. And the door was about to be tested.</p>
+
+        <h2>VI. The Jerusalem Council</h2>
+        <p>Some men from Judea came down to Antioch and started teaching, <em>"Unless you are circumcised according to the custom of Moses, you cannot be saved"</em> (Acts 15:1, NKJV). That sentence is the most dangerous sentence ever spoken inside the early church. Notice the two killer words: <em>cannot be saved</em>. The Judaizers were not asking the Gentile converts to be culturally Jewish for fellowship purposes. They were saying that without the surgical mark of the Mosaic law on their bodies these Gentiles were not actually Christians. Paul and Barnabas had no small dispute with them — the Greek says they had a stásis, a riot, a public clash. The Antioch church sent the issue up the chain. Paul, Barnabas, and others were dispatched to Jerusalem to settle it.</p>
+
+        <p>The Jerusalem council that resulted is the first ecumenical council in the history of the church. Acts 15 is its minutes. After much debate Peter stood up and reminded everyone that God had made no distinction between Jew and Gentile when the Spirit fell on Cornelius's household. Then he asked the question that should have ended the meeting in three minutes. <em>"Now therefore, why do you test God by putting a yoke on the neck of the disciples which neither our fathers nor we were able to bear?"</em> (Acts 15:10, NKJV). Even the Jews, Peter is saying, never could keep the Mosaic code perfectly. To require a Gentile to bear that yoke as the price of admission into Christ is to charge him a higher entrance fee than the Jews had ever paid.</p>
+
+        <p>Then Paul and Barnabas reported what God had done among the Gentiles on the first journey. And then, last of all, James the Lord's brother stood up. James was the senior pastor in Jerusalem. James was the most rigorously Torah-observant Jew on the platform. James was the one whose nickname inside the church was Old Camel Knees because he prayed so much for Israel. If anyone was going to insist on circumcision, it was going to be James. James opened his mouth, quoted the prophet Amos, and pronounced the verdict. <em>"Therefore I judge that we should not trouble those from among the Gentiles who are turning to God"</em> (Acts 15:19, NKJV). The Gentiles were not to be required to be circumcised. They were asked to abstain from a few practices that would make table fellowship with Jewish believers impossible — meat sacrificed to idols, blood, things strangled, sexual immorality. Four small concessions, not a yoke. The Council wrote a letter, the church at Antioch read it and rejoiced, and the question that could have split Christianity at its roots was settled.</p>
+
+        <h2>VII. Paul, Barnabas, and the Sharp Disagreement</h2>
+        <p>Acts 15 ends with one of the most painful scenes in the Bible. Paul wanted to go back and visit the churches from the first journey. Barnabas wanted to take John Mark again. Paul refused — Mark had walked out at Perga. Barnabas insisted. The dispute, Luke says with his usual restraint, was a <em>paroxysmos</em>, a sharp contention. The two men who had sat together in the Antioch leadership meeting, sailed together to Cyprus, been stoned together, defended the gospel together at Jerusalem, parted ways. Barnabas took Mark and sailed home to Cyprus. Paul took Silas and went overland through Syria and Cilicia.</p>
+
+        <p>I do not pretend to know which man was right. The text does not tell us, and good men have argued on both sides for two thousand years. What I do know is that the Lord used the disagreement to multiply the missionary force. Where there had been one missionary band, there were now two. Where one mentor had been pouring into one new man, two mentors were pouring into two. Mark eventually became useful enough that Paul wrote 2 Timothy asking for him. The Lord turned a quarrel into a doubling. He still does that. If you are estranged from a brother in ministry, do not give up praying for the relationship. The Lord buried Paul and Barnabas in the same Bible.</p>
+
+        <h2>VIII. Timothy and the Strengthening of the Churches</h2>
+        <p>Paul, with Silas at his side, traveled through Syria and Cilicia, then up the highland road into the cities he had visited on the first journey. At Lystra — the same Lystra where Paul had been stoned — the apostle met a young man named Timothy, son of a believing Jewess named Eunice and a Greek father, raised by his grandmother Lois on the Hebrew Scriptures. Timothy was already well spoken of by the brethren in Lystra and Iconium. Paul wanted to take him along. He had Timothy circumcised <em>"because of the Jews who were in that region"</em> (Acts 16:3, NKJV) — not because circumcision was now required for salvation; the Jerusalem Council had just settled that — but so that Timothy's mixed parentage would not become a needless obstacle in the synagogues. The same Paul who had refused circumcision for Titus on theological grounds permitted it for Timothy on missionary grounds. Paul was a master at picking which battles to fight.</p>
+
+        <p>Acts 16:5 closes the unit with a one-sentence summary that ought to be the goal of every pastoral ministry on the planet. <em>"So the churches were strengthened in the faith, and increased in number daily"</em> (Acts 16:5, NKJV). Strengthened. Increased. The two right verbs. May the Lord put both of them in the report of every church we serve.</p>
+
+        <h2>IX. Three Lessons Home</h2>
+        <p>First, <strong>missionary work begins on its knees</strong>. The first cross-cultural missions sending in church history happened because five men in Antioch were fasting and praying and the Holy Spirit spoke. The first missions agency was a prayer meeting. The Lord is still calling out workers from prayer meetings. Pray earnestly for laborers, and do not be surprised if He calls you.</p>
+
+        <p>Second, <strong>do not throw away your John Marks</strong>. Mark walked out at Perga. Barnabas took him back to Cyprus. The Lord turned the quitter into a Gospel-writer. There are people in your church who have failed publicly, who have walked away, who are sitting on the fringes wondering whether anyone will ever extend them a hand again. Be a Barnabas. The kingdom is full of Marks who came back.</p>
+
+        <p>Third, <strong>the gospel saves by faith and the gospel saves by faith alone</strong>. The Jerusalem Council settled in one paragraph what every reformation in church history has had to settle again. Salvation is not Christ plus circumcision. It is not Christ plus the sacraments. It is not Christ plus a denominational membership card. It is Christ alone, received by faith alone, by sinners alone. Anything more is the yoke neither our fathers nor we are able to bear. The Council fathers refused that yoke for the Gentiles. May we refuse it for ourselves and for everyone the Lord brings into our pulpits.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>I. Imposición de manos en Antioquía</h2>
+        <p>Abra Hechos 13. Antioquía ahora es el centro de gravedad del nuevo movimiento. Jerusalén todavía tiene a los apóstoles y a Jacobo el hermano del Señor, pero el filo cortante se ha movido a quinientos kilómetros al norte. Cinco hombres dirigen la iglesia allí. Lucas los nombra en el orden en que se sentaron en el cuarto. <em>"Había entonces en la iglesia que estaba en Antioquía, profetas y maestros: Bernabé, y Simón el que se llamaba Niger, y Lucio cireneo, y Manaén, el que había sido criado con Herodes el tetrarca, y Saulo"</em> (Hechos 13:1, RVG).</p>
+
+        <p>Deténgase y mire esa lista. Un levita chipriota. Un africano negro apodado Niger. Un norafricano de Cirene. Un hombre criado en el mismo palacio del Herodes que decapitó a Juan el Bautista. Y un ex perseguidor de Tarso. El primer equipo de liderazgo multiétnico y multiclase en la historia de la iglesia se sentó junto en un cuarto en Antioquía y escuchó al Espíritu Santo. Habían estado ayunando y ministrando al Señor. Y entonces el Espíritu habló. <em>"Apartadme a Bernabé y a Saulo para la obra a la cual los he llamado"</em> (Hechos 13:2, RVG). Hermanos, la manera en que el Espíritu llama a la gente a las misiones no ha cambiado. Todavía los llama de una iglesia que ora, ayuna y ministra.</p>
+
+        <p>Los líderes de Antioquía ayunaron, oraron, impusieron las manos sobre Bernabé y Saulo, y los enviaron. Note cómo Lucas formula la frase siguiente. <em>"Estos, enviados así por el Espíritu Santo, descendieron a Seleucia"</em> (Hechos 13:4, RVG). Antioquía los envió. El Espíritu Santo los envió. Las dos cosas son ciertas a la vez. Cada llamado misionero legítimo es respaldado tanto vertical como horizontalmente — por la voz interna del Espíritu y por la afirmación externa de una iglesia local. Cuidado con el misionero que dice que Dios lo llamó personalmente y nunca dejó que su iglesia lo confirmara. Cuidado con la iglesia que envía a un misionero a quien el Espíritu no ha llamado primero. Las dos confirmaciones se asientan una sobre la otra como una piedra angular. Antioquía tenía las dos.</p>
+
+        <h2>II. Chipre y un duelo con un hechicero</h2>
+        <p>Bernabé y Saulo, con Juan Marcos como su asistente, navegaron a Chipre, la isla natal de Bernabé. Predicaron en las sinagogas a través de la isla hasta que llegaron a la ciudad occidental de Pafos, sede del procónsul romano. El procónsul, Sergio Paulo, era un hombre inteligente que quería oír la palabra de Dios. Pero su astrólogo de corte, un hechicero judío llamado Bar-Jesús — también llamado Elimas, "el mago" — seguía interfiriendo, intentando apartar al procónsul de la fe. Entonces Saulo, a quien desde este punto Lucas llama Pablo, fijó los ojos en Elimas y pronunció una de las sentencias más severas que un apóstol haya jamás dado. <em>"Oh, lleno de todo engaño y de toda maldad, hijo del diablo, enemigo de toda justicia, ¿no cesarás de trastornar los caminos rectos del Señor? Ahora, pues, he aquí la mano del Señor está sobre ti, y serás ciego, que no veas el sol por algún tiempo"</em> (Hechos 13:10–11, RVG).</p>
+
+        <p>La mano que le había devuelto la vista a Pablo en el camino a Damasco le quitó la vista al hombre que se oponía al evangelio. Niebla y oscuridad cayeron sobre Elimas, y andaba buscando a alguien que lo llevara de la mano. Sergio Paulo, viendo esto, creyó. El primer oficial romano que se convierte en la narración de Hechos lo hizo porque vio a un hechicero quedar ciego. La mano del Señor es la misma mano en cada siglo, y a veces abre los ojos cerrándolos.</p>
+
+        <p>Note que desde Hechos 13:13 en adelante Lucas deja de llamarlos "Bernabé y Saulo" y empieza a llamarlos "Pablo y los suyos". El socio mayor ha dado un paso atrás, y el nuevo convertido de Tarso lleva el equipo. Bernabé el Consolador ha hecho lo que cada gran mentor eventualmente hace — dejar que el discípulo tome la delantera. Que tengamos suficiente gracia para hacer lo mismo cuando llegue el día.</p>
+
+        <h2>III. La deserción de Juan Marcos</h2>
+        <p>Desde Chipre el equipo navegó al norte hacia el continente de Asia Menor y desembarcó en Perge. Y aquí Lucas deja caer una frase que dolerá después. <em>"Y partidos de Pafos, Pablo y sus compañeros arribaron a Perge de Panfilia: entonces Juan, apartándose de ellos, se volvió a Jerusalén"</em> (Hechos 13:13, RVG). Marcos se fue a casa. Lucas no nos dice por qué. Quizás Marcos extrañaba su casa. Quizás pensó que la misión había tomado un giro equivocado cuando Pablo reemplazó a su primo Bernabé como líder. Quizás el camino por los pantanos malaria-infestados de Panfilia hacia las tierras altas de Pisidia se veía demasiado peligroso para un joven de un hogar cómodo de Jerusalén. Cualquiera que fuera la razón, Marcos renunció.</p>
+
+        <p>Quiero detenerme aquí, porque el fracaso de Marcos se convierte en una de las recuperaciones más bellas del Nuevo Testamento. Dos capítulos después Pablo se negará a llevar a Marcos en el segundo viaje, y ese desacuerdo lo separará de Bernabé. Pero el largo plazo termina diferente. Veinte años después, escribiendo su última carta desde una prisión romana y esperando su ejecución, Pablo dictará: <em>"Toma a Marcos, y tráele contigo; porque me es útil para el ministerio"</em> (2 Timoteo 4:11, RVG). El joven que renunció en Perge terminó escribiendo el segundo Evangelio y muriendo por el Señor cuya obra había abandonado. Y a lo largo del camino alguien tuvo que negarse a darse por vencido con él. Ese alguien fue Bernabé. Hay una astilla en el pie de Marcos en Perge, y habrá un sermón escrito por su mano en Roma veinte años después, porque su primo no quiso descartarlo. Hay Marcos a su alrededor esta noche. No los descarte.</p>
+
+        <h2>IV. El sermón de la Antioquía de Pisidia</h2>
+        <p>Pablo y Bernabé siguieron tierra adentro hacia la Antioquía de Pisidia — una Antioquía distinta de su iglesia enviadora, una colonia romana en las tierras altas del centro de Asia Menor. Entraron a la sinagoga el día de reposo y después de la lectura de la Ley y los Profetas los principales de la sinagoga invitaron a cualquier visitante con palabra de exhortación a compartir. Pablo se puso de pie, hizo señal con la mano, y predicó el primer sermón de su ministerio registrado por Lucas.</p>
+
+        <p>El sermón está estructurado casi idénticamente a la defensa de Esteban en Hechos 7. Pablo llevó a sus oyentes a través de la historia del Antiguo Testamento — los patriarcas, el Éxodo, el desierto, los jueces, Saúl el rey, David el rey, luego adelante hasta un hijo de David llamado Jesús — Su bautismo por Juan, Su rechazo por los gobernantes, Su crucifixión, Su sepultura, Su resurrección al tercer día, Sus apariciones a los discípulos. Pablo terminó con la línea que destila el mensaje apostólico en una sola frase. <em>"Séaos pues notorio, varones hermanos, que por éste se os anuncia remisión de pecados, y de todo lo que por la ley de Moisés no pudisteis ser justificados, en éste es justificado todo aquel que creyere"</em> (Hechos 13:38–39, RVG). Perdón predicado. Justificación ofrecida. Dos puertas que la ley de Moisés nunca había abierto. Pablo las abrió en un párrafo.</p>
+
+        <p>La sinagoga rogó a Pablo que predicara las mismas cosas el siguiente día de reposo. Para el siguiente día de reposo casi toda la ciudad había salido a oír. Los líderes judíos, viendo las multitudes, se llenaron de envidia y contradijeron a Pablo. Así que Pablo anunció el gran giro de su ministerio. <em>"A vosotros a la verdad era menester que se os hablase la palabra de Dios; mas pues que la desecháis, y os juzgáis indignos de la vida eterna, he aquí, nos volvemos a los gentiles"</em> (Hechos 13:46, RVG). Los gentiles de la Antioquía de Pisidia oyeron esa frase y se regocijaron. Lucas dice una de las cosas más tranquilamente atronadoras del Nuevo Testamento. <em>"Y creyeron todos los que estaban ordenados para vida eterna"</em> (Hechos 13:48, RVG). La doctrina de la elección está en el lecho de roca de Hechos. El Señor conoce a los suyos, y los llama cuando el evangelio pasa por el pueblo.</p>
+
+        <h2>V. Iconio, Listra, Derbe — y un apedreamiento</h2>
+        <p>Los líderes judíos echaron a Pablo y a Bernabé de la Antioquía de Pisidia. Los dos misioneros sacudieron el polvo de sus pies y viajaron al este, a Iconio. El mismo patrón se repitió. Predicación en sinagoga, muchos judíos y griegos creyendo, oposición surgiendo, un intento de apedrearlos, y Pablo y Bernabé escabulléndose antes de que cayeran las piedras.</p>
+
+        <p>En Listra Pablo sanó a un hombre cojo desde el vientre de su madre. La multitud, levantando la vista hacia los extranjeros que acababan de hacer lo que ningún listrano había visto jamás, decidió que Pablo y Bernabé debían ser Hermes y Zeus caminando entre los hombres. El sacerdote del templo de Zeus vino corriendo con guirnaldas y bueyes para ofrecer sacrificio. Pablo y Bernabé rompieron sus vestidos, corrieron hacia la multitud y gritaron: <em>"Varones, ¿por qué hacéis esto? Nosotros también somos hombres semejantes a vosotros, que os anunciamos que de estas vanidades os convirtáis al Dios vivo"</em> (Hechos 14:15, RVG). Tuvieron que disuadir a la multitud de adorarlos. Con gran dificultad, dice Lucas, contuvieron a la gente para que no les ofreciera sacrificio.</p>
+
+        <p>Entonces la misma oposición judía que había perseguido a Pablo desde la Antioquía de Pisidia llegó a Listra. La multitud que media hora antes había querido coronarlo como dios se volvió contra él en un momento, y las mismas manos que habían levantado guirnaldas levantaron piedras. Pablo fue apedreado, arrastrado fuera de la ciudad y dejado por muerto. Lea con cuidado la siguiente frase. <em>"Mas rodeándole los discípulos, se levantó y entró en la ciudad"</em> (Hechos 14:20, RVG). ¿Qué discípulos? Los nuevos convertidos de las semanas pasadas. El hombre a quien creyeron Hermes estaba tirado en un montón de piedras, y los creyentes listranos se reunieron alrededor de él y oraron, y él se puso de pie y caminó de regreso a la ciudad que acababa de tratar de matarlo. Al día siguiente él y Bernabé iban camino a Derbe a seguir predicando. No hay otra religión en la tierra cuyos trabajadores de primera línea hayan hecho este tipo de cosas durante dos mil años. El cristianismo no es un pasatiempo. Es una guerra, y el Señor da las órdenes de marcha y las heridas y las resurrecciones.</p>
+
+        <p>Desde Derbe Pablo y Bernabé dieron la vuelta y desandaron sus pasos — Listra, Iconio, Antioquía de Pisidia — de regreso por las mismas ciudades que los habían echado. ¿Por qué regresar? <em>"Confirmando los ánimos de los discípulos, exhortándoles a permanecer en la fe, y enseñándoles que es necesario que a través de muchas tribulaciones entremos en el reino de Dios"</em> (Hechos 14:22, RVG). El costo del discipulado predicado en cada parada. Constituyeron ancianos en cada iglesia, oraron y ayunaron, los encomendaron al Señor, y finalmente navegaron a casa, a Antioquía de Siria. Lucas anota que reportaron a la iglesia enviadora <em>"todas las cosas que Dios había hecho con ellos, y de cómo había abierto a los gentiles la puerta de la fe"</em> (Hechos 14:27, RVG). El primer viaje misionero había terminado. La puerta estaba abierta. Y la puerta estaba a punto de ser puesta a prueba.</p>
+
+        <h2>VI. El Concilio de Jerusalén</h2>
+        <p>Algunos hombres de Judea bajaron a Antioquía y comenzaron a enseñar: <em>"Si no os circuncidáis conforme al rito de Moisés, no podéis ser salvos"</em> (Hechos 15:1, RVG). Esa frase es la más peligrosa jamás dicha dentro de la iglesia primitiva. Note las dos palabras letales: <em>no podéis ser salvos</em>. Los judaizantes no estaban pidiendo a los convertidos gentiles ser culturalmente judíos para fines de comunión. Estaban diciendo que sin la marca quirúrgica de la ley mosaica en sus cuerpos estos gentiles no eran realmente cristianos. Pablo y Bernabé tuvieron disensión y discusión no pequeña con ellos — el griego dice que tuvieron una stásis, un alboroto, un choque público. La iglesia de Antioquía envió el asunto cadena arriba. Pablo, Bernabé y otros fueron enviados a Jerusalén a resolverlo.</p>
+
+        <p>El concilio de Jerusalén que resultó es el primer concilio ecuménico de la historia de la iglesia. Hechos 15 es su acta. Después de mucho debate Pedro se levantó y recordó a todos que Dios no había hecho distinción entre judío y gentil cuando el Espíritu cayó sobre la casa de Cornelio. Luego hizo la pregunta que debió haber terminado la reunión en tres minutos. <em>"Ahora pues, ¿por qué tentáis a Dios, poniendo sobre la cerviz de los discípulos un yugo, que ni nuestros padres ni nosotros hemos podido llevar?"</em> (Hechos 15:10, RVG). Aun los judíos, dice Pedro, nunca pudieron guardar el código mosaico perfectamente. Exigir a un gentil que cargue ese yugo como precio de admisión a Cristo es cobrarle una cuota de entrada más alta de la que los judíos jamás pagaron.</p>
+
+        <p>Entonces Pablo y Bernabé reportaron lo que Dios había hecho entre los gentiles en el primer viaje. Y entonces, por último, Jacobo el hermano del Señor se levantó. Jacobo era el pastor principal en Jerusalén. Jacobo era el judío más rigurosamente observante de la Torá en la plataforma. Jacobo era aquel cuyo apodo dentro de la iglesia era Rodillas de Camello porque oraba tanto por Israel. Si alguien iba a insistir en la circuncisión, ese iba a ser Jacobo. Jacobo abrió la boca, citó al profeta Amós, y pronunció el veredicto. <em>"Por lo cual yo juzgo, que los que de los gentiles se convierten a Dios, no han de ser molestados"</em> (Hechos 15:19, RVG). Los gentiles no debían ser obligados a circuncidarse. Se les pidió que se abstuvieran de unas pocas prácticas que harían imposible la comunión de mesa con los creyentes judíos — carne sacrificada a ídolos, sangre, ahogados, fornicación. Cuatro pequeñas concesiones, no un yugo. El Concilio escribió una carta, la iglesia de Antioquía la leyó y se regocijó, y la pregunta que pudo haber dividido al cristianismo en sus raíces fue resuelta.</p>
+
+        <h2>VII. Pablo, Bernabé, y el desacuerdo agudo</h2>
+        <p>Hechos 15 termina con una de las escenas más dolorosas de la Biblia. Pablo quería volver y visitar las iglesias del primer viaje. Bernabé quería llevar otra vez a Juan Marcos. Pablo se negó — Marcos había abandonado en Perge. Bernabé insistió. La disputa, dice Lucas con su acostumbrada moderación, fue un <em>paroxysmos</em>, una contienda aguda. Los dos hombres que se habían sentado juntos en la reunión de liderazgo de Antioquía, navegado juntos a Chipre, sido apedreados juntos, defendido el evangelio juntos en Jerusalén, se separaron. Bernabé tomó a Marcos y navegó a casa, a Chipre. Pablo tomó a Silas y se fue por tierra a través de Siria y Cilicia.</p>
+
+        <p>No pretendo saber cuál hombre tenía razón. El texto no nos lo dice, y hombres buenos han discutido en ambos lados durante dos mil años. Lo que sí sé es que el Señor usó el desacuerdo para multiplicar la fuerza misionera. Donde había habido una banda misionera, ahora había dos. Donde un mentor había estado vertiéndose en un hombre nuevo, dos mentores se vertían en dos. Marcos eventualmente llegó a ser tan útil que Pablo escribió 2 Timoteo pidiéndolo. El Señor convirtió una pelea en una duplicación. Todavía lo hace. Si está distanciado de un hermano en el ministerio, no deje de orar por la relación. El Señor sepultó a Pablo y a Bernabé en la misma Biblia.</p>
+
+        <h2>VIII. Timoteo y el fortalecimiento de las iglesias</h2>
+        <p>Pablo, con Silas a su lado, viajó por Siria y Cilicia, y luego subió por el camino de las tierras altas a las ciudades que había visitado en el primer viaje. En Listra — la misma Listra donde Pablo había sido apedreado — el apóstol conoció a un joven llamado Timoteo, hijo de una judía creyente llamada Eunice y de padre griego, criado por su abuela Loida en las Escrituras hebreas. Timoteo ya era bien conocido por los hermanos en Listra e Iconio. Pablo quería llevarlo. Hizo circuncidar a Timoteo <em>"por causa de los judíos que estaban en aquellos lugares"</em> (Hechos 16:3, RVG) — no porque la circuncisión ahora fuera requerida para la salvación; el Concilio de Jerusalén acababa de resolver eso — sino para que la mezcla de su parentela no se convirtiera en un obstáculo innecesario en las sinagogas. El mismo Pablo que había rehusado la circuncisión para Tito por motivos teológicos la permitió para Timoteo por motivos misioneros. Pablo era un maestro en escoger qué batallas pelear.</p>
+
+        <p>Hechos 16:5 cierra la unidad con una frase resumen que debería ser la meta de cada ministerio pastoral del planeta. <em>"Y las iglesias eran confirmadas en la fe, y eran aumentadas en número cada día"</em> (Hechos 16:5, RVG). Confirmadas. Aumentadas. Los dos verbos correctos. Que el Señor ponga ambos en el reporte de cada iglesia que servimos.</p>
+
+        <h2>IX. Tres lecciones a casa</h2>
+        <p>Primero, <strong>la obra misionera empieza de rodillas</strong>. El primer envío misionero intercultural en la historia de la iglesia ocurrió porque cinco hombres en Antioquía estaban ayunando y orando y el Espíritu Santo habló. La primera agencia misionera fue una reunión de oración. El Señor todavía está sacando obreros de las reuniones de oración. Ore con vehemencia por obreros, y no se sorprenda si lo llama a usted.</p>
+
+        <p>Segundo, <strong>no descarte a sus Juan Marcos</strong>. Marcos abandonó en Perge. Bernabé se lo llevó de regreso a Chipre. El Señor convirtió al que renunció en escritor del Evangelio. Hay personas en su iglesia que han fracasado públicamente, que se han alejado, que están sentadas en los márgenes preguntándose si alguien alguna vez les extenderá la mano de nuevo. Sea un Bernabé. El reino está lleno de Marcos que regresaron.</p>
+
+        <p>Tercero, <strong>el evangelio salva por la fe y el evangelio salva solo por la fe</strong>. El Concilio de Jerusalén resolvió en un párrafo lo que cada reforma en la historia de la iglesia ha tenido que resolver de nuevo. La salvación no es Cristo más circuncisión. No es Cristo más los sacramentos. No es Cristo más una tarjeta de membresía denominacional. Es Cristo solo, recibido por fe sola, por pecadores solos. Cualquier cosa más es el yugo que ni nuestros padres ni nosotros podemos llevar. Los padres del Concilio rehusaron ese yugo para los gentiles. Que nosotros lo rehusemos para nosotros mismos y para todos los que el Señor traiga a nuestros púlpitos.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 6;
+const NEXT_URL = 'CTSActsUnit7.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. The five leaders of the Antioch church listed in Acts 13:1 included Barnabas, Simeon Niger, Lucius of Cyrene, Manaen, and:", textEs: "1. Los cinco líderes de la iglesia de Antioquía mencionados en Hechos 13:1 incluían a Bernabé, Simón Niger, Lucio cireneo, Manaén, y:", optionsEn: ["Peter", "John", "Saul", "Apollos"], optionsEs: ["Pedro", "Juan", "Saulo", "Apolos"], correct: 2 },
+    { textEn: "2. The Holy Spirit's command to the Antioch church was:", textEs: "2. El mandato del Espíritu Santo a la iglesia de Antioquía fue:", optionsEn: ["Separate to Me Barnabas and Saul for the work to which I have called them", "Open a school in Jerusalem", "Send relief funds to Judea", "Build a temple"], optionsEs: ["Apartadme a Bernabé y a Saulo para la obra a la cual los he llamado", "Abrir una escuela en Jerusalén", "Enviar fondos a Judea", "Construir un templo"], correct: 0 },
+    { textEn: "3. The first stop on the first missionary journey was the island of:", textEs: "3. La primera parada del primer viaje misionero fue la isla de:", optionsEn: ["Crete", "Cyprus, Barnabas's home island", "Patmos", "Malta"], optionsEs: ["Creta", "Chipre, la isla natal de Bernabé", "Patmos", "Malta"], correct: 1 },
+    { textEn: "4. The sorcerer at Paphos who opposed Paul was named:", textEs: "4. El hechicero en Pafos que se opuso a Pablo se llamaba:", optionsEn: ["Simon Magus", "Apollos", "Bar-Jesus, also called Elymas", "Demetrius"], optionsEs: ["Simón Mago", "Apolos", "Bar-Jesús, también llamado Elimas", "Demetrio"], correct: 2 },
+    { textEn: "5. The Roman proconsul who believed at Paphos after seeing Elymas struck blind was:", textEs: "5. El procónsul romano que creyó en Pafos después de ver a Elimas quedar ciego era:", optionsEn: ["Sergius Paulus", "Felix", "Festus", "Pilate"], optionsEs: ["Sergio Paulo", "Félix", "Festo", "Pilato"], correct: 0 },
+    { textEn: "6. From Acts 13:13 onward, Luke shifts how he names the team. From Pamphylia onward they are called:", textEs: "6. Desde Hechos 13:13 en adelante, Lucas cambia cómo nombra al equipo. Desde Panfilia en adelante son llamados:", optionsEn: ["Barnabas and Saul", "The Antiochenes", "The apostles", "Paul and his party"], optionsEs: ["Bernabé y Saulo", "Los antioqueños", "Los apóstoles", "Pablo y los suyos"], correct: 3 },
+    { textEn: "7. At Perga in Pamphylia, John Mark:", textEs: "7. En Perge de Panfilia, Juan Marcos:", optionsEn: ["Was healed of a sickness", "Preached his first sermon", "Departed from them and returned to Jerusalem", "Was killed by bandits"], optionsEs: ["Fue sanado de una enfermedad", "Predicó su primer sermón", "Se apartó de ellos y se volvió a Jerusalén", "Fue muerto por bandidos"], correct: 2 },
+    { textEn: "8. Paul's sermon at Pisidian Antioch is structured most similarly to:", textEs: "8. El sermón de Pablo en la Antioquía de Pisidia está estructurado de manera más similar a:", optionsEn: ["The Sermon on the Mount", "Peter's Pentecost sermon", "Christ's Olivet Discourse", "Stephen's defense in Acts 7"], optionsEs: ["El Sermón del Monte", "El sermón de Pentecostés de Pedro", "El Discurso del Monte de los Olivos", "La defensa de Esteban en Hechos 7"], correct: 3 },
+    { textEn: "9. Paul's central declaration at Pisidian Antioch was that through Jesus is preached:", textEs: "9. La declaración central de Pablo en la Antioquía de Pisidia fue que por Jesús es predicado:", optionsEn: ["Political liberation", "A new dietary code", "A return to Mosaic law", "Forgiveness of sins and justification from all things"], optionsEs: ["Liberación política", "Un nuevo código alimentario", "Un retorno a la ley mosaica", "Perdón de pecados y justificación de todo"], correct: 3 },
+    { textEn: "10. Paul's pivotal announcement after Jewish rejection at Pisidian Antioch was:", textEs: "10. El anuncio pivotal de Pablo después del rechazo judío en la Antioquía de Pisidia fue:", optionsEn: ["We will return to Jerusalem", "Behold, we turn to the Gentiles", "We will plant a temple here", "We will go home to Antioch"], optionsEs: ["Volveremos a Jerusalén", "He aquí, nos volvemos a los gentiles", "Plantaremos un templo aquí", "Volveremos a casa, a Antioquía"], correct: 1 },
+    { textEn: "11. Acts 13:48 says, 'And as many as had been ___ to eternal life believed.':", textEs: "11. Hechos 13:48 dice: 'Y creyeron todos los que estaban ___ para vida eterna.':", optionsEn: ["Appointed/Ordained", "Invited", "Drawn", "Selected by lot"], optionsEs: ["Ordenados", "Invitados", "Atraídos", "Seleccionados por suerte"], correct: 0 },
+    { textEn: "12. At Lystra Paul healed a man who had been:", textEs: "12. En Listra Pablo sanó a un hombre que había sido:", optionsEn: ["Born blind", "Possessed by demons", "Crippled from his mother's womb", "Sick with leprosy"], optionsEs: ["Ciego de nacimiento", "Poseído por demonios", "Cojo desde el vientre de su madre", "Enfermo de lepra"], correct: 2 },
+    { textEn: "13. The Lystran crowd, watching the healing, mistook Paul and Barnabas for:", textEs: "13. La multitud de Listra, viendo la sanidad, confundió a Pablo y a Bernabé con:", optionsEn: ["Apollo and Mercury", "Hermes and Zeus", "Poseidon and Ares", "Dionysus and Apollo"], optionsEs: ["Apolo y Mercurio", "Hermes y Zeus", "Poseidón y Ares", "Dionisio y Apolo"], correct: 1 },
+    { textEn: "14. Paul was stoned at Lystra and left for dead, but:", textEs: "14. Pablo fue apedreado en Listra y dejado por muerto, pero:", optionsEn: ["When the disciples gathered around him, he rose up and went into the city", "He died and was secretly buried", "He was carried back to Jerusalem", "He was healed by an angel"], optionsEs: ["Rodeándole los discípulos, se levantó y entró en la ciudad", "Murió y fue sepultado en secreto", "Fue llevado de vuelta a Jerusalén", "Fue sanado por un ángel"], correct: 0 },
+    { textEn: "15. The Judaizers from Judea who came to Antioch taught that:", textEs: "15. Los judaizantes de Judea que vinieron a Antioquía enseñaban que:", optionsEn: ["Gentiles needed to learn Greek", "Sabbath was no longer required", "Baptism replaced circumcision", "Unless circumcised according to Moses, you cannot be saved"], optionsEs: ["Los gentiles necesitaban aprender griego", "El día de reposo ya no era requerido", "El bautismo reemplazó la circuncisión", "Si no os circuncidáis conforme a Moisés, no podéis ser salvos"], correct: 3 },
+    { textEn: "16. At the Jerusalem Council, Peter described the Mosaic law as:", textEs: "16. En el Concilio de Jerusalén, Pedro describió la ley mosaica como:", optionsEn: ["A perfect rule of life", "An outdated relic", "A yoke which neither our fathers nor we were able to bear", "A Roman invention"], optionsEs: ["Una regla de vida perfecta", "Una reliquia anticuada", "Un yugo que ni nuestros padres ni nosotros hemos podido llevar", "Una invención romana"], correct: 2 },
+    { textEn: "17. The decisive verdict at the Jerusalem Council was given by:", textEs: "17. El veredicto decisivo en el Concilio de Jerusalén fue dado por:", optionsEn: ["Peter alone", "James the Lord's brother, who quoted the prophet Amos", "John the apostle", "A vote of all delegates"], optionsEs: ["Solo Pedro", "Jacobo el hermano del Señor, quien citó al profeta Amós", "Juan el apóstol", "Una votación de todos los delegados"], correct: 1 },
+    { textEn: "18. The sharp disagreement that split Paul and Barnabas at the start of the second journey was over:", textEs: "18. El desacuerdo agudo que separó a Pablo y a Bernabé al inicio del segundo viaje fue sobre:", optionsEn: ["Whether to take John Mark with them again", "Money", "Doctrine", "Where to travel first"], optionsEs: ["Si llevar otra vez a Juan Marcos con ellos", "El dinero", "La doctrina", "Dónde viajar primero"], correct: 0 },
+    { textEn: "19. After the dispute, Paul took Silas, and Barnabas took:", textEs: "19. Después de la disputa, Pablo tomó a Silas, y Bernabé tomó a:", optionsEn: ["Apollos", "Timothy", "Luke", "John Mark, sailing back to Cyprus"], optionsEs: ["Apolos", "Timoteo", "Lucas", "Juan Marcos, navegando de vuelta a Chipre"], correct: 3 },
+    { textEn: "20. Paul met Timothy at Lystra. Timothy's mother was Eunice, and his grandmother was:", textEs: "20. Pablo conoció a Timoteo en Listra. La madre de Timoteo era Eunice, y su abuela era:", optionsEn: ["Mary", "Lois", "Anna", "Phoebe"], optionsEs: ["María", "Loida", "Ana", "Febe"], correct: 1 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Discuss the multi-ethnic composition of the Antioch leadership team in Acts 13:1. What does this teach about church leadership and gospel reach?", textEs: "21. Discuta la composición multiétnica del equipo de liderazgo de Antioquía en Hechos 13:1. ¿Qué enseña esto sobre el liderazgo eclesiástico y el alcance del evangelio?", kwEn: ["antioch", "leaders", "ethnic", "spirit", "diversity"], kwEs: ["antioquía", "líderes", "étnic", "espíritu", "diversidad"] },
+    { textEn: "22. Why are both vertical and horizontal confirmation necessary in a missionary call (Acts 13:2-4)? Discuss the dangers of having only one without the other.", textEs: "22. ¿Por qué son necesarias tanto la confirmación vertical como la horizontal en un llamado misionero (Hechos 13:2-4)? Discuta los peligros de tener solo una sin la otra.", kwEn: ["spirit", "church", "calling", "confirmation", "missionary"], kwEs: ["espíritu", "iglesia", "llamado", "confirmación", "misionero"] },
+    { textEn: "23. Discuss the significance of the shift from 'Barnabas and Saul' to 'Paul and his party' in Acts 13:13. What does this teach about mentoring and leadership transition?", textEs: "23. Discuta el significado del cambio de 'Bernabé y Saulo' a 'Pablo y los suyos' en Hechos 13:13. ¿Qué enseña esto sobre la mentoría y la transición de liderazgo?", kwEn: ["barnabas", "paul", "leadership", "mentor", "transition"], kwEs: ["bernabé", "pablo", "liderazgo", "mentor", "transición"] },
+    { textEn: "24. Trace the long-arc story of John Mark from Acts 13:13 (defection) to 2 Timothy 4:11 (Paul's request for him). What does this teach about restoring those who have failed?", textEs: "24. Trace la historia de largo arco de Juan Marcos desde Hechos 13:13 (deserción) hasta 2 Timoteo 4:11 (la petición de Pablo por él). ¿Qué enseña esto sobre restaurar a los que han fracasado?", kwEn: ["mark", "perge", "restoration", "barnabas", "useful"], kwEs: ["marcos", "perge", "restauración", "bernabé", "útil"] },
+    { textEn: "25. Discuss the structure of Paul's Pisidian Antioch sermon (Acts 13:16-41) and its theological climax in verses 38-39. How is justification by faith preached?", textEs: "25. Discuta la estructura del sermón de Pablo en la Antioquía de Pisidia (Hechos 13:16-41) y su clímax teológico en los versículos 38-39. ¿Cómo se predica la justificación por fe?", kwEn: ["pisidian antioch", "sermon", "justification", "forgiveness", "faith"], kwEs: ["antioquía de pisidia", "sermón", "justificación", "perdón", "fe"] },
+    { textEn: "26. Acts 13:48 says 'as many as had been appointed to eternal life believed.' Discuss this verse's significance for the doctrine of election in the book of Acts.", textEs: "26. Hechos 13:48 dice 'creyeron todos los que estaban ordenados para vida eterna.' Discuta el significado de este versículo para la doctrina de la elección en el libro de Hechos.", kwEn: ["appointed", "elected", "election", "eternal life", "sovereignty"], kwEs: ["ordenados", "elegidos", "elección", "vida eterna", "soberanía"] },
+    { textEn: "27. Discuss the volatility of the Lystran crowd: garlands one hour, stones the next (Acts 14:11-19). What does this teach about the unreliability of crowd-based ministry?", textEs: "27. Discuta la volatilidad de la multitud listrana: guirnaldas una hora, piedras la siguiente (Hechos 14:11-19). ¿Qué enseña esto sobre la fragilidad del ministerio basado en multitudes?", kwEn: ["lystra", "crowd", "stoning", "volatility", "praise"], kwEs: ["listra", "multitud", "apedreamiento", "volatilidad", "alabanza"] },
+    { textEn: "28. Discuss Peter's argument at the Jerusalem Council (Acts 15:7-11), particularly his identification of the Mosaic law as 'a yoke neither our fathers nor we were able to bear.'", textEs: "28. Discuta el argumento de Pedro en el Concilio de Jerusalén (Hechos 15:7-11), particularmente su identificación de la ley mosaica como 'un yugo que ni nuestros padres ni nosotros hemos podido llevar.'", kwEn: ["peter", "yoke", "law", "fathers", "salvation"], kwEs: ["pedro", "yugo", "ley", "padres", "salvación"] },
+    { textEn: "29. Why is James's verdict at the Jerusalem Council (Acts 15:13-21) particularly significant given his reputation as the most Torah-observant figure in the Jerusalem church?", textEs: "29. ¿Por qué es particularmente significativo el veredicto de Jacobo en el Concilio de Jerusalén (Hechos 15:13-21) dada su reputación como la figura más observante de la Torá en la iglesia de Jerusalén?", kwEn: ["james", "council", "verdict", "torah", "amos"], kwEs: ["jacobo", "concilio", "veredicto", "torá", "amós"] },
+    { textEn: "30. Synthesize the message of Acts 12:25–16:5: how does the Lord turn opposition (Bar-Jesus, the Lystran mob, the Judaizers, the Paul-Barnabas split) into multiplied gospel advance?", textEs: "30. Sintetice el mensaje de Hechos 12:25–16:5: ¿cómo convierte el Señor la oposición (Bar-Jesús, la multitud de Listra, los judaizantes, la separación Pablo-Bernabé) en avance multiplicado del evangelio?", kwEn: ["opposition", "providence", "advance", "first journey", "council"], kwEs: ["oposición", "providencia", "avance", "primer viaje", "concilio"] }
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = localStorage.getItem('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'mth') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'mth'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'mth' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Intensivo de Hechos' : 'Welcome to the Acts Intensive') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    localStorage.setItem('cts_student', JSON.stringify(rec));
+    localStorage.setItem('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem('cts_acts_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSActsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_acts_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return localStorage.getItem(MC_PASSED_KEY) === '1'; }
+function saPassed() { return localStorage.getItem(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(localStorage.getItem(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(localStorage.getItem(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < q.optionsEn.length; i++) {
+    const letter = 'ABCDEFGHIJ'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return; // don't allow re-answer after MC pass saved
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.querySelectorAll('.option').forEach(b => { b.disabled = true; b.style.cursor = 'default'; });
+      qDiv.dataset.answered = String(chosen);
+      const isEs = document.body.classList.contains('lang-es');
+      // Color-code
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      // Feedback text
+      const fb = document.createElement('div');
+      fb.className = 'feedback-text ' + (chosen === correct ? 'correct' : 'incorrect');
+      if (chosen === correct) {
+        fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!';
+      } else {
+        const cLetter = 'ABCDEFGHIJ'[correct];
+        fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cLetter;
+      }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const ans = (ta.value || '').toLowerCase();
+    const isEs = document.body.classList.contains('lang-es');
+    const kws = isEs ? (q.kwEs || []) : (q.kwEn || []);
+    let hits = 0;
+    kws.forEach(k => { if (ans.indexOf(k.toLowerCase()) !== -1) hits++; });
+    const ok = hits >= 3;
+    ta.disabled = true; btn.disabled = true;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    const fb = document.createElement('div');
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    if (ok) {
+      fb.textContent = isEs ? ('✓ ¡Suficientes palabras clave! (' + hits + ')') : ('✓ Sufficient keywords (' + hits + ')');
+    } else {
+      fb.textContent = isEs
+        ? ('✗ Faltan palabras clave (encontró ' + hits + ' de 3 necesarias)')
+        : ('✗ Missing keywords (found ' + hits + ' of 3 needed)');
+    }
+    qDiv.appendChild(fb);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+
+  // Score SA
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    const qd = document.getElementById('saq' + (i + 1));
+    if (qd && qd.dataset.answered === '1') sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      localStorage.setItem(MC_PASSED_KEY, '1');
+      localStorage.setItem(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      localStorage.setItem('cts_acts_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+      setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+    } else {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    localStorage.setItem(MC_PASSED_KEY, '1');
+    localStorage.setItem(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    localStorage.setItem(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    localStorage.setItem('cts_acts_progress', JSON.stringify(progress));
+    const finalMc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    setTimeout(() => { window.location.href = NEXT_URL; }, 3000);
+  } else {
+    localStorage.setItem(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => localStorage.removeItem(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    localStorage.setItem('cts_acts_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive &mdash; Certificate of Completion (M.Div Track)</title>
+<style>
+:root{--blue-dark:#2c3e6b;--blue-mid:#3f5a8a;--blue-light:#eef1f7;--gold:#c9a961;--gold-soft:#e8dcb8;--gold-deep:#8b6d2b;--ink:#1f2433;--rule:#bcc5d4;--rose:#9c5d6e;--cream:#fbf7ec;--parchment:#f7f1de;--mdiv-accent:#4a2c5a}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--blue-light);line-height:1.55;font-size:16px;min-height:100vh}
+body.lang-en .es-only{display:none}body.lang-es .en-only{display:none}
+body.lang-both .en-only,body.lang-both .es-only{display:block}
+body.lang-both .en-only{border-bottom:1px dashed #d7cec1;padding-bottom:6px;margin-bottom:6px}
+.toolbar{background:#fff;border-bottom:1px solid var(--rule);padding:10px 24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;position:sticky;top:0;z-index:5}
+.toolbar .lang-toggle button{background:var(--blue-light);border:1px solid var(--blue-mid);color:var(--blue-dark);padding:6px 12px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.85rem;margin-right:4px}
+.toolbar .lang-toggle button.active{background:var(--blue-dark);color:#fff}
+.toolbar .actions button{background:var(--blue-dark);color:#fff;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.9rem;margin-left:6px}
+.toolbar .actions button.secondary{background:#fff;color:var(--blue-dark);border:1px solid var(--blue-mid)}
+.lock-screen{max-width:680px;margin:80px auto;padding:30px 36px;background:#fff;border-top:5px solid var(--rose);border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.08);text-align:center}
+.lock-screen h2{color:var(--rose);margin-top:0}
+.lock-screen a{color:var(--blue-dark);font-weight:700}
+.cert-frame{max-width:1000px;margin:32px auto;padding:18px;background:linear-gradient(135deg,var(--gold-deep) 0%,var(--gold) 50%,var(--gold-deep) 100%);border-radius:6px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.cert{background:var(--parchment);background-image:radial-gradient(circle at top left,#fbf7ec 0%,#f7f1de 70%,#efe6c8 100%);padding:50px 60px 44px;border:2px solid var(--gold-deep);position:relative;text-align:center;min-height:760px}
+.cert::before,.cert::after{content:"";position:absolute;width:46px;height:46px;border:3px solid var(--gold-deep);opacity:.55}
+.cert::before{top:18px;left:18px;border-right:none;border-bottom:none}
+.cert::after{bottom:18px;right:18px;border-left:none;border-top:none}
+.cert .crest{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px;font-weight:700}
+.cert h1{font-family:Georgia,serif;font-size:2.4rem;color:var(--blue-dark);margin:0 0 4px;letter-spacing:.04em}
+.cert .subtitle-org{font-style:italic;color:var(--blue-mid);font-size:1.05rem;margin-bottom:10px}
+.cert-track-band{display:inline-block;background:var(--mdiv-accent);color:#fff;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;padding:5px 18px;border-radius:2px;margin:6px auto 22px;font-weight:700}
+.cert .awarded{font-size:1.05rem;color:var(--ink);margin-top:20px;font-style:italic}
+.cert .student-name{font-family:"Brush Script MT","Lucida Handwriting",cursive;font-size:3rem;color:var(--blue-dark);margin:14px 0;border-bottom:1px solid var(--gold-deep);padding-bottom:6px;display:inline-block;min-width:380px;line-height:1.1}
+.cert .for-completion{font-size:1.05rem;color:var(--ink);margin-top:14px;font-style:italic}
+.cert .course-title{font-size:2rem;color:var(--blue-dark);margin:14px 0 8px;font-weight:700;letter-spacing:.05em}
+.cert .course-tagline{font-style:italic;color:var(--rose);font-size:1.05rem;margin-bottom:24px}
+.cert .curriculum{background:rgba(255,255,255,.55);border:1px solid var(--gold-deep);padding:18px 22px;margin:14px auto 22px;text-align:left;max-width:780px;font-size:.88rem}
+.cert .curriculum h3{margin:0 0 8px;text-align:center;color:var(--blue-dark);font-size:1rem;letter-spacing:.08em;text-transform:uppercase}
+.cert .curriculum ol{margin:0;padding:0 0 0 24px}
+.cert .curriculum li{margin:3px 0;break-inside:avoid}
+.cert .mdiv-note{margin:14px auto 0;max-width:780px;padding:10px 18px;background:rgba(74,44,90,.08);border-left:3px solid var(--mdiv-accent);font-size:.88rem;color:var(--ink);text-align:left;font-style:italic}
+.cert .scripture{font-style:italic;color:var(--blue-dark);margin:18px auto 22px;max-width:720px;font-size:.98rem;border-top:1px dotted var(--gold-deep);border-bottom:1px dotted var(--gold-deep);padding:10px 16px}
+.cert .scripture .ref{display:block;font-size:.85rem;color:var(--gold-deep);margin-top:6px;font-style:normal;letter-spacing:.05em}
+.cert .signatures{display:flex;justify-content:space-around;align-items:flex-start;margin:30px auto 8px;max-width:780px;flex-wrap:wrap;gap:22px}
+.cert .sig-block{text-align:center;min-width:230px}
+.cert .sig-line{border-bottom:1.5px solid var(--ink);margin-bottom:6px;padding-bottom:2px;font-family:"Brush Script MT","Lucida Handwriting",cursive;font-size:1.6rem;color:var(--blue-dark);min-height:34px}
+.cert .sig-name{font-weight:700;font-size:.95rem;color:var(--ink)}
+.cert .sig-title{font-size:.82rem;color:var(--blue-mid);font-style:italic;margin-top:2px}
+.cert .footer-row{margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end;font-size:.85rem;color:var(--ink);max-width:840px;margin-left:auto;margin-right:auto;gap:18px;flex-wrap:wrap}
+.cert .footer-row .completion-date{font-style:italic}
+.cert .footer-row .seal{padding:8px 14px;border:2px solid var(--gold-deep);color:var(--gold-deep);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;border-radius:50%;background:rgba(255,255,255,.55)}
+.cert .cert-id{font-size:.7rem;color:var(--blue-mid);font-family:"Courier New",monospace;letter-spacing:.05em;margin-top:6px;text-align:center}
+@media print{
+  @page{size:letter landscape;margin:.35in}
+  html,body{background:#fff;margin:0;padding:0}
+  .toolbar{display:none}
+  .cert-frame{margin:0;padding:0;background:none;box-shadow:none;max-width:none;border-radius:0;page-break-after:avoid;page-break-inside:avoid;break-inside:avoid}
+  .cert{padding:16px 34px 12px;min-height:0;border:2px solid var(--gold-deep);background:var(--parchment);background-image:radial-gradient(circle at top left,#fbf7ec 0%,#f7f1de 70%,#efe6c8 100%);page-break-inside:avoid;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert::before,.cert::after{width:30px;height:30px;top:10px;left:10px}
+  .cert::after{top:auto;left:auto;bottom:10px;right:10px}
+  .cert .crest{font-size:.62rem;margin-bottom:3px;letter-spacing:.14em}
+  .cert h1{font-size:1.45rem;margin:0 0 2px}
+  .cert .subtitle-org{font-size:.74rem;margin-bottom:4px}
+  .cert-track-band{font-size:.6rem;padding:3px 14px;margin:3px auto 6px;letter-spacing:.14em;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .awarded{font-size:.78rem;margin-top:4px}
+  .cert .student-name{font-size:1.85rem;margin:3px 0;padding-bottom:2px;min-width:320px;line-height:1}
+  .cert .for-completion{font-size:.78rem;margin-top:3px}
+  .cert .course-title{font-size:1.25rem;margin:5px 0 2px;letter-spacing:.04em}
+  .cert .course-tagline{font-size:.78rem;margin-bottom:6px}
+  .cert .curriculum{padding:7px 14px;margin:5px auto 6px;font-size:.68rem;max-width:720px}
+  .cert .curriculum h3{font-size:.72rem;margin:0 0 3px;letter-spacing:.06em}
+  .cert .curriculum ol{padding:0 0 0 18px;column-gap:22px}
+  .cert .curriculum li{margin:1px 0}
+  .cert .mdiv-note{margin:5px auto 0;padding:5px 14px;font-size:.66rem;max-width:720px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .scripture{font-size:.74rem;margin:6px auto 6px;padding:5px 14px;max-width:640px}
+  .cert .scripture .ref{font-size:.64rem;margin-top:2px}
+  .cert .signatures{margin:8px auto 4px;gap:14px;max-width:720px}
+  .cert .sig-block{min-width:200px}
+  .cert .sig-line{font-size:1.15rem;min-height:22px;margin-bottom:2px}
+  .cert .sig-name{font-size:.74rem}
+  .cert .sig-title{font-size:.64rem;margin-top:1px}
+  .cert .footer-row{margin-top:8px;font-size:.68rem;max-width:780px;gap:8px}
+  .cert .footer-row .seal{font-size:.58rem;padding:4px 8px;letter-spacing:.1em}
+  .cert .cert-id{font-size:.58rem;margin-top:2px}
+  .cert .dedication{margin-top:6px;padding:4px 18px 0;font-size:.62rem;line-height:1.32;max-width:760px}
+}
+@media (max-width:780px){
+  .cert{padding:28px 22px}
+  .cert h1{font-size:1.7rem}
+  .cert .student-name{font-size:2.2rem;min-width:0}
+  .cert .course-title{font-size:1.4rem}
+}
+</style></head>
+<body class="lang-en">
+
+<div class="toolbar">
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button data-lang="en" class="active">English</button>
+    <button data-lang="es">Español</button>
+    <button data-lang="both">Both / Ambos</button>
+  </div>
+  <div class="actions">
+    <button class="secondary" id="back-btn" type="button"><span class="en-only">&larr; Back to Unit 11</span><span class="es-only">&larr; Volver a Unidad 11</span></button>
+    <button id="print-btn" type="button"><span class="en-only">Print Certificate</span><span class="es-only">Imprimir Certificado</span></button>
+  </div>
+</div>
+
+<div id="lock" class="lock-screen" style="display:none">
+  <h2><span class="en-only">Certificate Locked</span><span class="es-only">Certificado Bloqueado</span></h2>
+  <p class="en-only">The M.Div-track Acts Intensive certificate is awarded only after all eleven units have been passed at both the multiple-choice and short-answer levels. Please return to the course and complete the remaining units.</p>
+  <p class="es-only">El certificado del Intensivo de Hechos de la v&iacute;a M.Div se otorga s&oacute;lo despu&eacute;s de aprobar las once unidades tanto en opci&oacute;n m&uacute;ltiple como en respuesta corta. Por favor regrese al curso y complete las unidades restantes.</p>
+  <p id="missing-units"></p>
+  <p><a href="CTSActsUnit1.html"><span class="en-only">Return to Unit 1</span><span class="es-only">Regresar a la Unidad 1</span></a> &nbsp;|&nbsp; <a href="CTSActsUnit11.html"><span class="en-only">Go to Unit 11</span><span class="es-only">Ir a la Unidad 11</span></a></p>
+</div>
+
+<div id="cert-wrap" class="cert-frame" style="display:none">
+  <div class="cert">
+    <div class="crest">Chapala Theological Seminary &middot; Seminario Teol&oacute;gico de Chapala</div>
+    <h1 class="en-only">Certificate of Completion</h1>
+    <h1 class="es-only">Certificado de Terminaci&oacute;n</h1>
+    <div class="subtitle-org en-only">Awarded by the faculty of Chapala Theological Seminary, Chapala, Jalisco, M&eacute;xico</div>
+    <div class="subtitle-org es-only">Otorgado por la facultad del Seminario Teol&oacute;gico de Chapala, Chapala, Jalisco, M&eacute;xico</div>
+    <div class="cert-track-band en-only">Master of Divinity Track</div>
+    <div class="cert-track-band es-only">V&iacute;a de Maestr&iacute;a en Divinidades</div>
+
+    <div class="awarded"><span class="en-only">This certificate is awarded to</span><span class="es-only">Este certificado se otorga a</span></div>
+    <div class="student-name" id="student-name">_____________________________</div>
+    <div class="for-completion"><span class="en-only">in recognition of the successful completion of the course</span><span class="es-only">en reconocimiento por la exitosa terminaci&oacute;n del curso</span></div>
+
+    <div class="course-title en-only">Acts Intensive</div>
+    <div class="course-title es-only">Intensivo de Hechos</div>
+    <div class="course-tagline en-only">Eleven Units &middot; Bilingual &middot; Wayne Cook</div>
+    <div class="course-tagline es-only">Once Unidades &middot; Biling&uuml;e &middot; Wayne Cook</div>
+
+    <div class="curriculum">
+      <h3 class="en-only">Curriculum Completed</h3>
+      <h3 class="es-only">Curr&iacute;culo Completado</h3>
+      <ol class="en-only">
+        <li>Unit 1 &mdash; From Jerusalem to the Uttermost Parts (Acts 1&ndash;2)</li>
+        <li>Unit 2 &mdash; Bold Witness in Jerusalem (Acts 3:1&ndash;6:7)</li>
+        <li>Unit 3 &mdash; Scattered Like Seed (Acts 6:8&ndash;8:40)</li>
+        <li>Unit 4 &mdash; The Damascus Road (Acts 9:1&ndash;31)</li>
+        <li>Unit 5 &mdash; The Hand of the Lord at Antioch (Acts 9:32&ndash;12:24)</li>
+        <li>Unit 6 &mdash; The First Journey and the First Council (Acts 12:25&ndash;16:5)</li>
+        <li>Unit 7 &mdash; Macedonian Call to Mars Hill (Acts 16:6&ndash;18:22)</li>
+        <li>Unit 8 &mdash; Ephesus and the Long Goodbye (Acts 18:23&ndash;21:16)</li>
+        <li>Unit 9 &mdash; Arrest in Jerusalem (Acts 21:17&ndash;23:35)</li>
+        <li>Unit 10 &mdash; Storms and Shipwreck on the Way to Rome (Acts 24&ndash;28)</li>
+        <li>Unit 11 &mdash; Living Acts 29</li>
+      </ol>
+      <ol class="es-only">
+        <li>Unidad 1 &mdash; De Jerusal&eacute;n hasta lo &Uacute;ltimo de la Tierra (Hechos 1&ndash;2)</li>
+        <li>Unidad 2 &mdash; Testimonio Audaz en Jerusal&eacute;n (Hechos 3:1&ndash;6:7)</li>
+        <li>Unidad 3 &mdash; Esparcidos como Semilla (Hechos 6:8&ndash;8:40)</li>
+        <li>Unidad 4 &mdash; El Camino a Damasco (Hechos 9:1&ndash;31)</li>
+        <li>Unidad 5 &mdash; La Mano del Se&ntilde;or en Antioqu&iacute;a (Hechos 9:32&ndash;12:24)</li>
+        <li>Unidad 6 &mdash; El Primer Viaje y el Primer Concilio (Hechos 12:25&ndash;16:5)</li>
+        <li>Unidad 7 &mdash; El Llamado Macedonio al Are&oacute;pago (Hechos 16:6&ndash;18:22)</li>
+        <li>Unidad 8 &mdash; &Eacute;feso y la Larga Despedida (Hechos 18:23&ndash;21:16)</li>
+        <li>Unidad 9 &mdash; Arresto en Jerusal&eacute;n (Hechos 21:17&ndash;23:35)</li>
+        <li>Unidad 10 &mdash; Tormentas y Naufragio Camino a Roma (Hechos 24&ndash;28)</li>
+        <li>Unidad 11 &mdash; Viviendo Hechos 29</li>
+      </ol>
+    </div>
+
+    <div class="mdiv-note">
+      <span class="en-only">This bearer has completed all eleven units of the Acts Intensive course at both the multiple-choice component (90%) and the short-answer component (90%), demonstrating mastery of the narrative, theology, and pastoral application of the Acts of the Apostles, and the ability to articulate it in extended written response.</span>
+      <span class="es-only">El portador ha completado las once unidades del curso Intensivo de Hechos tanto en el componente de opci&oacute;n m&uacute;ltiple (90%) como en el componente de respuesta corta (90%), demostrando dominio de la narrativa, la teolog&iacute;a, y la aplicaci&oacute;n pastoral de los Hechos de los Ap&oacute;stoles, y la capacidad de articularlo en respuesta escrita extendida.</span>
+    </div>
+
+    <div class="scripture">
+      <span class="en-only">"But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth."</span>
+      <span class="es-only">&laquo;Pero recibir&eacute;is poder cuando haya venido sobre vosotros el Esp&iacute;ritu Santo, y me ser&eacute;is testigos en Jerusal&eacute;n, en toda Judea, en Samaria, y hasta lo &uacute;ltimo de la tierra&raquo;.</span>
+      <span class="ref">Acts 1:8 &middot; Hechos 1:8</span>
+    </div>
+
+    <div class="signatures">
+      <div class="sig-block">
+        <div class="sig-line">Wayne Cook</div>
+        <div class="sig-name">Dr. Wayne Cook</div>
+        <div class="sig-title en-only">Professor of New Testament</div>
+        <div class="sig-title es-only">Profesor de Nuevo Testamento</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-line">Ted Rogers</div>
+        <div class="sig-name">Dr. Ted Rogers</div>
+        <div class="sig-title en-only">Director, Chapala Theological Seminary</div>
+        <div class="sig-title es-only">Director, Seminario Teol&oacute;gico de Chapala</div>
+      </div>
+    </div>
+
+    <div class="footer-row">
+      <div class="completion-date">
+        <span class="en-only">Date of completion: <strong id="cdate-en">_____________________</strong></span>
+        <span class="es-only">Fecha de terminaci&oacute;n: <strong id="cdate-es">_____________________</strong></span>
+      </div>
+      <div class="seal">CTS &middot; STC</div>
+    </div>
+    <div class="cert-id">Certificate ID: <span id="cert-id">&nbsp;</span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const langButtons = document.querySelectorAll('.lang-toggle button');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      document.body.classList.remove('lang-en','lang-es','lang-both');
+      document.body.classList.add('lang-' + lang);
+      langButtons.forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+
+  let progress = {};
+  try { progress = JSON.parse(localStorage.getItem('cts_acts_progress') || '{}'); } catch(e) { progress = {}; }
+  const lockEl = document.getElementById('lock');
+  const certEl = document.getElementById('cert-wrap');
+
+  const missing = [];
+  for (let n = 1; n <= 11; n++) {
+    if (!progress['unit' + n]) missing.push(n);
+  }
+  if (missing.length > 0) {
+    lockEl.style.display = 'block';
+    certEl.style.display = 'none';
+    const missEl = document.getElementById('missing-units');
+    if (missEl) {
+      missEl.innerHTML = '<span class="en-only">Units still to complete: ' + missing.join(', ') + '</span>' +
+                        '<span class="es-only">Unidades por completar: ' + missing.join(', ') + '</span>';
+    }
+    document.getElementById('back-btn').addEventListener('click', () => { window.location.href = 'CTSActsUnit11.html'; });
+    document.getElementById('print-btn').addEventListener('click', () => { window.print(); });
+    return;
+  }
+  lockEl.style.display = 'none';
+  certEl.style.display = 'block';
+
+  let student = null;
+  try { student = JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch(e) { student = null; }
+  const nameEl = document.getElementById('student-name');
+  if (student && student.name) {
+    nameEl.textContent = student.name;
+  } else {
+    nameEl.textContent = 'Student / Estudiante';
+    nameEl.style.fontStyle = 'italic';
+    nameEl.style.color = '#888';
+  }
+
+  let dateStr = null;
+  try { dateStr = localStorage.getItem('cts_acts_completion_date'); } catch(e) { dateStr = null; }
+  if (!dateStr) {
+    const d = new Date();
+    dateStr = d.toISOString().slice(0, 10);
+    try { localStorage.setItem('cts_acts_completion_date', dateStr); } catch(e) {}
+  }
+  const dt = new Date(dateStr + 'T12:00:00');
+  const monthsEn = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthsEs = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  document.getElementById('cdate-en').textContent = monthsEn[dt.getMonth()] + ' ' + dt.getDate() + ', ' + dt.getFullYear();
+  document.getElementById('cdate-es').textContent = dt.getDate() + ' de ' + monthsEs[dt.getMonth()] + ' de ' + dt.getFullYear();
+
+  let certId = localStorage.getItem('cts_acts_mdiv_cert_id');
+  if (!certId) {
+    const seed = (student && student.name ? student.name : 'anon') + '|' + dateStr + '|mdiv';
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+      hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+      hash |= 0;
+    }
+    const hex = Math.abs(hash).toString(16).toUpperCase().padStart(6, '0');
+    certId = 'CTS-ACTS-MDIV-' + dt.getFullYear() + '-' + hex;
+    try { localStorage.setItem('cts_acts_mdiv_cert_id', certId); } catch(e) {}
+  }
+  document.getElementById('cert-id').textContent = certId;
+
+  document.getElementById('print-btn').addEventListener('click', () => { window.print(); });
+  document.getElementById('back-btn').addEventListener('click', () => { window.location.href = 'CTSActsUnit11.html'; });
+})();
+</script>
+</body></html>
